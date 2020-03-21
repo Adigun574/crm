@@ -73,7 +73,6 @@ export class CustomersComponent implements OnInit {
   }
 
   showCustomer(id){
-    console.log(id)
     this.router.navigateByUrl(`customer/${id}`)
   }
 

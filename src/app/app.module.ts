@@ -84,10 +84,10 @@ import { CustomerModule } from './views/customer/customer.module';
   ],
 
   providers: [
-    // {
-    //   provide: LocationStrategy,
-    //   useClass: HashLocationStrategy
-    // },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
     // { provide: ErrorHandler, useClass: GlobalErrorHandler },
     // {
     //   provide: HTTP_INTERCEPTORS,
@@ -98,3 +98,5 @@ import { CustomerModule } from './views/customer/customer.module';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+// https://www.google.com/search?q=Refused+to+apply+style+from+%27http%3A%2F%2Flocalhost%3A5000%2Fcustomer%2Fassets%2Fjs%2Fplugins%2F%40fortawesome%2Ffontawesome-free%2Fcss%2Fall.min.css%27+because+its+MIME+type+(%27text%2Fhtml%27)+is+not+a+supported+stylesheet+MIME+type%2C+and+strict+MIME+checking+is+enabled.&rlz=1C1CHBF_enNG870NG870&oq=Refused+to+apply+style+from+%27http%3A%2F%2Flocalhost%3A5000%2Fcustomer%2Fassets%2Fjs%2Fplugins%2F%40fortawesome%2Ffontawesome-free%2Fcss%2Fall.min.css%27+because+its+MIME+type+(%27text%2Fhtml%27)+is+not+a+supported+stylesheet+MIME+type%2C+and+strict+MIME+checking+is+enabled.&aqs=chrome..69i57.552j0j7&sourceid=chrome&ie=UTF-8

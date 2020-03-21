@@ -4,6 +4,10 @@ export const navItems: INavData[] = [
   {
     name: 'Customers',
     url: '/customers'
+  },
+  {
+    name: 'Customer Detail',
+    url: 'customer/:1'
   }
   // {
   //   name: 'Dashboard',

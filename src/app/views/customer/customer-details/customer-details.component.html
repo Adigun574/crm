@@ -1,1 +1,75 @@
-<p>customer-details works!</p>
+<!-- <p>customer-details works!</p>
+<mat-tab-group animationDuration="2000ms" class="mb-4">
+    <mat-tab label="First">Content 1</mat-tab>
+    <mat-tab label="Second">Content 2</mat-tab>
+    <mat-tab label="Third">Content 3</mat-tab>
+</mat-tab-group>
+<hr> -->
+<ngb-tabset [justify]="currentJustify" class="mt-4">
+    <ngb-tab title="Converstaions">
+        <ng-template ngbTabContent>
+            <div class="form-row">
+                <div class="col-sm-10 mb-3">
+                  <label for="validationTooltip01">Enter Conversation</label>
+                  <input type="text" class="form-control" id="validationTooltip01" placeholder="lorem ipsum dolor" required>
+                  <div class="valid-tooltip">
+                    Looks good!
+                  </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <label for="validationTooltip01">First name</label>
+                    <button class="btn btn-primary form-control">Add</button>
+                </div>
+            </div>
+        <ul>
+            <li>Lorem ipsum dolor lorem ipsum dolor <i class="fa fa-trash"></i></li>
+            <li>Lorem ipsum dolor lorem ipsum dolor <i class="fa fa-trash"></i></li>
+            <li>Lorem ipsum dolor lorem ipsum dolor <i class="fa fa-trash"></i></li>
+            <li>Lorem ipsum dolor lorem ipsum dolor <i class="fa fa-trash"></i></li>
+        </ul>
+        <button class="btn btn-danger">Clear Conversations</button>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle>Customer Details</ng-template>
+        <ng-template ngbTabContent>
+            <form [formGroup]="editCustomerDetailsForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" 
+                        id="name" aria-describedby="emailHelp" 
+                        placeholder="Enter name" formControlName="name">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group">
+                    <label for="phoneNo">Phone No</label>
+                    <input type="text" class="form-control" 
+                        id="phoneNo" placeholder="Enter Phone No"
+                        formControlName="phoneNo">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" 
+                        id="email" placeholder="Enter Email"
+                        formControlName="email">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control"    
+                        id="address" placeholder="Enter Address"
+                        formControlName="address">
+                </div>
+                <!-- <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div> -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Customer Sales Record">
+        <ng-template ngbTabContent>
+        <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi. Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio. Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna, egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget neque. Phasellus nec tortor vel tellus pulvinar feugiat.</p>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

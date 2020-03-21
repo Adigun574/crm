@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomersComponent } from './customers/customers.component';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule,
+          MatTabsModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -11,8 +14,11 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
   imports: [
     CommonModule,
     MatButtonModule,
+    MatTabsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
+    // NgbTabset
   ]
 })
 export class CustomerModule { }
