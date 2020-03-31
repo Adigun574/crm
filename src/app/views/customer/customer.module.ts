@@ -6,18 +6,23 @@ import { MatButtonModule,
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomerReportComponent } from './customer-report/customer-report.component';
+import { RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
 // import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [CustomersComponent, CustomerDetailsComponent],
+  declarations: [CustomersComponent, CustomerDetailsComponent, CustomerReportComponent],
   imports: [
     CommonModule,
     MatButtonModule,
     MatTabsModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    RouterModule,
+    NgSelectModule
     // NgbTabset
   ]
 })

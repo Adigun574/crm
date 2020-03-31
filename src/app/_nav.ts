@@ -2,12 +2,32 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
+    name: 'Dashboard',
+    url: '/salesreport'
+  },
+  {
     name: 'Customers',
     url: '/customers'
   },
   {
-    name: 'Customer Detail',
-    url: 'customer/:1'
+    name: 'Employees',
+    url: '/employees'
+  },
+  {
+    name: 'Inventory',
+    url: '/inventory'
+  },
+  {
+    name: 'Training Programs',
+    url: '/training-programs'
+  },
+  {
+    name: 'Skill Monitoring',
+    url: '/skill-monitoring'
+  },
+  {
+    name: 'Messages',
+    url: '/messaging'
   }
   // {
   //   name: 'Dashboard',

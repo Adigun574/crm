@@ -47,6 +47,9 @@ import { ErrorInterceptor } from './util/error.interceptor';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { GlobalErrorHandler } from './util/global-error-handler';
 import { CustomerModule } from './views/customer/customer.module';
+import { SaleModule } from './views/sale/sale.module';
+import { EmployeeModule } from './views/employee/employee.module';
+import { MessagingComponent } from './views/messaging/messaging.component';
 
 @NgModule({
   imports: [
@@ -69,11 +72,14 @@ import { CustomerModule } from './views/customer/customer.module';
     FormsModule,
     HttpClientModule,
     AngularMaterialModule,
-    CustomerModule
+    CustomerModule,
+    SaleModule,
+    EmployeeModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
+    MessagingComponent,
     // P404Component,
     // P500Component,
     // LoginComponent,

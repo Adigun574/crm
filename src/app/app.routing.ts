@@ -12,6 +12,15 @@ import { DefaultLayoutComponent } from './containers';
 import { AuthGuard } from './util/auth.guard';
 import { CustomersComponent } from './views/customer/customers/customers.component';
 import { CustomerDetailsComponent } from './views/customer/customer-details/customer-details.component';
+import { SalesReportComponent } from './views/sale/sales-report/sales-report.component';
+import { EmployeesComponent } from './views/employee/employees/employees.component';
+import { EmployeeDetailComponent } from './views/employee/employee-detail/employee-detail.component';
+import { InventoryComponent } from './views/sale/inventory/inventory.component';
+import { CustomerReportComponent } from './views/customer/customer-report/customer-report.component';
+import { RequestedItemsComponent } from './views/sale/requested-items/requested-items.component';
+import { MessagingComponent } from './views/messaging/messaging.component';
+import { TrainingProgramsComponent } from './views/employee/training-programs/training-programs.component';
+import { SkillMonitoringComponent } from './views/employee/skill-monitoring/skill-monitoring.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -20,12 +29,56 @@ export const routes: Routes = [
     component:DefaultLayoutComponent,
     children:[
       {
+        path:'',
+        component:SalesReportComponent
+      },
+      {
         path:'customers',
         component:CustomersComponent
       },
       {
         path:'customer/:id',
         component:CustomerDetailsComponent
+      },
+      {
+        path:'salesreport',
+        component:SalesReportComponent
+      },
+      {
+        path:'employees',
+        component:EmployeesComponent
+      },
+      {
+        path:'employee/:id',
+        component:EmployeeDetailComponent
+      },
+      {
+        path:'inventory',
+        component:InventoryComponent
+      },
+      {
+        path:'customers-report',
+        component:CustomerReportComponent
+      },
+      {
+        path:'requested-items',
+        component:RequestedItemsComponent
+      },
+      {
+        path:'messaging',
+        component:MessagingComponent
+      },
+      {
+        path:'training-programs',
+        component:TrainingProgramsComponent
+      },
+      {
+        path:'skill-monitoring',
+        component:SkillMonitoringComponent
+      },
+      {
+        path:'**',
+        component:SalesReportComponent
       }
     ]
   }
