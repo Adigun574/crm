@@ -1,0 +1,41 @@
+<div class="body">
+    <div class="text-center">
+        <h3 class="header">{{product.name}}</h3>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="product.name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quantity</label>
+                    <input type="text" class="form-control" [(ngModel)]="product.quantity">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cost Price</label>
+                    <input type="text" class="form-control" [(ngModel)]="product.price.costPrice">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Sale Price</label>
+                    <input type="text" class="form-control" [(ngModel)]="product.price.salePrice">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Image</label>
+                    <input type="file" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <img src="" alt="no image" width="100%" height="100%">
+            </div>
+        </div>
+        
+        <div>
+            <button class="btn btn-success pull-right" (click)="updateProduct()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="updating"></span> 
+                Update
+            </button>
+        </div>
+    </div>
+</div>

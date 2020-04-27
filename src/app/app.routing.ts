@@ -21,11 +21,19 @@ import { RequestedItemsComponent } from './views/sale/requested-items/requested-
 import { MessagingComponent } from './views/messaging/messaging.component';
 import { TrainingProgramsComponent } from './views/employee/training-programs/training-programs.component';
 import { SkillMonitoringComponent } from './views/employee/skill-monitoring/skill-monitoring.component';
+import { LoginComponent } from './views/login/login.component';
+import { ProductsComponent } from './views/product/products/products.component';
+import { EditProductComponent } from './views/product/edit-product/edit-product.component';
+import { RoleComponent } from './views/employee/role/role.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path:'',
+    component:LoginComponent
+  },
+  {
+    path: 'main',
     component:DefaultLayoutComponent,
     children:[
       {
@@ -35,6 +43,14 @@ export const routes: Routes = [
       {
         path:'customers',
         component:CustomersComponent
+      },
+      {
+        path:'products',
+        component:ProductsComponent
+      },
+      {
+        path:'product/:id',
+        component:EditProductComponent
       },
       {
         path:'customer/:id',
@@ -75,6 +91,10 @@ export const routes: Routes = [
       {
         path:'skill-monitoring',
         component:SkillMonitoringComponent
+      },
+      {
+        path:'role',
+        component:RoleComponent
       },
       {
         path:'**',

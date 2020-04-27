@@ -9,7 +9,7 @@
         </h5>
     </div>
         <div class="modal-body" >
-        <div  class="card mb-4 save-customer-card">
+        <div  class="card mb-4 save-customer-card container">
             <form [formGroup]="addProgramForm">
                 <div class="form-group">
                     <label class="form-label"> Program Name:</label>
@@ -45,18 +45,6 @@
             <div class="enroll-btn"><button mat-raised-button (click)="open(topModal3, { windowClass: 'modal-top' })">Enroll Employee</button></div>
         </div>
     </div>
-            
-    <!-- <div class="col-sm-4" *ngFor="let program of programs">
-        <div class="card program-card text-center">
-            <div (click)="open(topModal2, { windowClass: 'modal-top' })">
-                <div class="program-initial mt-2"><h1><span class="name-initial">{{program.name.split('')[0]}}</span></h1></div>
-                <div class="program-name mt-2"><h3><b>{{program.name}}</b></h3></div>
-                <div class="program-duration text-muted mt-2"><i class="fa fa-clock"></i> {{program.duration}}</div>
-                <div class="program-description mt-2">{{program.description}}</div>
-            </div>
-            <div class="enroll-btn"><button mat-raised-button (click)="open(topModal3, { windowClass: 'modal-top' })">Enroll Employee</button></div>
-        </div>
-    </div> -->
 </div>
 
 <ng-template #topModal2 let-c="close" let-d="dismiss">

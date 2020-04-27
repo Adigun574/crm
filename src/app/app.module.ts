@@ -50,6 +50,8 @@ import { CustomerModule } from './views/customer/customer.module';
 import { SaleModule } from './views/sale/sale.module';
 import { EmployeeModule } from './views/employee/employee.module';
 import { MessagingComponent } from './views/messaging/messaging.component';
+import { LoginComponent } from './views/login/login.component';
+import { ProductModule } from './views/product/product.module';
 
 @NgModule({
   imports: [
@@ -74,12 +76,14 @@ import { MessagingComponent } from './views/messaging/messaging.component';
     AngularMaterialModule,
     CustomerModule,
     SaleModule,
-    EmployeeModule
+    EmployeeModule,
+    ProductModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     MessagingComponent,
+    LoginComponent,
     // P404Component,
     // P500Component,
     // LoginComponent,

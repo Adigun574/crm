@@ -1,0 +1,48 @@
+.body{
+    padding:30px !important;
+}
+.product-card{
+    background-image: url('../../../../assets/favicon.ico');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height:200px; */
+    /* width:100px; */
+    /* width: 40%; */
+    height:120px; 
+    background-color:white; 
+    box-shadow:1px 3px 3px rgb(189, 189, 192); 
+    border-radius:3px;
+    cursor: pointer;
+    /* float:left */
+}
+
+.price{
+    position:absolute; 
+    right:0px; 
+    top:0px; 
+    background-color: rgb(143, 8, 8); 
+    border-radius:3px; 
+    color:white; 
+    padding:0 5px
+}
+.name{
+    position:absolute; 
+    left:0px; 
+    bottom:0;
+    background-color: rgb(216, 215, 215);
+    font-weight: bolder;
+    border-radius:3px;
+    width:100%;
+    text-align: center;
+}
+.add-btn{
+    position: absolute;
+    bottom:20px;
+    right:20px;
+    z-index:2;
+}
+.inner-card{
+    width:80% !important;
+    margin:auto;
+}

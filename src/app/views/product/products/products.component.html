@@ -1,0 +1,61 @@
+<div class="body">
+<div class="d-block mt-2">
+    <h3 class="text-center text-muted">PRODUCTS</h3>
+</div>
+<div class="d-block">
+    <button class="btn btn-success pull-right d-block" (click)="open(addProductModal)">Add Product</button>
+</div>
+<!-- <button class="btn btn-success pull-right add-btn" (click)="open(addProductModal)">Add Product</button> -->
+<br>
+<div class="container">
+    <div class="row m-auto">
+        <!-- <div class="col-sm-3 mb-2 mr-2 mt-1 product-card" *ngFor="let product of products"> -->
+        <div class="col-sm-3 product-card" *ngFor="let product of products" (click)="viewProduct(product.id)">
+            <div class="mb-2 mr-2 mt-1 inner-card">
+                <p class="name">{{product.name}}</p>
+                <p class="price">₦{{product.price.salePrice}}.00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #addProductModal>
+    <div class="card p-2">
+        <div class="card-header">
+            <h5>Add Product</h5>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="addProductForm">
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" class="form-control" formControlName="Name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quantity</label>
+                    <input type="number" class="form-control" formControlName="Quantity">
+                </div>
+                <div class="form-row d-flex" style="justify-content: space-between">
+                    <div class="form-group">
+                        <label class="form-label">Cost Price</label>
+                        <input type="number" class="form-control" [(ngModel)]="CostPrice" [ngModelOptions]="{standalone:true}">
+                    </div>            
+                    <div class="form-group">
+                        <label class="form-label">Sell Price</label>
+                        <input type="number" class="form-control" [(ngModel)]="SalePrice" [ngModelOptions]="{standalone:true}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Image</label>
+                    <input type="file" class="form-control" formControlName="Image">
+                </div>
+            </form>
+        </div>        
+        <div class="card-footer">
+            <button class="btn btn-primary pull-right" (click)="addProduct()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="saving"></span> 
+                Save
+            </button>
+        </div>
+    </div>
+</ng-template>
+</div>

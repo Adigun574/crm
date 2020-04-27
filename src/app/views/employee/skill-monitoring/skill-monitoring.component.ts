@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 export var single = [
@@ -64,7 +66,9 @@ export class SkillMonitoringComponent implements OnInit {
 
   showTable=true;
 
-  constructor() {
+  constructor(
+    private modalService: NgbModal,
+  ) {
     // Object.assign(this, { single });
    }
 
@@ -76,23 +80,31 @@ export class SkillMonitoringComponent implements OnInit {
     this.skills = [
       {
         employeeName:'Adigun Ibrahim',
-        skills:5,
-        certifiedSkills:3
+        numberOfSkills:5,
+        numberOfCertifiedSkills:3,
+        skills:['skill1','skill2','skill3','skill4','skill5'],
+        certifiedSkills:['certified skill1','certified skill2','certified skill3']
       },
       {
         employeeName:'Adigun Adedotun',
-        skills:4,
-        certifiedSkills:2
+        numberOfSkills:4,
+        numberOfCertifiedSkills:2,
+        skills:['skill1','skill2','skill3','skill4','skill5'],
+        certifiedSkills:['certified skill1','certified skill2','certified skill3']
       },
       {
         employeeName:'Adigun Akanni',
-        skills:10,
-        certifiedSkills:7
+        numberOfSkills:10,
+        numberOfCertifiedSkills:7,
+        skills:['skill1','skill2','skill3','skill4','skill5'],
+        certifiedSkills:['certified skill1','certified skill2','certified skill3']
       },
       {
         employeeName:'Adigun Omotojola',
-        skills:2,
-        certifiedSkills:1
+        numberOfSkills:2,
+        numberOfCertifiedSkills:1,
+        skills:['skill1','skill2','skill3','skill4','skill5'],
+        certifiedSkills:['certified skill1','certified skill2','certified skill3']
       },
       
     ]
@@ -110,6 +122,12 @@ export class SkillMonitoringComponent implements OnInit {
 
   onDeactivate(data): void {
     // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  open(content, options = {}) {
+    this.modalService.open(content, options).result.then((result) => {
+    },
+    err=>{})
   }
 
 }

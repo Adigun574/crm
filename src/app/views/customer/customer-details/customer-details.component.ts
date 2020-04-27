@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { CustomerService } from '../../../services/customer.service';
+import { Customer } from '../../../models/customer';
 
 @Component({
   selector: 'app-customer-details',
@@ -14,24 +16,28 @@ export class CustomerDetailsComponent implements OnInit {
   customers:any[]
   selectedCustomer:any
   editCustomerDetailsForm:FormGroup
+  products:any[]
 
 
   constructor(
     private route:ActivatedRoute,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private customerService:CustomerService
   ) { 
     this.customerId = this.route.snapshot.params.id
     this.getCustomers()
     this.getSingleCustomer()
     this.editCustomerDetailsForm = this.fb.group({
-      name:[this.selectedCustomer.name],
-      phoneNo:[this.selectedCustomer.phoneNo],
+      firstName:[this.selectedCustomer.name],
+      lastName:[this.selectedCustomer.name],
+      phone:[this.selectedCustomer.phoneNo],
       email:[this.selectedCustomer.phoneNo],
       address:[this.selectedCustomer.address]
     })
   }
 
   ngOnInit() {
+    this.getCustomerSalesRecord()
   }
 
   getCustomers(){
@@ -60,8 +66,47 @@ export class CustomerDetailsComponent implements OnInit {
     ]
   }
 
+  // getSingleCustomer(){
+  //   this.customerService.getSingleCustomer(this.customerId).subscribe(data=>{
+  //     this.selectedCustomer = <Customer>data
+  //   },
+  //     err=>{
+
+  //     })
+  // }
+
   getSingleCustomer(){
     this.selectedCustomer = this.customers.find(x=>x.id==this.customerId)
   }
+
+  getCustomerSalesRecord(){
+    this.products = [
+      {
+        productName:'product1',
+        quantity:10,
+        totalPrice:10000,
+        date:'02/02/19'
+      },
+      {
+        productName:'product2',
+        quantity:15,
+        totalPrice:12000,
+        date:'02/02/19'
+      },
+      {
+        productName:'product3',
+        quantity:2,
+        totalPrice:5000,
+        date:'02/02/19'
+      },
+      {
+        productName:'product4',
+        quantity:20,
+        totalPrice:13500,
+        date:'02/02/19'
+      },
+    ]
+  }
+
 
 }

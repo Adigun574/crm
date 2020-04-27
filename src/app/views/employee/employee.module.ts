@@ -10,6 +10,9 @@ import { TrainingProgramsComponent } from './training-programs/training-programs
 import { SkillMonitoringComponent } from './skill-monitoring/skill-monitoring.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { RoleComponent } from './role/role.component';
+import { SharedModule } from '../../shared/shared.module';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -18,7 +21,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     EmployeesComponent,
     EmployeeDetailComponent,
     TrainingProgramsComponent,
-    SkillMonitoringComponent
+    SkillMonitoringComponent,
+    RoleComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +32,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgbModule,
     MatButtonModule,
     NgSelectModule,
-    NgxChartsModule
+    NgxChartsModule,
+    SharedModule
   ]
 })
 export class EmployeeModule { }

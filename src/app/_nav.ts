@@ -7,27 +7,35 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Customers',
-    url: '/customers'
+    url: '/main/customers'
+  },
+  {
+    name: 'Products',
+    url: '/main/products'
   },
   {
     name: 'Employees',
-    url: '/employees'
+    url: '/main/employees'
+  },
+  {
+    name: 'Roles',
+    url: '/main/role'
   },
   {
     name: 'Inventory',
-    url: '/inventory'
+    url: '/main/inventory'
   },
   {
     name: 'Training Programs',
-    url: '/training-programs'
+    url: '/main/training-programs'
   },
   {
     name: 'Skill Monitoring',
-    url: '/skill-monitoring'
+    url: '/main/skill-monitoring'
   },
   {
     name: 'Messages',
-    url: '/messaging'
+    url: '/main/messaging'
   }
   // {
   //   name: 'Dashboard',
