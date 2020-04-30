@@ -1,15 +1,11 @@
-<!--<div class="container">  -->
+<div class="pos-body"> 
+  <!-- <div class="pos-top"></div> -->
     <div class="row">
         <div class="col-md-4">
-            <div class="orderScreen" *ngIf="cartEmpty" style="opacity:0.3; text-align: center">
-                <h1><i class="fa fa-shopping-cart"></i></h1>
-                <h3>Your shopping cart is empty!!!</h3>
-            </div>
-            <div class="orderScreen" *ngIf="!cartEmpty">
+            
+            <div class="orderScreen">
                 <table class="table table-striped">
                   <thead>
-                    <td>
-                    </td>
                     <td>
                       <b>Qty</b>
                     </td>
@@ -23,107 +19,85 @@
                   </thead>
                   <tr *ngFor="let order of orders; index as i">
                     <td>
-                      <input type="checkbox">
-                    </td>
-                    <td>
                       <input type="number" style="width:50px" (change)="setQuantity(quantity.value,i)" #quantity>
                     </td>
                     <td>
                       {{order.name}}
                     </td>
                     <td>
-                      ₦{{order.sellPrice}}
+                      ₦{{order.price.salePrice}}
                     </td>
                     <td>
                       <i class="fa fa-trash" (click)="removeItem(i)"></i>
                     </td>
                   </tr>
                 </table>
-                <div style="position:absolute; top:200px; right:30px"><b>Total:₦{{total}}</b></div>
-            </div> 
-            
-            <div class="calculator" style="width:250px; margin-left:auto; margin-right:auto">    
-              <div style="background-color:black; border-top:2px solid black; height:50px; color:white; width:240px; text-align:center;margin-left:auto; margin-right:auto" class="pt-2">{{calculatorscreen}}</div>
-          <div style="width:241px; margin-left:auto; margin-right:auto">
-            <select style="background-color:rgb(212, 209, 209); border-right:1px solid rgb(150,148,148); margin-righ:1px; width:120px">
-              <option>Priority</option>
-              <option>Urgent</option>
-              <option>Normal</option>
-              <option>Low</option>
-            </select>
-            <select style="background-color:rgb(212, 209, 209); border:none; width:120px">
-              <option>Type</option>
-              <option>Eat in</option>
-              <option>Delivery</option>
-              <option>Take away</option>
-            </select>
-          </div>
-          <div class="row">
-            <div class="col-xs-4"></div>
-          </div>
-          <div class="numbers" style="width:240px; margin-left:auto; margin-right:auto">
-            <div><button class="btn" (click)="calc(1)">1</button><button class="btn" (click)="calc(2)">2</button><button class="btn" (click)="calc(3)">3</button><button class="btn" style="background-color:steelblue; color:white" (click)="resetSale()">New Order</button></div>
-            <div><button class="btn" (click)="calc(4)">4</button><button class="btn" (click)="calc(5)">5</button><button class="btn" (click)="calc(6)">6</button><button class="btn" style="background-color:rgb(212, 76, 155); color:white" (click)="printBill()">Print Bill</button></div>
-            <div><button class="btn" (click)="calc(7)">7</button><button class="btn" (click)="calc(8)">8</button><button class="btn" (click)="calc(9)">9</button><button class="btn" style="background-color:slateblue; color:white">Print Order</button></div>
-            <div><button class="btn" style="background-color:rgb(241, 125, 125); color:white" (click)="cancel()">x</button><button class="btn" (click)="calc(0)">0</button><button class="btn" style="background-color:rgb(60, 231, 60); color:white; width:120px" (click)="pay()" *ngIf="!showCompleteOrder">Pay >>></button><button *ngIf="showCompleteOrder" class="btn" style="background-color:steelblue; color:white; width:120px" (click)="completeOrder()">Complete Order</button>
+                <div class="orderScreen" *ngIf="orders.length==0" style="opacity:0.3; text-align: center">
+                    <h1><i class="fa fa-shopping-cart"></i></h1>
+                    <h3>Your shopping cart is empty!!!</h3>
+                </div>
+                <div style="position:absolute; top:200px; right:40px"><b>Total:₦{{total}}</b></div>
             </div>
+            
+          <div class="calculator" style="width:90%; margin-left:auto; margin-right:auto">    
+            <div>              
+              <div class="p-4">
+                <div class="form-group">
+                  <label class="form-label">Select Customer</label>
+                  <ng-select
+                    [items]="customers"
+                    bindLabel="firstName"
+                  >                    
+                  </ng-select>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-4">
+                    <button class="btn btn-primary" (click)="completeSale()">Pay>>></button>
+                  </div>
+                  <div class="col-4">
+                    <button class="btn btn-success">Receipt</button>
+                  </div>
+                  <div class="col-4">
+                    <button class="btn btn-danger" (click)="resetSales()">Reset</button>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="order-display-screen mt-2">
+                    <table>
+                      <tr>
+                        <td>Customer:</td>
+                        <td>Com Mukaila</td>
+                      </tr>
+                      <tr>
+                        <td>Total:</td>
+                        <td>5000</td>
+                      </tr>
+                    </table>
+                </div>
+              </div>
+            </div>            
+            
           </div>
-        </div>
+          
         </div>
     
         <div class="col-md-8 order" style="background-color: rgb(225, 230, 230); border-top:2px solid red">
-            <input type="text" style="width:100%; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" (input)="searchFood(food.value)" #food>
+            <input type="search" style="width:100%; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" (input)="searchFood(food.value)" #food>
             <div  style="height:100vh">
                 <div class="loader" *ngIf="loadProducts"></div>
                 <h3 *ngIf="foodExists" style="opacity:0.3; text-align:center">Your have no products under this category!!!</h3>
                 <div class="row">
-                <div class="col-sm-3 mb-2 mr-2 mt-1 food" *ngFor="let food of foods" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192); float:left" (click)="addToCart(food)">
-                    <p class="name">{{food.name}}</p>
-                    <p class="price">₦{{food.sellPrice}}</p>
+                <div class="col-sm-3 food cursor-pointer" *ngFor="let product of products" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192); float:left" (click)="addToCart(product)">
+                    <div class="mb-2 mr-2 mt-1 product-div">
+                      <p class="name">{{product.name}}</p>
+                      <p class="price">₦{{product.price.salePrice}}.00</p>
+                    </div>
                 </div>
                 </div>
             </div>
-            <!-- <mat-tab-group>
-                <mat-tab label="Food">
-                  <input type="text" style="width:100%; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" (input)="searchFood(food.value)" #food>
-                  <div  style="height:100vh">
-                      <div class="loader" *ngIf="loadProducts"></div>
-                      <h3 *ngIf="foodExists" style="opacity:0.3; text-align:center">Your have no products under this category!!!</h3>
-                    <div class="row">
-                      <div class="col-sm-3 mb-2 mr-2 mt-1 food" *ngFor="let food of foods" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192); float:left" (click)="addToCart(food)">
-                        <p class="name">{{food.name}}</p>
-                        <p class="price">₦{{food.sellPrice}}</p>
-                      </div>
-                    </div>
-                  </div>
-                </mat-tab>
-                <mat-tab label="Drinks">
-                    <input type="text" style="width:100%; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" (input)="searchDrink(drink.value)" #drink>
-                  <div  style="height:100vh">
-                      <div class="loader" *ngIf="loadProducts"></div>
-                      <h3 *ngIf="drinkExists" style="opacity:0.3; text-align:center">Your have no products under this category!!!</h3>
-                    <div class="row">
-                      <div class="col-sm-3 mb-2 mr-2 mt-1 drink" *ngFor="let drink of drinks" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192)" (click)="addToCart(drink)">
-                        <p class="name">{{drink.name}}</p>
-                        <p class="price">₦{{drink.sellPrice}}</p>
-                      </div>
-                    </div>
-                  </div>
-                </mat-tab>
-                <mat-tab label="Others">
-                    <input type="text" style="width:100%; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" (input)="searchOther(other.value)" #other>
-                  <div  style="height:100vh">
-                      <div class="loader" *ngIf="loadProducts"></div>
-                      <h3 *ngIf="otherExists" style="opacity:0.3; text-align:center">Your have no products under this category!!!</h3>
-                    <div class="row">
-                      <div class="col-sm-3 mb-2 mr-2 mt-1 other" *ngFor="let other of others" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192)" (click)="addToCart(other)">
-                        <p class="name">{{other.name}}</p>
-                        <p class="price">₦{{other.sellPrice}}</p>
-                      </div>
-                    </div>
-                  </div>
-                </mat-tab>
-            </mat-tab-group> -->
         </div>
       </div>
     
@@ -155,4 +129,4 @@
         <div style="position:absolute; top:200px; right:30px"><b>Total:₦{{total}}</b></div>
         <code>You were served by: <b>{{cashierName}}</b></code>
     </div> 
-    <!--</div>-->
+</div>

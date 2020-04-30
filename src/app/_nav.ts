@@ -2,48 +2,67 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
+    title: true,
+    name: 'TUNNEX LAB'
+  },
+  {
     name: 'Dashboard',
-    url: '/salesreport'
+    url: '/main/salesreport',
+    icon: 'icon-speedometer',
+    badge: {
+          variant: 'info',
+          text: 'NEW'
+        }
   },
   {
     name: 'POS',
-    url: '/main/pos'
+    url: '/main/pos',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Customers',
-    url: '/main/customers'
+    url: '/main/customers',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Products',
-    url: '/main/products'
+    url: '/main/products',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Users',
-    url: '/main/user'
+    url: '/main/user',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Employees',
-    url: '/main/employees'
+    url: '/main/employees',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Roles',
-    url: '/main/role'
+    url: '/main/role',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Inventory',
-    url: '/main/inventory'
+    url: '/main/inventory',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Training Programs',
-    url: '/main/training-programs'
+    url: '/main/training-programs',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Skill Monitoring',
-    url: '/main/skill-monitoring'
+    url: '/main/skill-monitoring',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Messages',
-    url: '/main/messaging'
+    url: '/main/messaging',
+    icon: 'icon-speedometer'
   }
   // {
   //   name: 'Dashboard',

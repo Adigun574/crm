@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../../services/product.service';
+import { CustomerService } from '../../../services/customer.service';
 
 @Component({
   selector: 'app-pos',
@@ -8,45 +10,57 @@ import { Component, OnInit } from '@angular/core';
 export class PosComponent implements OnInit {
 
   cartEmpty:boolean = false
-  orders = [
-    {
-      name:'fanta',
-      sellPrice:150
-    },
-    {
-      name:'sprite',
-      sellPrice:200
-    }
-  ]
-  foods = [
-    {
-      name:'fanta',
-      sellPrice:150
-    },
-    {
-      name:'sprite',
-      sellPrice:200
-    }
-  ]
-  total = 350
+  orders = []
+  products = []
+  total = 0
   loadProducts = true
+  customers=[]
 
-  constructor() { }
+  constructor(
+    private productService:ProductService,
+    private customerService:CustomerService
+  ) { }
 
   ngOnInit(): void {
+    this.getProducts()
+    this.getCustomers()
   }
 
+  getProducts(){
+    this.productService.getAllProducts().subscribe(data=>{
+      this.loadProducts = false
+      this.products = <any[]>data
+    })
+  }
 
+  addToCart(product){
+    this.orders.push(product)
+    this.calculateTotal()
+  }
 
+  calculateTotal(){
+    this.total = 0
+    this.orders.forEach(order=>this.total += order.price.salePrice)
+  }
 
+  getCustomers(){
+    this.customerService.getAllCustomers().subscribe(data=>{
+      this.customers = <any[]>data
+    })
+  }
 
+  removeItem(i){
+    this.orders.splice(i,1)
+    this.calculateTotal()
+  }
 
+  completeSale(){
+    console.log(this.orders)
+  }
 
-
-
-
-
-
+  resetSales(){
+    this.orders = []
+  }
 
 }
 
