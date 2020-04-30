@@ -6,12 +6,20 @@ export const navItems: INavData[] = [
     url: '/salesreport'
   },
   {
+    name: 'POS',
+    url: '/main/pos'
+  },
+  {
     name: 'Customers',
     url: '/main/customers'
   },
   {
     name: 'Products',
     url: '/main/products'
+  },
+  {
+    name: 'Users',
+    url: '/main/user'
   },
   {
     name: 'Employees',

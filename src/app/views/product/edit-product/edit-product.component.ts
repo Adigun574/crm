@@ -11,9 +11,10 @@ import { Product } from '../../../models/product';
 export class EditProductComponent implements OnInit {
 
   productId:number
-  // product:Product
-  product
+  product:Product
+  // product
   updating:boolean = false
+  loadingProduct = true
 
   constructor(
     private route:ActivatedRoute,
@@ -27,43 +28,44 @@ export class EditProductComponent implements OnInit {
   }
 
   getProduct(){
-    // this.productService.getProductById(this.productId).subscribe(data=>{
-    //   this.product = <Product>data
-    // },
-    //   err=>{
-
-    //   })
-    this.product = {
-      "name": "malt",
-      "quantity": 20,
-      "image": "imageString",
-      "priceID": 1,
-      "price": {
-        "id": 1,
-        "userCreated": 0,
-        "userModified": 0,
-        "dateCreated": "2020-03-30T15:10:33.2058236",
-        "dateModified": "2020-03-30T21:49:17.7538787",
-        "costPrice": 20,
-        "salePrice": 30
-      },
-      "id": 1,
-      "userCreated": 0,
-      "userModified": 0,
-      "dateCreated": "2020-03-30T15:10:43.8541328",
-      "dateModified": "2020-03-30T21:49:15.8988712"
-    }
+    this.productService.getProductById(this.productId).subscribe(data=>{
+      this.product = <Product>data
+      this.loadingProduct = false
+    },
+      err=>{
+        this.loadingProduct = false
+      })
+    // this.product = {
+    //   "name": "malt",
+    //   "quantity": 20,
+    //   "image": "imageString",
+    //   "priceID": 1,
+    //   "price": {
+    //     "id": 1,
+    //     "userCreated": 0,
+    //     "userModified": 0,
+    //     "dateCreated": "2020-03-30T15:10:33.2058236",
+    //     "dateModified": "2020-03-30T21:49:17.7538787",
+    //     "costPrice": 20,
+    //     "salePrice": 30
+    //   },
+    //   "id": 1,
+    //   "userCreated": 0,
+    //   "userModified": 0,
+    //   "dateCreated": "2020-03-30T15:10:43.8541328",
+    //   "dateModified": "2020-03-30T21:49:15.8988712"
+    // }
   }
 
   updateProduct(){
     this.updating = true
-    // this.productService.updateProduct(this.product).subscribe(data=>{
-    //   this.updating = false
-    //   console.log(data)
-    // },
-    //   err=>{
+    this.productService.updateProduct(this.product).subscribe(data=>{
+      this.updating = false
+      console.log(data)
+    },
+      err=>{
 
-    //   })
+      })
   }
 
 }

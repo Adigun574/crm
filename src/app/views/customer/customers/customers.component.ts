@@ -21,6 +21,7 @@ export class CustomersComponent implements OnInit {
     {name:'not specified'}
   ]
   savingCustomer:boolean = false
+  submitted:boolean = false
 
   constructor(
     private modalService: NgbModal,
@@ -36,31 +37,34 @@ export class CustomersComponent implements OnInit {
       Address:[],
       Gender:[],
       Image:[],
-      UserCreated:[],
-      UserModified:[],
-      DateCreated:[],
-      DateModified:[]
+      UserCreated:[0],
+      UserModified:[0],
+      DateCreated:["2020-04-30T04:18:48.379Z"],
+      DateModified:["2020-04-30T04:18:48.379Z"]
     })
   }
 
   ngOnInit(): void {
-    this.getCustomers()
-    // this.getAllCustomers()
+    this.getAllCustomers()
   }
 
   saveCustomer(){
+    this.submitted = true
     if(this.addCustomerForm.invalid){
       return
     }
     else{
-      console.log(this.addCustomerForm.value)
       this.savingCustomer = true
       this.customerService.saveCustomer(this.addCustomerForm.value).subscribe(data=>{
-        console.log(data)
+        this.getAllCustomers()
         this.savingCustomer = false
+        this.submitted = false
+        this.modalService.dismissAll()
       },
         err=>{
+          this.submitted = false
           this.savingCustomer = false
+          this.modalService.dismissAll()
         })
     }
   }
@@ -81,73 +85,6 @@ export class CustomersComponent implements OnInit {
     err=>{})
   }
 
-  getCustomers(){
-    this.customers = [
-      // {
-      //   id:1,
-      //   name:'Adigun Ibrahim',
-      //   phoneNo:'08165230739',
-      //   email:'adigun@gmail.com',
-      //   address:'12 main str'
-      // },
-      // {
-      //   id:2,
-      //   name:'Adigun Adedotun',
-      //   phoneNo:'08165230739',
-      //   email:'adigun@gmail.com',
-      //   address:'12 main str'
-      // },
-      // {
-      //   id:3,
-      //   name:'Adigun Akanni',
-      //   phoneNo:'08165230739',
-      //   email:'adigun@gmail.com',
-      //   address:'12 main str'
-      // }
-      {
-        "firstName": "string",
-        "lastName": "string",
-        "email": "string",
-        "address": "string",
-        "phone": "string",
-        "gender": "string",
-        "image": "string",
-        "id": 1,
-        "userCreated": 0,
-        "userModified": 0,
-        "dateCreated": "2020-04-18T08:16:03.9941987",
-        "dateModified": "2020-04-18T07:15:27.178"
-      },
-      {
-        "firstName": "stfddsdhjdfring",
-        "lastName": "string",
-        "email": "string",
-        "address": "string",
-        "phone": "string",
-        "gender": "string",
-        "image": "string",
-        "id": 2,
-        "userCreated": 0,
-        "userModified": 0,
-        "dateCreated": "2020-04-18T08:20:19.7624202",
-        "dateModified": "2020-04-18T07:15:27.178"
-      },
-      {
-        "firstName": "string",
-        "lastName": "string",
-        "email": "string",
-        "address": "string",
-        "phone": "string",
-        "gender": "string",
-        "image": "string",
-        "id": 3,
-        "userCreated": 0,
-        "userModified": 0,
-        "dateCreated": "2020-04-26T23:49:26.2460429",
-        "dateModified": "0001-01-01T00:00:00"
-      }
-    ]
-  }
 
   showCustomer(id){
     this.router.navigateByUrl(`main/customer/${id}`)

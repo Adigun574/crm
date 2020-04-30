@@ -3,6 +3,9 @@
         <h3>Role</h3>
     </div>
     <div>
+        <button class="btn btn-success" (click)="open(addRoleModal)">Add Role</button>
+    </div>
+    <div>
         <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
         
@@ -32,3 +35,42 @@
         </div>                  
     </div>
 </div>
+
+<ng-template #addRoleModal>
+    <div>
+        <div class="card p-4">
+            <div class="card-header">
+                <h3>Add Role</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input class="form-control" type="text" [(ngModel)]="roleName">
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <thead>
+                        <td><b>Menu</b></td>
+                        <td><b>Access</b></td>
+                    </thead>
+                    <tr>
+                        <td>Customer</td>
+                        <input type="checkbox" [(ngModel)]="roleObj.Privileges[0].Write">
+                    </tr>
+                    <tr>
+                        <td>Product</td>
+                        <input type="checkbox" class="text-center" [(ngModel)]="roleObj.Privileges[1].Write">
+                    </tr>
+                    <tr>
+                        <td>Role</td>
+                        <input type="checkbox" class="text-center" [(ngModel)]="roleObj.Privileges[2].Write">
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-success pull-right" (click)="saveRole()">Save</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -3,39 +3,59 @@
     <ngb-tab>
         <ng-template ngbTabTitle>Customer Details</ng-template>
         <ng-template ngbTabContent>
-            <form [formGroup]="editCustomerDetailsForm">
+            <!-- <form [formGroup]="editCustomerDetailsForm"> -->
                 <div class="form-group">
                     <label for="name">Firstname</label>
+                    <!-- <input type="text" class="form-control" 
+                        id="firstName" aria-describedby="emailHelp" 
+                        placeholder="Enter name" formControlName="firstName"> -->
                     <input type="text" class="form-control" 
                         id="firstName" aria-describedby="emailHelp" 
-                        placeholder="Enter name" formControlName="firstName">
+                        placeholder="Enter name" 
+                        [(ngModel)]="selectedCustomer.firstName">
                 </div>
                 <div class="form-group">
                     <label for="name">Lastname</label>
+                    <!-- <input type="text" class="form-control" 
+                        id="lastName" aria-describedby="emailHelp" 
+                        placeholder="Enter name" formControlName="lastName"> -->
                     <input type="text" class="form-control" 
                         id="lastName" aria-describedby="emailHelp" 
-                        placeholder="Enter name" formControlName="lastName">
+                        placeholder="Enter name" [(ngModel)]="selectedCustomer.lastName">
                 </div>
                 <div class="form-group">
                     <label for="phoneNo">Phone No</label>
+                    <!-- <input type="text" class="form-control" 
+                        id="phoneNo" placeholder="Enter Phone No"
+                        formControlName="phone"> -->
                     <input type="text" class="form-control" 
                         id="phoneNo" placeholder="Enter Phone No"
-                        formControlName="phone">
+                        [(ngModel)]="selectedCustomer.phone">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
+                    <!-- <input type="text" class="form-control" 
+                        id="email" placeholder="Enter Email"
+                        formControlName="email"> -->
                     <input type="text" class="form-control" 
                         id="email" placeholder="Enter Email"
-                        formControlName="email">
+                        [(ngModel)]="selectedCustomer.email">
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control"    
+                    <!-- <input type="text" class="form-control"    
                         id="address" placeholder="Enter Address"
-                        formControlName="address">
+                        formControlName="address"> -->
+                    <textarea  class="form-control" 
+                        [(ngModel)]="selectedCustomer.address"
+                    ></textarea>
+                    
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
+                <button type="submit" class="btn btn-primary" (click)="updateCustomer()">
+                    <span class="spinner-grow spinner-grow-sm" *ngIf="updatingCustomer"></span> 
+                    Update
+                </button>
+            <!-- </form> -->
         </ng-template>
     </ngb-tab>
     <ngb-tab title="Converstaions">

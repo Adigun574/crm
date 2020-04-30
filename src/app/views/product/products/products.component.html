@@ -5,13 +5,13 @@
 <div class="d-block">
     <button class="btn btn-success pull-right d-block" (click)="open(addProductModal)">Add Product</button>
 </div>
-<!-- <button class="btn btn-success pull-right add-btn" (click)="open(addProductModal)">Add Product</button> -->
+<br>
 <br>
 <div class="container">
     <div class="row m-auto">
-        <!-- <div class="col-sm-3 mb-2 mr-2 mt-1 product-card" *ngFor="let product of products"> -->
-        <div class="col-sm-3 product-card" *ngFor="let product of products" (click)="viewProduct(product.id)">
-            <div class="mb-2 mr-2 mt-1 inner-card">
+        <!-- <div class="col-sm-3 product-card" *ngFor="let product of products" (click)="viewProduct(product.id)"> -->
+        <div class="col-sm-3" *ngFor="let product of products" (click)="viewProduct(product.id)">
+            <div class="mb-2 mr-2 mt-1 inner-card product-card">
                 <p class="name">{{product.name}}</p>
                 <p class="price">₦{{product.price.salePrice}}.00</p>
             </div>
@@ -26,6 +26,9 @@
         </div>
         <div class="card-body">
             <form [formGroup]="addProductForm">
+                <div class="text-center" *ngIf="submitted && addProductForm.invalid">
+                    <small class="text-danger">Please fill all required fields</small>
+                </div>
                 <div class="form-group">
                     <label class="form-label">Product Name</label>
                     <input type="text" class="form-control" formControlName="Name">

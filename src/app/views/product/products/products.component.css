@@ -8,7 +8,7 @@
     background-size: cover;
     /* height:200px; */
     /* width:100px; */
-    /* width: 40%; */
+    /* width: 40% !important; */
     height:120px; 
     background-color:white; 
     box-shadow:1px 3px 3px rgb(189, 189, 192); 
@@ -19,22 +19,25 @@
 
 .price{
     position:absolute; 
-    right:0px; 
-    top:0px; 
+    right:23px; 
+    top:4px; 
     background-color: rgb(143, 8, 8); 
     border-radius:3px; 
     color:white; 
     padding:0 5px
 }
 .name{
-    position:absolute; 
-    left:0px; 
     bottom:0;
     background-color: rgb(216, 215, 215);
     font-weight: bolder;
     border-radius:3px;
-    width:100%;
+    padding:3px;
     text-align: center;
+    width: 120px;
+    position: absolute;
+    left: 50%;
+    margin-left: -60px;
+    overflow-x: hidden;
 }
 .add-btn{
     position: absolute;
@@ -43,6 +46,6 @@
     z-index:2;
 }
 .inner-card{
-    width:80% !important;
+    width:90% !important;
     margin:auto;
 }

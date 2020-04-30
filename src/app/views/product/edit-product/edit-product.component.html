@@ -1,4 +1,5 @@
-<div class="body">
+<h1 *ngIf="loadingProduct">Loading</h1>
+<div class="body" *ngIf="!loadingProduct">
     <div class="text-center">
         <h3 class="header">{{product.name}}</h3>
     </div>
@@ -27,7 +28,7 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <img src="" alt="no image" width="100%" height="100%">
+                <img src="../../../../assets/favicon.ico" alt="no image" width="100%" height="90%" class="image">
             </div>
         </div>
         
