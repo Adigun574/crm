@@ -1,6 +1,6 @@
-#### Simplify HRM
+#### CRM
 
-Human Resource Management Module for Simplify
+CRM tool
 
 #### Prerequisites
 
