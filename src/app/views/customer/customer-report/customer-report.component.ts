@@ -13,6 +13,7 @@ export class CustomerReportComponent implements OnInit {
     {name:"Regular"},
     {name:"Average"}
   ]
+  loading = false
 
   constructor() { }
 

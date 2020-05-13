@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class InventoryComponent implements OnInit {
 
   products:any[]
+  loading = false
+  filterVal = ''
 
   constructor() { }
 
@@ -38,6 +40,10 @@ export class InventoryComponent implements OnInit {
         sellPrice:4000
       }
     ]
+  }
+
+  searchTable(){
+    
   }
 
 }

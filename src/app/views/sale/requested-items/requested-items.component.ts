@@ -13,6 +13,7 @@ export class RequestedItemsComponent implements OnInit {
     {name:"Regular"},
     {name:"Average"}
   ]
+  loading = false
 
   constructor() { }
 

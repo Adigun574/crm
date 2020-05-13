@@ -13,6 +13,7 @@ export class EmployeeDetailComponent implements OnInit {
   employees:any[]
   selectedEmployee:any
   editEmployeeDetailsForm:FormGroup
+  currentJustify:any
 
 
   constructor(

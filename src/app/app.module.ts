@@ -39,8 +39,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ModalModule } from 'ngx-bootstrap';
+// import { TabsModule } from 'ngx-bootstrap/tabs';
+// import { ModalModule } from 'ngx-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ErrorInterceptor } from './util/error.interceptor';
@@ -66,8 +66,8 @@ import { ProductModule } from './views/product/product.module';
     PerfectScrollbarModule,
     NgbModule,
     BsDropdownModule.forRoot(),
-    TabsModule.forRoot(),
-    ModalModule.forRoot(),
+    // TabsModule.forRoot(),
+    // ModalModule.forRoot(),
     SweetAlert2Module.forRoot(),
     ChartsModule,
     ReactiveFormsModule,
