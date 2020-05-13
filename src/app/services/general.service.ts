@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GeneralService {
 
-  public api = `http://api.tunnexlabcrm.com/api/`
+  public api = `https://api.tunnexlabcrm.com/api/`
 
   constructor() { }
 }
