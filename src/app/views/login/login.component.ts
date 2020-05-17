@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +9,36 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  username:string = ''
+  password:string = ''
+  emptyCredentials:boolean
+  invalidCredentials:boolean
+
   constructor(
-    private router:Router
+    private router:Router,
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
   }
 
   login(){
-    this.router.navigateByUrl('main')
+    if(this.username != '' && this.password != ''){
+      this.userService.login(this.username,this.password).subscribe(data=>{
+        localStorage.setItem("tunnexcrmuser",JSON.stringify(data))
+        this.router.navigateByUrl('main')
+        this.invalidCredentials = false
+      },
+        err=>{
+          console.log(err)
+          this.invalidCredentials = true
+        })
+    }
+    else{
+      this.emptyCredentials=true
+    }
+
+    // this.router.navigateByUrl('main')
   }
 
 }

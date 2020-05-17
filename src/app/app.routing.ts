@@ -27,6 +27,7 @@ import { EditProductComponent } from './views/product/edit-product/edit-product.
 import { RoleComponent } from './views/employee/role/role.component';
 import { UserComponent } from './views/employee/user/user.component';
 import { PosComponent } from './views/sale/pos/pos.component';
+import { SalesHistoryComponent } from './views/sale/sales-history/sales-history.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -105,6 +106,10 @@ export const routes: Routes = [
       {
         path:'pos',
         component:PosComponent
+      },
+      {
+        path:'sales-history',
+        component:SalesHistoryComponent
       },
       {
         path:'**',

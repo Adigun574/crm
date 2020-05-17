@@ -68,21 +68,40 @@ orderScreen li:nth-child(even){
     100%{transform:rotate(360deg)}
 }
 
-.food, .drink, .other{
+/* .food, .drink, .other{
     background-image: url('../../../../assets/img/avatars/undraw_profile_pic_ic5t.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height:200px;
     width:70% !important;
-    /* width:100px; */
-    /* margin-left:auto; */
+} */
+
+.food, .drink, .other{
+    background-image: url('../../../../assets/img/avatars/undraw_profile_pic_ic5t.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:200px;
+    width:95% !important;
+    margin:auto;
+    border-radius:3px;
 }
 
-.price{
+
+/* .price{
     position:absolute; 
     right:0px; 
     top:0px; 
+    background-color: rgb(143, 8, 8); 
+    border-radius:3px; 
+    color:white; 
+    padding:0 5px
+} */
+.price{
+    position:absolute; 
+    right:20px; 
+    top:15px; 
     background-color: rgb(143, 8, 8); 
     border-radius:3px; 
     color:white; 

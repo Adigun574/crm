@@ -47,6 +47,7 @@ export class UserComponent implements OnInit {
       Name: [,Validators.required],
       Post: [],
       Phone: [],
+      Password: [],
       Gender: ["male"],
       Image: [],
       Email: [],

@@ -13,7 +13,7 @@
         <div class="col-sm-3" *ngFor="let product of products" (click)="viewProduct(product.id)">
             <div class="mb-2 mr-2 mt-1 inner-card product-card">
                 <p class="name">{{product.name}}</p>
-                <p class="price">₦{{product.price.salePrice}}.00</p>
+                <p class="price">₦{{product.salePrice}}.00</p>
             </div>
         </div>
     </div>
@@ -40,11 +40,13 @@
                 <div class="form-row d-flex" style="justify-content: space-between">
                     <div class="form-group">
                         <label class="form-label">Cost Price</label>
-                        <input type="number" class="form-control" [(ngModel)]="CostPrice" [ngModelOptions]="{standalone:true}">
+                        <!-- <input type="number" class="form-control" [(ngModel)]="CostPrice" [ngModelOptions]="{standalone:true}"> -->
+                        <input type="number" class="form-control" formControlName="CostPrice">
                     </div>            
                     <div class="form-group">
                         <label class="form-label">Sell Price</label>
-                        <input type="number" class="form-control" [(ngModel)]="SalePrice" [ngModelOptions]="{standalone:true}">
+                        <!-- <input type="number" class="form-control" [(ngModel)]="SalePrice" [ngModelOptions]="{standalone:true}"> -->
+                        <input type="number" class="form-control" formControlName="SalePrice">
                     </div>
                 </div>
                 <div class="form-group">

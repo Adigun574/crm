@@ -9,11 +9,12 @@ import { RequestedItemsComponent } from './requested-items/requested-items.compo
 import { PosComponent } from './pos/pos.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from '../../shared/shared.module';
+import { SalesHistoryComponent } from './sales-history/sales-history.component';
 
 
 
 @NgModule({
-  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent],
+  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

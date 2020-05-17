@@ -23,4 +23,8 @@ export class UserService {
   updateUser(obj){
     return this.httpClient.post(`${this.generalService.api}User/UpdateUser`,obj)
   }
+
+  login(username,password){
+    return this.httpClient.post(`${this.generalService.api}User/Authenticate?username=${username}&password=${password}`,null)
+  }
 }

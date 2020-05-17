@@ -90,7 +90,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   showEmployee(id){
-    this.router.navigateByUrl(`employee/${id}`)
+    this.router.navigateByUrl(`main/employee/${id}`)
   }
 
 }

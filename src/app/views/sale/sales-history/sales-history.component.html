@@ -1,0 +1,39 @@
+<h2 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+    <div>Sales Report</div>
+  </h2>
+  
+  <div> 
+   
+    <div class="row mb-1">
+        <div class="col-sm-6 col-md-6 d-inline-flex">
+            <input type="text"
+            [(ngModel)]="filterVal"
+            (input)="searchTable()"
+            class="form-control w-auto"
+            placeholder="Search...">
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 ">
+          <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white">
+              <i class="ion ion-md-print"></i>&nbsp; Print
+          </a>
+        </div>
+      </div>
+  <div class="table-responsive mt-2">
+      <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
+    <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
+      <thead>
+            <th>Date <i class="ion text-muted ml-2"></i></th>
+            <th>Items <i class="ion text-muted ml-2"></i></th>
+            <th>Amount <i class="ion text-muted ml-2"></i></th>
+       </thead>
+      <tbody>
+        <tr *ngFor="let sale of sales" >
+          <td>{{ sale.dateCreated.split('T')[0] }}</td>
+          <td><span *ngFor="let item of sale.cart.items">{{item.name}}<b>({{item.quantity}})</b> </span></td>
+          <td><span>&#8358;</span>{{sale.cart.amount}}.00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  

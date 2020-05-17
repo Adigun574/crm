@@ -40,6 +40,11 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer'
   },
   {
+    name: 'Sales History',
+    url: '/main/sales-history',
+    icon: 'icon-speedometer'
+  },
+  {
     name: 'Roles',
     url: '/main/role',
     icon: 'icon-speedometer'

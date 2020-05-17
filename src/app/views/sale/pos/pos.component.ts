@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { CustomerService } from '../../../services/customer.service';
+import { Sale, Invoice, Cashier, Cart } from '../../../models/sales';
+import { Customer } from '../../../models/customer';
+import { SaleService } from '../../../services/sale.service';
 
 @Component({
   selector: 'app-pos',
@@ -15,15 +18,76 @@ export class PosComponent implements OnInit {
   total = 0
   loadProducts = true
   customers=[]
+  sale = new Sale()
+  selectedCustomer:Customer
+  guestCustomer = {
+    firstName: 'Guest',
+    lastName: '',
+    email: '',
+    address: '',
+    phone: '',
+    gender: '',
+    image: '',
+    id: 1,
+    userCreated: 0,
+    userModified: 0,
+    dateCreated: '',
+    dateModified: '',
+  }
 
   constructor(
     private productService:ProductService,
-    private customerService:CustomerService
+    private customerService:CustomerService,
+    private saleService:SaleService
   ) { }
 
   ngOnInit(): void {
     this.getProducts()
     this.getCustomers()
+  }
+
+  completeSale(){
+    if(this.selectedCustomer){
+      this.sale.CustomerID = this.selectedCustomer.id
+    }
+    else{
+      this.sale.CustomerID = 1
+      this.selectedCustomer = this.guestCustomer
+    }
+    this.sale.Cart = null
+    this.sale.Payment = [
+      {
+        ID: 0,
+        CustomerID: this.selectedCustomer.id,
+        Amount: this.total,
+        Method: 'cash',
+        Reference: null,
+        DatePaid: "2020-05-17T13:27:44.923Z",
+        InvoiceNo: null,
+        UserCreated: 4
+      }
+    ]
+    this.sale.UserCreated = 4
+    this.sale.Invoice = new Invoice()
+    this.sale.Invoice.Cashier = new Cashier()
+    this.sale.Invoice.Cashier.ID = 4
+    this.sale.Invoice.CustomerID = this.selectedCustomer.id
+    this.sale.Invoice.Amount = this.total
+    this.sale.Invoice.AmountPaid = this.total
+    this.sale.Invoice.Cashier.UserCreated = 4
+    this.sale.Invoice.UserCreated = 4
+    this.sale.Cart = new Cart()
+    this.sale.Cart.Amount = this.total
+    this.sale.Cart.Items = this.orders
+    this.sale.Cart.UserCreated = 4
+    // console.log(JSON.stringify(this.sale))
+    console.log(this.sale)
+    this.saleService.saveSale(this.sale).subscribe(data=>{
+      console.log(data)
+    },
+      err=>{
+
+      })
   }
 
   getProducts(){
@@ -34,13 +98,14 @@ export class PosComponent implements OnInit {
   }
 
   addToCart(product){
+    product.quantity = 1
     this.orders.push(product)
     this.calculateTotal()
   }
 
   calculateTotal(){
     this.total = 0
-    this.orders.forEach(order=>this.total += order.price.salePrice)
+    this.orders.forEach(order=>this.total += order.salePrice)
   }
 
   getCustomers(){
@@ -54,9 +119,7 @@ export class PosComponent implements OnInit {
     this.calculateTotal()
   }
 
-  completeSale(){
-    console.log(this.orders)
-  }
+  
 
   resetSales(){
     this.orders = []

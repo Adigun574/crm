@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { navItems } from '../../_nav';
-// import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +11,6 @@ export class DefaultLayoutComponent {
   public navItems = navItems;
 
   constructor(
-    // private authService: AuthService, 
     private router: Router
   ) {}
 
@@ -21,7 +19,7 @@ export class DefaultLayoutComponent {
   }
 
   logOut() {
-    // this.authService.logout();
-    window.location.href = `https://login.yoursimplify.com/home`;
+    localStorage.removeItem("tunnexcrmuser")
+    this.router.navigateByUrl('')
   }
 }
