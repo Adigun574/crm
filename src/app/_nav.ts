@@ -9,10 +9,10 @@ export const navItems: INavData[] = [
     name: 'Dashboard',
     url: '/main/salesreport',
     icon: 'icon-speedometer',
-    badge: {
-          variant: 'info',
-          text: 'NEW'
-        }
+    // badge: {
+    //       variant: 'info',
+    //       text: 'NEW'
+    //     }
   },
   {
     name: 'POS',
@@ -37,6 +37,11 @@ export const navItems: INavData[] = [
   {
     name: 'Employees',
     url: '/main/employees',
+    icon: 'icon-speedometer'
+  },
+  {
+    name: 'Leads',
+    url: '/main/leads',
     icon: 'icon-speedometer'
   },
   {

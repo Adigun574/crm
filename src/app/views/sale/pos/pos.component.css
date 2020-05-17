@@ -78,7 +78,7 @@ orderScreen li:nth-child(even){
 } */
 
 .food, .drink, .other{
-    background-image: url('../../../../assets/img/avatars/undraw_profile_pic_ic5t.png');
+    background-image: url('../../../../assets/img/cart.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

@@ -9,11 +9,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerReportComponent } from './customer-report/customer-report.component';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { LeadsComponent } from './leads/leads.component';
 // import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [CustomersComponent, CustomerDetailsComponent, CustomerReportComponent],
+  declarations: [CustomersComponent, CustomerDetailsComponent, CustomerReportComponent, LeadsComponent],
   imports: [
     CommonModule,
     MatButtonModule,

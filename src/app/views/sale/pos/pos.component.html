@@ -19,13 +19,13 @@
                   </thead>
                   <tr *ngFor="let order of orders; index as i">
                     <td>
-                      <input type="number" style="width:50px" (change)="setQuantity(quantity.value,i)" #quantity [(ngModel)]="order.quantity">
+                      <input type="number" style="width:50px" (input)="setQuantity(quantity.value,i)" #quantity [(ngModel)]="order.quantity">
                     </td>
                     <td>
                       {{order.name}}
                     </td>
                     <td>
-                      ₦{{order.salePrice}}.00
+                      ₦{{order.salePrice * order.quantity}}.00
                     </td>
                     <td>
                       <i class="fa fa-trash" (click)="removeItem(i)"></i>
@@ -54,7 +54,10 @@
                 <hr>
                 <div class="row">
                   <div class="col-4">
-                    <button class="btn btn-primary" (click)="completeSale()">Pay>>></button>
+                    <button class="btn btn-primary" (click)="completeSale()">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSale"></span>
+                      Pay
+                    </button>
                   </div>
                   <div class="col-4">
                     <button class="btn btn-success">Receipt</button>
@@ -70,7 +73,7 @@
                     <table>
                       <tr>
                         <td>Customer:</td>
-                        <td>Com Mukaila</td>
+                        <td>{{selectedCustomer.firstName}}</td>
                       </tr>
                       <tr>
                         <td>Total:</td>
@@ -86,7 +89,7 @@
         </div>
     
         <div class="col-md-8 order" style="background-color: rgb(225, 230, 230); border-top:2px solid red">
-            <input type="search" style="width:100%; height:40px; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" #food>
+            <input type="search" style="width:100%; height:40px; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" #food (input)="searchProducts(food.value)">
             <div  style="height:100vh">
                 <div class="loader" *ngIf="loadProducts"></div>
                 <!-- <h3 *ngIf="foodExists" style="opacity:0.3; text-align:center">Your have no products under this category!!!</h3> -->

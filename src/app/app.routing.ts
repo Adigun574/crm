@@ -28,6 +28,7 @@ import { RoleComponent } from './views/employee/role/role.component';
 import { UserComponent } from './views/employee/user/user.component';
 import { PosComponent } from './views/sale/pos/pos.component';
 import { SalesHistoryComponent } from './views/sale/sales-history/sales-history.component';
+import { LeadsComponent } from './views/customer/leads/leads.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -110,6 +111,10 @@ export const routes: Routes = [
       {
         path:'sales-history',
         component:SalesHistoryComponent
+      },
+      {
+        path:'leads',
+        component:LeadsComponent
       },
       {
         path:'**',

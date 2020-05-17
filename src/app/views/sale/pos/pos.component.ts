@@ -14,6 +14,7 @@ export class PosComponent implements OnInit {
 
   cartEmpty:boolean = false
   orders = []
+  apiorders = []
   products = []
   total = 0
   loadProducts = true
@@ -34,6 +35,8 @@ export class PosComponent implements OnInit {
     dateCreated: '',
     dateModified: '',
   }
+  allProducts:any[] = []
+  savingSale:boolean = false
 
   constructor(
     private productService:ProductService,
@@ -44,9 +47,12 @@ export class PosComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts()
     this.getCustomers()
+    this.selectedCustomer = this.guestCustomer
+    console.log('WTF!!! Why are you here???')
   }
 
   completeSale(){
+    this.savingSale = true
     if(this.selectedCustomer){
       this.sale.CustomerID = this.selectedCustomer.id
     }
@@ -78,21 +84,38 @@ export class PosComponent implements OnInit {
     this.sale.Invoice.UserCreated = 4
     this.sale.Cart = new Cart()
     this.sale.Cart.Amount = this.total
-    this.sale.Cart.Items = this.orders
+    this.sale.Cart.Items = this.apiorders
     this.sale.Cart.UserCreated = 4
-    // console.log(JSON.stringify(this.sale))
-    console.log(this.sale)
+    // console.log(this.sale)
     this.saleService.saveSale(this.sale).subscribe(data=>{
       console.log(data)
+      this.savingSale = false
+      this.resetSales()
     },
       err=>{
-
+        this.savingSale = false
       })
+  }
+
+  setQuantity(qnt,i){
+    this.orders[i].quantity = qnt
+    this.apiorders[i].quantity = qnt
+    this.calculateTotal()
+  }
+
+  searchProducts(searchterm){
+    if(searchterm==''){
+      this.products = this.allProducts
+    }
+    else{
+      this.products = this.allProducts.filter(x=>x.name.toLowerCase().includes(searchterm.toLowerCase()))
+    }
   }
 
   getProducts(){
     this.productService.getAllProducts().subscribe(data=>{
       this.loadProducts = false
+      this.allProducts = <any[]>data
       this.products = <any[]>data
     })
   }
@@ -100,12 +123,21 @@ export class PosComponent implements OnInit {
   addToCart(product){
     product.quantity = 1
     this.orders.push(product)
+    this.apiorders.push({
+      ID:0,
+      cartID:0,
+      Name:product.name,
+      Code:product.code,
+      Quantity:1,
+      Amount:product.salePrice,
+      ProductID:product.id
+    })
     this.calculateTotal()
   }
 
   calculateTotal(){
     this.total = 0
-    this.orders.forEach(order=>this.total += order.salePrice)
+    this.orders.forEach(order=>this.total += order.salePrice * order.quantity)
   }
 
   getCustomers(){
