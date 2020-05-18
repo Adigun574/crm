@@ -22,6 +22,7 @@ export class CustomersComponent implements OnInit {
   ]
   savingCustomer:boolean = false
   submitted:boolean = false
+  loading:boolean = false
 
   constructor(
     private modalService: NgbModal,
@@ -70,8 +71,10 @@ export class CustomersComponent implements OnInit {
   }
 
   getAllCustomers(){
+    this.loading = true
     this.customerService.getAllCustomers().subscribe(data=>{
       this.customers = <Customer[]>data
+      this.loading = false
     },
       err=>{
 

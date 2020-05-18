@@ -6,11 +6,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // import { ErrorMsgComponent } from '../views/components/error-msg/error-msg.component';
 // import { TextLoaderComponent } from '../views/components/text-loader/text-loader.component';
 import { MatTableModule, MatPaginatorModule } from '@angular/material';
+import { LoaderComponent } from '../loader/loader.component';
 
 @NgModule({
   declarations: [
     // FilterPipe, 
-    // LoaderComponent, 
+    LoaderComponent, 
     // ErrorMsgComponent, TextLoaderComponent
   ],
   imports: [
@@ -18,14 +19,15 @@ import { MatTableModule, MatPaginatorModule } from '@angular/material';
     ReactiveFormsModule,
     FormsModule,
     MatTableModule,
-    MatPaginatorModule    
+    MatPaginatorModule,    
   ],
   exports: [
     // LoaderComponent, 
     ReactiveFormsModule,
     FormsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    LoaderComponent
     // ErrorMsgComponent, FilterPipe, TextLoaderComponent
   ]
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { LoaderService } from "../services/loader.service";
+// import { LoaderService } from "../services/loader.service";
 
 @Component({
   selector: "app-loader",
@@ -11,10 +11,12 @@ export class LoaderComponent implements OnInit {
   loading: boolean;
   loadingSubscription: Subscription;
 
-  constructor(private loaderService: LoaderService) {
-    this.loaderService.loading.subscribe(value => {
-      this.loading = value;
-    });
+  constructor(
+    // private loaderService: LoaderService
+  ) {
+    // this.loaderService.loading.subscribe(value => {
+    //   this.loading = value;
+    // });
   }
 
   ngOnInit() {}

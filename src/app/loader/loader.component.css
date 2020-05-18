@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   height: 100vh;
   display: flex;
@@ -65,4 +65,63 @@ body {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+} */
+.app-loading-mask {
+  display: flex;
+  z-index: 3;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f5f5f5;
+}
+.app-loading-mask > div {
+  margin: auto;
+}
+.alm__app-name {
+  font-size: 32px;
+}
+.alm__brand-label {
+  margin: 0 auto;
+  font-family: monospace;
+  font-size: 14px;
+  text-align: right;
+}
+.alm__progress-bar {
+  margin: 0 auto;
+  height: 2px;
+  background: #0097cc;
+  overflow-x: hidden;
+}
+.alm__progress-bar > div {
+  position: relative;
+  width: 25px;
+  height: 100%;
+  background: #fff;
+  animation: ani-bar 2s infinite;
+}
+.alm-hide-ani {
+  animation: bkl-hide-ani 1s 1;
+}
+@keyframes ani-bar {
+  from {
+    left: -100%;
+    width: 100%;
+  }
+  to {
+    left: 100%;
+    width: 0;
+  }
+}
+@keyframes bkl-hide-ani {
+  to {
+    opacity: 0;
+  }
+}
+
+/*Demo css*/
+.app-demo-container{
+  text-align: center;
+  color: #0097cc;
 }

@@ -29,6 +29,7 @@ import { UserComponent } from './views/employee/user/user.component';
 import { PosComponent } from './views/sale/pos/pos.component';
 import { SalesHistoryComponent } from './views/sale/sales-history/sales-history.component';
 import { LeadsComponent } from './views/customer/leads/leads.component';
+import { ConversationsComponent } from './views/customer/conversations/conversations.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -115,6 +116,10 @@ export const routes: Routes = [
       {
         path:'leads',
         component:LeadsComponent
+      },
+      {
+        path:'conversations/:id',
+        component:ConversationsComponent
       },
       {
         path:'**',

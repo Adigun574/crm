@@ -19,6 +19,7 @@ export class ProductsComponent implements OnInit {
   SalePrice:number
   saving:boolean = false
   submitted:boolean = false
+  loading:boolean = false
 
   constructor(
     private modalService:NgbModal,
@@ -67,13 +68,12 @@ export class ProductsComponent implements OnInit {
         SalePrice: this.SalePrice
       }
       this.addProductForm.value.Price = priceObj
-      console.log(this.addProductForm.value)
+      // console.log(this.addProductForm.value)
       this.productService.saveProduct(this.addProductForm.value).subscribe(data=>{
       this.saving = false
       this.submitted = false
       this.getAllProducts()
       this.modalService.dismissAll()
-        console.log(data)
       },
         err=>{
           this.saving = false
@@ -90,131 +90,11 @@ export class ProductsComponent implements OnInit {
 
 
   getAllProducts(){
+    this.loading = true
     this.productService.getAllProducts().subscribe(data=>{
       this.products = <Product[]>data
+      this.loading = false
     })
-    // this.products = [
-    //     {
-    //       "name": "malt",
-    //       "quantity": 20,
-    //       "image": "imageString",
-    //       "priceID": 1,
-    //       "price": {
-    //         "id": 1,
-    //         "userCreated": 0,
-    //         "userModified": 0,
-    //         "dateCreated": "2020-03-30T15:10:33.2058236",
-    //         "dateModified": "2020-03-30T21:49:17.7538787",
-    //         "costPrice": 20,
-    //         "salePrice": 30
-    //       },
-    //       "id": 1,
-    //       "userCreated": 0,
-    //       "userModified": 0,
-    //       "dateCreated": "2020-03-30T15:10:43.8541328",
-    //       "dateModified": "2020-03-30T21:49:15.8988712"
-    //     },
-    //     {
-    //       "name": "string",
-    //       "quantity": 0,
-    //       "image": "string",
-    //       "priceID": 2,
-    //       "price": {
-    //         "id": 2,
-    //         "userCreated": 0,
-    //         "userModified": 0,
-    //         "dateCreated": "2020-04-27T06:50:32.6169559",
-    //         "dateModified": "0001-01-01T00:00:00",
-    //         "costPrice": 0,
-    //         "salePrice": 0
-    //       },
-    //       "id": 2,
-    //       "userCreated": 0,
-    //       "userModified": 0,
-    //       "dateCreated": "2020-04-27T06:50:34.4753225",
-    //       "dateModified": "0001-01-01T00:00:00"
-    //     },
-    //     {
-    //       "name": "malt",
-    //       "quantity": 20,
-    //       "image": "imageString",
-    //       "priceID": 1,
-    //       "price": {
-    //         "id": 1,
-    //         "userCreated": 0,
-    //         "userModified": 0,
-    //         "dateCreated": "2020-03-30T15:10:33.2058236",
-    //         "dateModified": "2020-03-30T21:49:17.7538787",
-    //         "costPrice": 20,
-    //         "salePrice": 30
-    //       },
-    //       "id": 1,
-    //       "userCreated": 0,
-    //       "userModified": 0,
-    //       "dateCreated": "2020-03-30T15:10:43.8541328",
-    //       "dateModified": "2020-03-30T21:49:15.8988712"
-    //     },
-    //     {
-    //       "name": "string",
-    //       "quantity": 0,
-    //       "image": "string",
-    //       "priceID": 2,
-    //       "price": {
-    //         "id": 2,
-    //         "userCreated": 0,
-    //         "userModified": 0,
-    //         "dateCreated": "2020-04-27T06:50:32.6169559",
-    //         "dateModified": "0001-01-01T00:00:00",
-    //         "costPrice": 0,
-    //         "salePrice": 0
-    //       },
-    //       "id": 2,
-    //       "userCreated": 0,
-    //       "userModified": 0,
-    //       "dateCreated": "2020-04-27T06:50:34.4753225",
-    //       "dateModified": "0001-01-01T00:00:00"
-    //     },
-    //     {
-    //       "name": "malt",
-    //       "quantity": 20,
-    //       "image": "imageString",
-    //       "priceID": 1,
-    //       "price": {
-    //         "id": 1,
-    //         "userCreated": 0,
-    //         "userModified": 0,
-    //         "dateCreated": "2020-03-30T15:10:33.2058236",
-    //         "dateModified": "2020-03-30T21:49:17.7538787",
-    //         "costPrice": 20,
-    //         "salePrice": 30
-    //       },
-    //       "id": 1,
-    //       "userCreated": 0,
-    //       "userModified": 0,
-    //       "dateCreated": "2020-03-30T15:10:43.8541328",
-    //       "dateModified": "2020-03-30T21:49:15.8988712"
-    //     },
-    //     {
-    //       "name": "string",
-    //       "quantity": 0,
-    //       "image": "string",
-    //       "priceID": 2,
-    //       "price": {
-    //         "id": 2,
-    //         "userCreated": 0,
-    //         "userModified": 0,
-    //         "dateCreated": "2020-04-27T06:50:32.6169559",
-    //         "dateModified": "0001-01-01T00:00:00",
-    //         "costPrice": 0,
-    //         "salePrice": 0
-    //       },
-    //       "id": 2,
-    //       "userCreated": 0,
-    //       "userModified": 0,
-    //       "dateCreated": "2020-04-27T06:50:34.4753225",
-    //       "dateModified": "0001-01-01T00:00:00"
-    //     }
-    // ]
   }
 
 }

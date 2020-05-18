@@ -1,3 +1,4 @@
+<app-loader *ngIf="loading"></app-loader>
 <div>
     <div>
         <h3>Leads</h3>
@@ -21,8 +22,8 @@
                             </button>   
                         </div>
                         <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
-                            <a class="dropdown-item">View Converstaions</a>
-                            <a class="dropdown-item">Add Converstaion</a>
+                            <a class="dropdown-item" [routerLink]="['/main/conversations', lead.id]">View Converstaions</a>
+                            <a class="dropdown-item" (click)="open(convo)">Add Converstaion</a>
                         </div>
                     </div>                
                 </div>
@@ -30,3 +31,15 @@
         </div>
     </div>
 </div>
+
+<ng-template #convo>
+    <div class="card p-4">
+        <div class="form-group">
+            <label class="form-label">New message</label>
+            <input class="form-control">
+        </div>
+        <div>
+            <button class="btn btn-primary float-right">Add</button>
+        </div>
+    </div>
+</ng-template>

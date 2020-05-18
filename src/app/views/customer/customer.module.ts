@@ -10,11 +10,13 @@ import { CustomerReportComponent } from './customer-report/customer-report.compo
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LeadsComponent } from './leads/leads.component';
+import { ConversationsComponent } from './conversations/conversations.component';
+import { SharedModule } from '../../shared/shared.module';
 // import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [CustomersComponent, CustomerDetailsComponent, CustomerReportComponent, LeadsComponent],
+  declarations: [CustomersComponent, CustomerDetailsComponent, CustomerReportComponent, LeadsComponent, ConversationsComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -23,7 +25,8 @@ import { LeadsComponent } from './leads/leads.component';
     FormsModule,
     NgbModule,
     RouterModule,
-    NgSelectModule
+    NgSelectModule,
+    SharedModule
     // NgbTabset
   ]
 })
