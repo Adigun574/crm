@@ -27,5 +27,9 @@ export class CustomerService {
   getSingleCustomer(id){
     return this.httpClient.get(`${this.generalService.api}Customer/GetCustomerByID/${id}`)
   }
+
+  getTopCustomers(){
+    return this.httpClient.get(`${this.generalService.api}Customer/MostFrequentCustomers`)
+  }
 }
 

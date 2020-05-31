@@ -1,6 +1,7 @@
-<div>
-    <div>
-        <h3>Users</h3>
+<app-loader *ngIf="loadingUsers"></app-loader>
+<div *ngIf="!loadingUsers">
+    <div class="mt-2">
+        <h3 class="text-center text-muted">USERS</h3>
     </div>
     <div>
         <button class="btn btn-success pull-right" (click)="open(topModal)">Add User</button>

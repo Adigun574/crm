@@ -17,6 +17,7 @@ export class RoleComponent implements OnInit {
 
   roles = []
   roleName:string
+  loadingRoles:boolean = false
 
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
@@ -51,61 +52,15 @@ export class RoleComponent implements OnInit {
   }
 
   getAllRoles(){
+    this.loadingRoles = true
     this.roleService.getAllRoles().subscribe(data=>{
       this.roles = <Role[]>data
       this.dataSource = new MatTableDataSource<Role>(this.roles);
+      this.loadingRoles = false
     },
       err=>{
-
+        this.loadingRoles = false
       })
-    // this.roles = [
-    //   {
-    //     "name": "string",
-    //     "code": "string",
-    //     "privileges": [
-    //       {
-    //         "name": "string",
-    //         "code": "string",
-    //         "read": true,
-    //         "write": true,
-    //         "roleID": 1,
-    //         "id": 1,
-    //         "userCreated": 0,
-    //         "userModified": 0,
-    //         "dateCreated": "2020-04-25T08:41:47.472",
-    //         "dateModified": "2020-04-25T08:41:47.473"
-    //       }
-    //     ],
-    //     "id": 1,
-    //     "userCreated": 0,
-    //     "userModified": 0,
-    //     "dateCreated": "2020-04-25T08:52:15.340588",
-    //     "dateModified": "0001-01-01T00:00:00"
-    //   },
-    //   {
-    //     "name": "string",
-    //     "code": "string",
-    //     "privileges": [
-    //       {
-    //         "name": "string",
-    //         "code": "string",
-    //         "read": true,
-    //         "write": true,
-    //         "roleID": 2,
-    //         "id": 2,
-    //         "userCreated": 0,
-    //         "userModified": 0,
-    //         "dateCreated": "2020-04-27T22:42:38.971",
-    //         "dateModified": "2020-04-27T22:42:38.971"
-    //       }
-    //     ],
-    //     "id": 2,
-    //     "userCreated": 0,
-    //     "userModified": 0,
-    //     "dateCreated": "2020-04-27T09:43:47.9407145",
-    //     "dateModified": "0001-01-01T00:00:00"
-    //   }
-    // ]
   }
 
   roleObj:Role = {
@@ -128,7 +83,7 @@ export class RoleComponent implements OnInit {
         Name: "product",
         Code: "",
         Read: true,
-        Write: false,
+        Write: true,
         RoleID: 0,
         ID: 0,
         UserCreated: 0,
@@ -174,6 +129,102 @@ export class RoleComponent implements OnInit {
       },
       {
         Name: "saleshistory",
+        Code: "",
+        Read: true,
+        Write: true,
+        RoleID: 0,
+        ID: 0,
+        UserCreated: 0,
+        UserModified: 0,
+        DateCreated: "2020-04-29T04:09:33.948Z",
+        DateModified: "2020-04-29T04:09:33.948Z"
+      },
+      {
+        Name: "users",
+        Code: "",
+        Read: true,
+        Write: true,
+        RoleID: 0,
+        ID: 0,
+        UserCreated: 0,
+        UserModified: 0,
+        DateCreated: "2020-04-29T04:09:33.948Z",
+        DateModified: "2020-04-29T04:09:33.948Z"
+      },
+      {
+        Name: "leads",
+        Code: "",
+        Read: true,
+        Write: true,
+        RoleID: 0,
+        ID: 0,
+        UserCreated: 0,
+        UserModified: 0,
+        DateCreated: "2020-04-29T04:09:33.948Z",
+        DateModified: "2020-04-29T04:09:33.948Z"
+      },
+      {
+        Name: "productreports",
+        Code: "",
+        Read: true,
+        Write: true,
+        RoleID: 0,
+        ID: 0,
+        UserCreated: 0,
+        UserModified: 0,
+        DateCreated: "2020-04-29T04:09:33.948Z",
+        DateModified: "2020-04-29T04:09:33.948Z"
+      },
+      {
+        Name: "customersreport",
+        Code: "",
+        Read: true,
+        Write: true,
+        RoleID: 0,
+        ID: 0,
+        UserCreated: 0,
+        UserModified: 0,
+        DateCreated: "2020-04-29T04:09:33.948Z",
+        DateModified: "2020-04-29T04:09:33.948Z"
+      },
+      {
+        Name: "inventory",
+        Code: "",
+        Read: true,
+        Write: true,
+        RoleID: 0,
+        ID: 0,
+        UserCreated: 0,
+        UserModified: 0,
+        DateCreated: "2020-04-29T04:09:33.948Z",
+        DateModified: "2020-04-29T04:09:33.948Z"
+      },
+      {
+        Name: "training programmes",
+        Code: "",
+        Read: true,
+        Write: true,
+        RoleID: 0,
+        ID: 0,
+        UserCreated: 0,
+        UserModified: 0,
+        DateCreated: "2020-04-29T04:09:33.948Z",
+        DateModified: "2020-04-29T04:09:33.948Z"
+      },
+      {
+        Name: "skillmonitoring",
+        Code: "",
+        Read: true,
+        Write: true,
+        RoleID: 0,
+        ID: 0,
+        UserCreated: 0,
+        UserModified: 0,
+        DateCreated: "2020-04-29T04:09:33.948Z",
+        DateModified: "2020-04-29T04:09:33.948Z"
+      },
+      {
+        Name: "messages",
         Code: "",
         Read: true,
         Write: true,

@@ -91,16 +91,8 @@
         <div class="col-md-8 order" style="background-color: rgb(225, 230, 230); border-top:2px solid red">
             <input type="search" style="width:100%; height:40px; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" #food (input)="searchProducts(food.value)">
             <div  style="height:100vh">
-                <div class="loader" *ngIf="loadProducts"></div>
-                <!-- <h3 *ngIf="foodExists" style="opacity:0.3; text-align:center">Your have no products under this category!!!</h3> -->
-                <!-- <div class="row">                                 
-                    <div class="col-sm-3 food cursor-pointer" *ngFor="let product of products" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192); float:left" (click)="addToCart(product)">
-                        <div class="mb-2 mr-2 mt-1 product-div">
-                          <p class="name">{{product.name}}</p>
-                          <p class="price">₦{{product.salePrice}}.00</p>
-                        </div>
-                    </div>
-                </div> -->
+                <!-- <div class="loader" *ngIf="loadProducts"></div> -->
+                <app-loader *ngIf="loadProducts"></app-loader>
                 <div class="row">
                   <div class="col-sm-3" *ngFor="let product of products">
                       <div class="food cursor-pointer mt-3" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192); float:left" (click)="addToCart(product)">

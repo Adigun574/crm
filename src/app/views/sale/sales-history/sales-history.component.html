@@ -1,16 +1,28 @@
-<h2 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+<!-- <h2 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
     <div>Sales Report</div>
-  </h2>
+  </h2> -->
+
+  <app-loader *ngIf="loadingReport"></app-loader>
+
+<div *ngIf="!loadingReport">
+  <div class="mt-2">
+    <h3 class="text-center text-muted">SALES REPORT</h3>
+  </div>
   
   <div> 
    
     <div class="row mb-1">
         <div class="col-sm-6 col-md-6 d-inline-flex">
-            <input type="text"
+            <!-- <input type="text"
             [(ngModel)]="filterVal"
             (input)="searchTable()"
             class="form-control w-auto"
-            placeholder="Search...">
+            placeholder="Search..."> -->
+            <input type="date"
+            [(ngModel)]="filterVal"
+            (input)="searchTable()"
+            class="form-control w-auto"
+            >
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 ">
           <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white">
@@ -22,18 +34,33 @@
       <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
     <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
       <thead>
+            <th>S/N <i class="ion text-muted ml-2"></i></th>
             <th>Date <i class="ion text-muted ml-2"></i></th>
             <th>Items <i class="ion text-muted ml-2"></i></th>
+            <th>Customer <i class="ion text-muted ml-2"></i></th>
             <th>Amount <i class="ion text-muted ml-2"></i></th>
        </thead>
       <tbody>
-        <tr *ngFor="let sale of sales" >
+        <tr *ngFor="let sale of sales; index as i" >
+          <td>{{i+1}}</td>
           <td>{{ sale.dateCreated.split('T')[0] }}</td>
-          <td><span *ngFor="let item of sale.cart.items">{{item.name}}<b>({{item.quantity}})</b> </span></td>
+          <td style="display:inline-flex">Items
+            <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+              <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
+                  <button class="btn btn btn-sm btn-default icon-btn borderless btn-round md-btn-flat hide-arrow">
+                  <span class="fa fa-ellipsis-v"></span>
+                  </button>   
+              </div>
+              <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                  <a class="dropdown-item" *ngFor="let item of sale.cart.items">{{item.name}}<b>({{item.quantity}})</b></a>
+              </div>
+            </div>         
+          </td>
+          <td>{{getCustomerName(sale.customerID)}}</td>
           <td><span>&#8358;</span>{{sale.cart.amount}}.00</td>
         </tr>
       </tbody>
     </table>
   </div>
   </div>
-  
+</div>

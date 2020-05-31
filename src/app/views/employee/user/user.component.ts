@@ -28,6 +28,7 @@ export class UserComponent implements OnInit {
   savingUser:boolean = false
   selectedUser:any
   updatingUser:boolean = false
+  loadingUsers:boolean = false
 
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
@@ -71,16 +72,17 @@ export class UserComponent implements OnInit {
   openEditModal(editModal,user){
     this.selectedUser = user
     this.open(editModal)
-    console.log(this.selectedUser)
   }
 
   getAllUsers(){
+    this.loadingUsers = true
     this.userService.getUsers().subscribe(data=>{
       this.users = <any[]>data
       this.dataSource = new MatTableDataSource<Role>(this.users);
+      this.loadingUsers = false
     },
       err=>{
-
+        this.loadingUsers = false
       })
   }
 

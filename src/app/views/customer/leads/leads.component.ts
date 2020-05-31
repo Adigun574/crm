@@ -38,4 +38,10 @@ export class LeadsComponent implements OnInit {
     this.modalService.open(content)
   }
 
+  convertToCustomer(id){
+    this.leadService.convertLeadToCustomer(id).subscribe(data=>{
+      this.getLeads()
+    })
+  }
+
 }

@@ -23,4 +23,8 @@ export class LeadService {
   getLeadByID(id){
     return this.httpClient.get(`${this.generalService.api}Lead/GetLeadByID/${id}`)
   }
+
+  convertLeadToCustomer(id){
+    return this.httpClient.post(`${this.generalService.api}Lead/ConvertLeadToCustomer/${id}`,null)
+  }
 }

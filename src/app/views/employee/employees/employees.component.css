@@ -25,6 +25,8 @@ i{
   background: #fff;
   transition: 1s;
   text-align: center;
+  /*--*/
+  height:100%;
 }
 .contact::before{
   content: '';

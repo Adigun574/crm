@@ -1,7 +1,7 @@
 <app-loader *ngIf="loading"></app-loader>
 <div>
-    <div>
-        <h3>Leads</h3>
+    <div class="mt-2">
+        <h3 class="text-center text-muted">LEADS</h3>
     </div>
     <div>
         <button class="btn btn-success float-right">Add Lead</button>
@@ -24,6 +24,7 @@
                         <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
                             <a class="dropdown-item" [routerLink]="['/main/conversations', lead.id]">View Converstaions</a>
                             <a class="dropdown-item" (click)="open(convo)">Add Converstaion</a>
+                            <a class="dropdown-item" (click)="convertToCustomer(lead.id)">Convert To Customer</a>
                         </div>
                     </div>                
                 </div>

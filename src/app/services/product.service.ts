@@ -27,4 +27,8 @@ export class ProductService {
   getAllProducts(){
     return this.httpClient.get(`${this.generalService.api}Product/GetAllProducts`)
   }
+
+  getBestSellingProduct(){
+    return this.httpClient.get(`${this.generalService.api}Product/BestSellingProducts`)
+  }
 }

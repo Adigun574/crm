@@ -1,6 +1,8 @@
-<div>
-    <div>
-        <h3>Role</h3>
+<app-loader *ngIf="loadingRoles"></app-loader>
+
+<div *ngIf="!loadingRoles">
+    <div class="mt-2">
+        <h3 class="text-center text-muted">ROLES</h3>
     </div>
     <div class="mb-4">
         <button class="btn btn-success float-right" (click)="open(addRoleModal)">Add Role</button>
@@ -57,27 +59,59 @@
                     </thead>
                     <tr>
                         <td>Customers</td>
-                        <input type="checkbox" [(ngModel)]="roleObj.Privileges[0].Write">
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[0].Write">
                     </tr>
                     <tr>
                         <td>Products</td>
-                        <input type="checkbox" class="text-center" [(ngModel)]="roleObj.Privileges[1].Write">
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[1].Write">
                     </tr>
                     <tr>
                         <td>Roles</td>
-                        <input type="checkbox" class="text-center" [(ngModel)]="roleObj.Privileges[2].Write">
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[2].Write">
                     </tr>
                     <tr>
                         <td>POS</td>
-                        <input type="checkbox" class="text-center" [(ngModel)]="roleObj.Privileges[3].Write">
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[3].Write">
                     </tr>
                     <tr>
                         <td>Employees</td>
-                        <input type="checkbox" class="text-center" [(ngModel)]="roleObj.Privileges[4].Write">
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[4].Write">
                     </tr>
                     <tr>
                         <td>Sales History</td>
-                        <input type="checkbox" class="text-center" [(ngModel)]="roleObj.Privileges[5].Write">
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[5].Write">
+                    </tr>
+                    <tr>
+                        <td>Users</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[6].Write">
+                    </tr>
+                    <tr>
+                        <td>Leads</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[7].Write">
+                    </tr>
+                    <tr>
+                        <td>Products Report</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[8].Write">
+                    </tr>
+                    <tr>
+                        <td>Customers Report</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[9].Write">
+                    </tr>
+                    <tr>
+                        <td>Inventory</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[10].Write">
+                    </tr>
+                    <tr>
+                        <td>Training Programmes</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[11].Write">
+                    </tr>
+                    <tr>
+                        <td>Skill Monitoring</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[12].Write">
+                    </tr>
+                    <tr>
+                        <td>Messages</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[13].Write">
                     </tr>
                 </table>
             </div>
