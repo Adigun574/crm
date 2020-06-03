@@ -23,6 +23,8 @@ export class CustomersComponent implements OnInit {
   savingCustomer:boolean = false
   submitted:boolean = false
   loading:boolean = false
+  searchKey:string = ''
+  filteredCustomers:Customer[] = []
 
   constructor(
     private modalService: NgbModal,
@@ -74,7 +76,16 @@ export class CustomersComponent implements OnInit {
     this.loading = true
     this.customerService.getAllCustomers().subscribe(data=>{
       this.customers = <Customer[]>data
+      this.filteredCustomers = this.customers
       this.loading = false
+      this.filteredCustomers.forEach(cust=>{
+        if(!cust.firstName){
+          cust.firstName = ''
+        }
+        if(!cust.lastName){
+          cust.lastName = ''
+        }
+      })
     },
       err=>{
 
@@ -91,6 +102,10 @@ export class CustomersComponent implements OnInit {
 
   showCustomer(id){
     this.router.navigateByUrl(`main/customer/${id}`)
+  }
+
+  filterCustomer(){
+    this.filteredCustomers = this.customers.filter(x=>x.firstName.includes(this.searchKey) || x.lastName.includes(this.searchKey))
   }
 
 }

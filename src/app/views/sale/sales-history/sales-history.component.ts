@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SaleService } from '../../../services/sale.service';
 import { CustomerService } from '../../../services/customer.service';
+import { Formats } from '../../../classes/print';
 
 @Component({
   selector: 'app-sales-history',
@@ -12,6 +13,7 @@ export class SalesHistoryComponent implements OnInit {
   sales:any[] = []
   customers:any[] = []
   loadingReport:boolean = false
+  format = new Formats()
 
   constructor(
     private saleService:SaleService,
@@ -43,6 +45,10 @@ export class SalesHistoryComponent implements OnInit {
   getCustomerName(id){
     let customer = this.customers.find(x=>x.id == id)
     return `${customer.firstName} ${customer.lastName}`
+  }
+
+  print(id){
+    this.format.printDiv(id)
   }
 
 }

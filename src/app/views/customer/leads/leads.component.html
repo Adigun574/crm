@@ -4,13 +4,22 @@
         <h3 class="text-center text-muted">LEADS</h3>
     </div>
     <div>
-        <button class="btn btn-success float-right">Add Lead</button>
+        <button class="btn btn-success float-right" (click)="open(topModal)">Add Lead</button>
     </div><br>
     <br>
 
     <div>
+        <input type="search" 
+        class="form-control"
+        [(ngModel)]="searchKey"
+        (input)="filterCustomer()"
+        placeholder="filter by firstname or lastname"
+        >
+    </div>
+
+    <div>
         <div class="row">
-            <div class="col-md-3" *ngFor="let lead of leads">
+            <div class="col-md-3 mt-2" *ngFor="let lead of filteredLeads">
                 <div class="card p-4 lead-card text-center cursor-pointer">
                     <h5>{{lead.firstName}} {{lead.lastName}}</h5>
                     <p><i class="fa fa-phone"></i> {{lead.phone}}</p>
@@ -22,8 +31,8 @@
                             </button>   
                         </div>
                         <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
-                            <a class="dropdown-item" [routerLink]="['/main/conversations', lead.id]">View Converstaions</a>
-                            <a class="dropdown-item" (click)="open(convo)">Add Converstaion</a>
+                            <a class="dropdown-item" [routerLink]="['/main/conversations', lead.id]">View Conversations</a>
+                            <a class="dropdown-item" (click)="open(convo)">Add Conversation</a>
                             <a class="dropdown-item" (click)="convertToCustomer(lead.id)">Convert To Customer</a>
                         </div>
                     </div>                
@@ -32,6 +41,64 @@
         </div>
     </div>
 </div>
+
+<ng-template #topModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">
+        New Lead
+        </h5>
+    </div>
+        <div class="modal-body" >
+        <div  class="card mb-4 save-customer-card p-2">
+            <form [formGroup]="addLeadForm">
+                <div class="text-center" *ngIf="submitted && addLeadForm.invalid">
+                    <small class="text-danger">Please fill all required fields</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> First Name:<small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" placeholder="Firstname" formControlName="firstName">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Last Name:<small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" placeholder="Lastame" formControlName="lastName">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Company:</label>
+                    <input type="text" class="form-control" placeholder="Sean Holdings" formControlName="company">
+                </div>  
+                <div class="form-group">
+                    <label class="form-label"> Phone Number:</label>
+                    <input type="text" class="form-control" placeholder="+234XXXXXXXX" formControlName="phone">
+                </div>  
+                <div class="form-group">
+                    <label class="form-label"> Email:</label>
+                    <input type="text" class="form-control" placeholder="example@gmail.com" formControlName="email">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Address:</label>
+                    <textarea  class="form-control" placeholder="123 main str, Isolo" formControlName="address"></textarea>
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Gender:</label>
+                    <ng-select
+                        [items]="genders"
+                        bindValue="name"
+                        bindLabel="name"
+                    >
+                    </ng-select>
+                </div> 
+            </form>
+        </div>
+    
+        <div class="modal-footer">
+            <button class="btn btn-primary" (click)="saveLead()">
+            <span class="spinner-grow spinner-grow-sm" *ngIf="savingLead"></span> 
+            Save
+        </button>
+        </div>
+        </div>    
+</ng-template>
+    
 
 <ng-template #convo>
     <div class="card p-4">

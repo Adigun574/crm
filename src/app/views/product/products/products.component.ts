@@ -20,6 +20,8 @@ export class ProductsComponent implements OnInit {
   saving:boolean = false
   submitted:boolean = false
   loading:boolean = false
+  searchKey:string = ''
+  displayedProducts:Product[] = []
 
   constructor(
     private modalService:NgbModal,
@@ -93,8 +95,13 @@ export class ProductsComponent implements OnInit {
     this.loading = true
     this.productService.getAllProducts().subscribe(data=>{
       this.products = <Product[]>data
+      this.displayedProducts = this.products
       this.loading = false
     })
+  }
+
+  filterProduct(){
+    this.displayedProducts = this.products.filter(x=>x.name.includes(this.searchKey))
   }
 
 }

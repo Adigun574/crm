@@ -1,6 +1,7 @@
 .lead-card{
     width:90%;
     margin:auto;
+    height:100%;
 }
 .lead-card:hover{
     transform:scale(1.02,1.02)
