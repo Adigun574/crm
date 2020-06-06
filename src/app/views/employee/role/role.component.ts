@@ -4,7 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { RoleService } from '../../../services/role.service';
 import { Role } from '../../../models/role';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { User } from '../../../models/User';
+import { User } from '../../../models/user';
 import { date } from '../../../classes/date';
 
 

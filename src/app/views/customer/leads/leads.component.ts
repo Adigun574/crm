@@ -4,7 +4,7 @@ import { Lead } from '../../../models/lead';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { date } from '../../../classes/date';
-import { User } from '../../../models/User';
+import { User } from '../../../models/user';
 
 
 @Component({

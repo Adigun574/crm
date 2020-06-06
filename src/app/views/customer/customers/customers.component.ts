@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../models/customer';
-import { User } from '../../../models/User';
+import { User } from '../../../models/user';
 import { date } from '../../../classes/date';
 
 

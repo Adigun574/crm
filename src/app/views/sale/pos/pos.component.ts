@@ -5,7 +5,7 @@ import { Sale, Invoice, Cashier, Cart } from '../../../models/sales';
 import { Customer } from '../../../models/customer';
 import { SaleService } from '../../../services/sale.service';
 import { date } from '../../../classes/date';
-import { User } from '../../../models/User';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-pos',

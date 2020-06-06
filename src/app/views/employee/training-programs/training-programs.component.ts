@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SkillService } from '../../../services/skill.service';
-import { User } from '../../../models/User';
+import { User } from '../../../models/user';
 import { date } from '../../../classes/date';
 
 @Component({

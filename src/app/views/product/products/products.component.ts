@@ -4,7 +4,7 @@ import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../models/product';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '../../../models/User';
+import { User } from '../../../models/user';
 import { date } from '../../../classes/date';
 import { HttpClient } from '@angular/common/http';
 

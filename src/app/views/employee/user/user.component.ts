@@ -6,7 +6,7 @@ import { Role } from '../../../models/role';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 import { FormGroup, FormBuilder, Validators } from '../../../../../node_modules/@angular/forms';
-import { User } from '../../../models/User';
+import { User } from '../../../models/user';
 import { date } from '../../../classes/date';
 
 
