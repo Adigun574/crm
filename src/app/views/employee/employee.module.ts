@@ -13,6 +13,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { RoleComponent } from './role/role.component';
 import { SharedModule } from '../../shared/shared.module';
 import { UserComponent } from './user/user.component';
+import { QualificationsComponent } from './qualifications/qualifications.component';
 
 
 
@@ -23,7 +24,8 @@ import { UserComponent } from './user/user.component';
     TrainingProgramsComponent,
     SkillMonitoringComponent,
     RoleComponent,
-    UserComponent
+    UserComponent,
+    QualificationsComponent
   ],
   imports: [
     CommonModule,

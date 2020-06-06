@@ -6,6 +6,8 @@ import { Role } from '../../../models/role';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 import { FormGroup, FormBuilder, Validators } from '../../../../../node_modules/@angular/forms';
+import { User } from '../../../models/User';
+import { date } from '../../../classes/date';
 
 
 @Component({
@@ -29,6 +31,7 @@ export class UserComponent implements OnInit {
   selectedUser:any
   updatingUser:boolean = false
   loadingUsers:boolean = false
+  currentUser:User
 
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
@@ -43,6 +46,7 @@ export class UserComponent implements OnInit {
     private userService:UserService,
     private fb:FormBuilder
   ) { 
+    this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
     this.addUserForm = this.fb.group({
       Username:[,Validators.required],
       Name: [,Validators.required],
@@ -53,10 +57,10 @@ export class UserComponent implements OnInit {
       Image: [],
       Email: [],
       ID: 0,
-      UserCreated: 0,
+      UserCreated: this.currentUser.id,
       UserModified: 0,
-      DateCreated: ["2020-04-30T18:00:28.252Z"],
-      DateModified: ["2020-04-30T18:00:28.252Z"]
+      // DateCreated: [date()],
+      // DateModified: [date()]
     })
   }
 
@@ -117,6 +121,16 @@ export class UserComponent implements OnInit {
         this.updatingUser = false
         this.modalService.dismissAll()
       })
+  }
+
+  deleteUser(user){
+    this.userService.deleteUser(user.id).subscribe(data=>{
+      console.log(data)
+      this.getAllUsers()
+    },
+    err=>{
+      console.log(err)
+    })
   }
 
 }

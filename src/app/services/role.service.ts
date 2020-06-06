@@ -23,4 +23,8 @@ export class RoleService {
   getRoleById(id){
     return this.httpClient.get(`${this.generalService.api}Role/GetRoleByID/${id}`)
   }
+
+  deleteRole(id){
+    return this.httpClient.post(`${this.generalService.api}Role/DeleteRole/${id}`,null)
+  }
 }

@@ -13,7 +13,7 @@ export class LeadService {
   ) { }
 
   saveLead(obj){
-    return this.httpClient.post(`${this.generalService.api}Lead/Save`,obj)
+    return this.httpClient.post(`${this.generalService.api}Lead/SaveLead`,obj)
   }
 
   getAllLeads(){
@@ -26,5 +26,9 @@ export class LeadService {
 
   convertLeadToCustomer(id){
     return this.httpClient.post(`${this.generalService.api}Lead/ConvertLeadToCustomer/${id}`,null)
+  }
+
+  deleteLead(id){
+    return this.httpClient.post(`${this.generalService.api}Lead/DeleteLead/ID?ID=${id}`,null)
   }
 }

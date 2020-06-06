@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
         this.invalidCredentials = false
       },
         err=>{
-          console.log(err)
           this.invalidCredentials = true
         })
     }

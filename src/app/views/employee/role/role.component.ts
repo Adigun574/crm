@@ -4,6 +4,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { RoleService } from '../../../services/role.service';
 import { Role } from '../../../models/role';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { User } from '../../../models/User';
+import { date } from '../../../classes/date';
 
 
 @Component({
@@ -18,11 +20,14 @@ export class RoleComponent implements OnInit {
   roles = []
   roleName:string
   loadingRoles:boolean = false
+  currentUser:User
+  roleObj:Role
+  savingRole:boolean = false
 
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  displayedColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = ['id', 'name', 'action'];
   dataSource = new MatTableDataSource<Role>(this.roles);  
 
 
@@ -33,7 +38,10 @@ export class RoleComponent implements OnInit {
   constructor(
     private roleService:RoleService,
     private modalService:NgbModal
-  ) { }
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
+    this.setRoleObj()
+   }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -47,8 +55,17 @@ export class RoleComponent implements OnInit {
   
 
   saveRole(){
+    this.savingRole = true
     this.roleObj.Name = this.roleName
-    console.log(this.roleObj)
+    this.roleService.saveRole(this.roleObj).subscribe(data=>{
+      this.savingRole = false
+      this.modalService.dismissAll()
+      this.getAllRoles()
+    },
+      err=>{
+        this.savingRole = false
+        this.modalService.dismissAll()
+      })
   }
 
   getAllRoles(){
@@ -63,184 +80,196 @@ export class RoleComponent implements OnInit {
       })
   }
 
-  roleObj:Role = {
-    Name: "",
-    Code: "",
-    Privileges: [
-      {
-        Name: "customer",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "product",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "role",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "pos",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "employees",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "saleshistory",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "users",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "leads",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "productreports",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "customersreport",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "inventory",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "training programmes",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "skillmonitoring",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      },
-      {
-        Name: "messages",
-        Code: "",
-        Read: true,
-        Write: true,
-        RoleID: 0,
-        ID: 0,
-        UserCreated: 0,
-        UserModified: 0,
-        DateCreated: "2020-04-29T04:09:33.948Z",
-        DateModified: "2020-04-29T04:09:33.948Z"
-      }
-    ],
-    ID: 0,
-    UserCreated: 0,
-    UserModified: 0,
-    DateCreated: "2020-04-29T04:09:33.948Z",
-    DateModified: "2020-04-29T04:09:33.948Z"
+  deleteRole(id){
+    this.roleService.deleteRole(id).subscribe(data=>{
+      console.log(data)
+      this.getAllRoles()
+    },
+      err=>{
+        console.log(err)
+      })
+  }
+
+  setRoleObj(){
+    this.roleObj = {
+      Name: "",
+      Code: "",
+      Privileges: [
+        {
+          Name: "customer",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "product",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "role",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "pos",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "employees",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "saleshistory",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "users",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "leads",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "productreports",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "customersreport",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "inventory",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "training programmes",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "skillmonitoring",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "messages",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        }
+      ],
+      ID: 0,
+      UserCreated: this.currentUser.id,
+      UserModified: 0,
+      DateCreated: date(),
+      DateModified: date()
+    }
   }
 
 }

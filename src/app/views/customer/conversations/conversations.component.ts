@@ -19,7 +19,6 @@ export class ConversationsComponent implements OnInit {
     private leadService:LeadService
   ) { 
     this.leadId = +this.route.snapshot.paramMap.get('id')
-    console.log(this.leadId)
   }
 
   ngOnInit(): void {

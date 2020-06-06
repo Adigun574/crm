@@ -14,20 +14,57 @@ export class SalesHistoryComponent implements OnInit {
   customers:any[] = []
   loadingReport:boolean = false
   format = new Formats()
+  today
+  filterVal
 
   constructor(
     private saleService:SaleService,
     private customerService:CustomerService
-  ) { }
+  ) { 
+    let d = new Date()
+    let day:any = d.getDay()
+    let month:any = d.getMonth()+1
+    let year:any = d.getFullYear()
+    if(day<10){
+      day = `0${day}`
+    }
+    if(month<10){
+      month = `0${month}`
+    }
+    this.today = `${day}-${month}-${year}`
+  }
 
   ngOnInit(): void {
     this.getCustomers()
-    this.getSales()
+    // this.getSales()
+    this.getSalesByDate(this.today)
   }
 
-  getSales(){
+  // getSales(){
+  //   this.loadingReport = true
+  //   this.saleService.getAllSales().subscribe(data=>{
+  //     this.sales = <any[]>data
+  //     this.loadingReport = false
+  //   },
+  //     err=>{
+  //       this.loadingReport = false
+  //     })
+  // }
+
+  refresh(){
+    this.getSalesByDate(this.today)
+  }
+
+  filterSales(){
+    let d = this.filterVal.split('-')
+    let newDate = `${d[2]}-${d[1]}-${d[0]}`
+    this.getSalesByDate(newDate)
+  }
+
+  getSalesByDate(date){
     this.loadingReport = true
-    this.saleService.getAllSales().subscribe(data=>{
+    // '28-05-2020'
+    this.saleService.getSalesByDate(date).subscribe(data=>{
       this.sales = <any[]>data
       this.loadingReport = false
     },

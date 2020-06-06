@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SkillService } from '../../../services/skill.service';
 
 
 
@@ -68,12 +69,14 @@ export class SkillMonitoringComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
+    private skillService:SkillService
   ) {
     // Object.assign(this, { single });
    }
 
   ngOnInit(): void {
     this.getSkills()
+    this.getAllSkills()
   }
 
   getSkills(){
@@ -128,6 +131,15 @@ export class SkillMonitoringComponent implements OnInit {
     this.modalService.open(content, options).result.then((result) => {
     },
     err=>{})
+  }
+
+  getAllSkills(){
+    this.skillService.getAllSkills().subscribe(data=>{
+      console.log(data)
+    },
+      err=>{
+        console.log(err)
+      })
   }
 
 }

@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../models/customer';
+import { User } from '../../../models/User';
+import { date } from '../../../classes/date';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class CustomersComponent implements OnInit {
   loading:boolean = false
   searchKey:string = ''
   filteredCustomers:Customer[] = []
+  currentUser:User
 
   constructor(
     private modalService: NgbModal,
@@ -32,18 +35,19 @@ export class CustomersComponent implements OnInit {
     private router: Router,
     private customerService:CustomerService
   ) { 
+    this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
     this.addCustomerForm = this.fb.group({
       FirstName:[,Validators.required],
       LastName:[,Validators.required],
       Email:[],
       Phone:[],
       Address:[],
-      Gender:[],
+      Gender:['male'],
       Image:[],
-      UserCreated:[0],
+      UserCreated:[this.currentUser.id],
       UserModified:[0],
-      DateCreated:["2020-04-30T04:18:48.379Z"],
-      DateModified:["2020-04-30T04:18:48.379Z"]
+      DateCreated:[date()],
+      DateModified:[date()]
     })
   }
 
@@ -105,7 +109,7 @@ export class CustomersComponent implements OnInit {
   }
 
   filterCustomer(){
-    this.filteredCustomers = this.customers.filter(x=>x.firstName.includes(this.searchKey) || x.lastName.includes(this.searchKey))
+    this.filteredCustomers = this.customers.filter(x=>x.firstName.toLowerCase().includes(this.searchKey.toLowerCase()) || x.lastName.includes(this.searchKey))
   }
 
 }

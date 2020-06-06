@@ -1,18 +1,19 @@
 export interface Lead{
-  Email: string;
-  Phone: string;
-  FirstName: string;
-  LastName: string;
-  Company: string;
-  Address: string;
-  Gender: string;
-  Image: string;
-  Message: Message[];
-  ID: number;
-  UserCreated: number;
-  UserModified: number;
-  DateCreated: string;
-  DateModified: string
+  email: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
+  company: string;
+  address: string;
+  gender: string;
+  image: string;
+  message: Message[];
+  isCustomer:boolean;
+  id: number;
+  userCreated: number;
+  userModified: number;
+  dateCreated: string;
+  dateModified: string
 }
 
 export interface Message{

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router' ;
 import { ProductService } from '../../../services/product.service' ;
 import { Product } from '../../../models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-product',
@@ -15,10 +16,12 @@ export class EditProductComponent implements OnInit {
   // product
   updating:boolean = false
   loadingProduct = true
+  deleting:boolean = false
 
   constructor(
     private route:ActivatedRoute,
-    private productService:ProductService
+    private productService:ProductService,
+    private router:Router
   ) { 
     this.productId = +this.route.snapshot.params.id
   }
@@ -35,36 +38,29 @@ export class EditProductComponent implements OnInit {
       err=>{
         this.loadingProduct = false
       })
-    // this.product = {
-    //   "name": "malt",
-    //   "quantity": 20,
-    //   "image": "imageString",
-    //   "priceID": 1,
-    //   "price": {
-    //     "id": 1,
-    //     "userCreated": 0,
-    //     "userModified": 0,
-    //     "dateCreated": "2020-03-30T15:10:33.2058236",
-    //     "dateModified": "2020-03-30T21:49:17.7538787",
-    //     "costPrice": 20,
-    //     "salePrice": 30
-    //   },
-    //   "id": 1,
-    //   "userCreated": 0,
-    //   "userModified": 0,
-    //   "dateCreated": "2020-03-30T15:10:43.8541328",
-    //   "dateModified": "2020-03-30T21:49:15.8988712"
-    // }
   }
 
   updateProduct(){
     this.updating = true
     this.productService.updateProduct(this.product).subscribe(data=>{
       this.updating = false
-      console.log(data)
+      this.router.navigateByUrl('main/products')
     },
       err=>{
+        this.updating = false
+      })
+  }
 
+  deleteProduct(id){
+    this.deleting = true
+    this.productService.deleteProduct(id).subscribe(data=>{
+      console.log(data)
+      this.deleting = false
+      this.router.navigateByUrl('main/products')
+    },
+      err=>{
+        console.log(err)
+        this.deleting = false
       })
   }
 

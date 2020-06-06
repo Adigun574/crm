@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SkillService } from '../../../services/skill.service';
+import { User } from '../../../models/User';
+import { date } from '../../../classes/date';
 
 @Component({
   selector: 'app-training-programs',
@@ -12,21 +15,40 @@ export class TrainingProgramsComponent implements OnInit {
   addProgramForm:FormGroup
   programs:any[]
   employees:any[]
+  saving:boolean = false
+  loadingSkills:boolean = false
+  selectedEmployee
+  sas
+  selectedSkill
+  skillToUpdate
+  updatingSkill:boolean = false
+  currentUser:User
+  addingStaffSkill:boolean = false
+  invalidDetails:boolean = false
+
 
   constructor(
     private fb:FormBuilder,
-    private modalService:NgbModal
+    private modalService:NgbModal,
+    private skillService:SkillService
   ) {
+    this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
     this.addProgramForm = this.fb.group({
       name:['',Validators.required],
-      duration:[],
-      description:['']
+      // duration:[],
+      description:[''],
+      id: [0],
+      userCreated: [this.currentUser.id],
+      userModified: [0],
+      dateCreated: [date()],
+      dateModified: [date()]
+
     })
    }
 
   ngOnInit(): void {
-    this.getPrograms()
-    this.getEmployees()
+    this.getSkills()
+    this.getAllEmployees()
   }
 
   open(content, options = {}) {
@@ -35,56 +57,99 @@ export class TrainingProgramsComponent implements OnInit {
     err=>{})
   }
 
-  getPrograms(){
-    this.programs = [
-      {
-        name:'Customer Relationship',
-        duration:'3 weeks',
-        description:'To teach employees how to relate with customers'
+  saveProgram(){
+    if(this.addProgramForm.invalid){
+      return
+    }
+    else{
+      this.saving = true
+      this.skillService.saveSkill(this.addProgramForm.value).subscribe(data=>{
+        this.saving = false
+        this.getSkills()
+        this.modalService.dismissAll()
       },
-      {
-        name:'Aggressive Thinking',
-        duration:'1 week',
-        description:'To teach employees how to aspire to perspire'
-      },
-      {
-        name:'Catapulting Success',
-        duration:'1 week',
-        description:'Still all about aspire to perspire bullshit'
-      }
-    ]
+        err=>{
+          this.saving = false
+          this.modalService.dismissAll()
+        })
+      
+    }
   }
 
-  getEmployees(){
-    this.employees = [
-      {
-        id:1,
-        name:'Adigun Ibrahim',
-        phoneNo:'08165230739',
-        email:'adigun@gmail.com',
-        address:'12 main str',
-        position:'Frontend Dev',
-        Qualification:'B.Sc',
-      },
-      {
-        id:2,
-        name:'Adigun Adedotun',
-        phoneNo:'08165230739',
-        email:'adigun@gmail.com',
-        address:'12 main str',
-        position:'Backend Dev',
-        Qualification:'M.Sc',
-      },
-      {
-        id:3,
-        name:'Adigun Akanni',
-        phoneNo:'08165230739',
-        email:'adigun@gmail.com',
-        address:'12 main str',
-        position:'Devops',
-        Qualification:'HND',
-      }
-    ]
+  getSkills(){
+    this.loadingSkills = true
+    this.skillService.getAllSkills().subscribe(data=>{
+      this.programs = <any[]>data
+      this.loadingSkills = false
+    },
+      err=>{
+        this.loadingSkills = false
+      })
   }
 
+  getAllEmployees(){
+    this.skillService.getAllEmployees().subscribe(data=>{
+      this.employees = <any[]>data
+    },
+      err=>{
+        
+      })
+  }
+
+  selectSkill(skill){
+    this.selectedSkill = skill
+  }
+
+  addStaffSkill(){
+    if(!this.selectedSkill || !this.selectedEmployee || this.sas>5 || !this.sas || this.sas<0){
+      console.log('invalid stuffs')
+      this.invalidDetails = true
+      return
+    }
+    else{
+      this.invalidDetails = false
+      this.addingStaffSkill = true
+      let obj = {
+        id: 0,
+        staffID: this.selectedEmployee.id,
+        skillID: this.selectedSkill.id,
+        assessments: [
+          {
+            id: 0,
+            staffSkillID: 0,
+            sas: this.sas,
+            dateCreated: '2020-06-04T09:52:53.345Z'
+          }
+        ],
+        supervisorID: 0,
+        competencyValue: this.currentUser.id
+      }
+      this.skillService.saveStaffSkill(obj).subscribe(data=>{
+        this.addingStaffSkill = false
+        this.modalService.dismissAll()
+      },
+        err=>{
+          this.addingStaffSkill = false
+          this.modalService.dismissAll()
+        })
+    }    
+  }
+
+  selectSkillToUpdate(skill){
+    this.skillToUpdate = skill
+  }
+
+  updateSkill(){
+    this.updatingSkill = true
+    this.skillService.updateSkill(this.skillToUpdate).subscribe(data=>{
+      this.updatingSkill = false
+      this.modalService.dismissAll()
+    },
+      err=>{
+        this.updatingSkill = false
+        this.modalService.dismissAll()
+      })
+  }
+
+  
 }

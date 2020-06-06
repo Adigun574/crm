@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { SkillService } from '../../../services/skill.service';
+import { date } from '../../../classes/date';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-employee-detail',
@@ -14,62 +17,91 @@ export class EmployeeDetailComponent implements OnInit {
   selectedEmployee:any
   editEmployeeDetailsForm:FormGroup
   currentJustify:any
+  qualificationForm:FormGroup
+  loadingDetails:boolean = true
+  savingQualification:boolean = false
+  updatingEmployee:boolean = false
+  deletingEmployee:boolean = false
 
 
   constructor(
     private route:ActivatedRoute,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private skillService:SkillService,
+    private router:Router
   ) { 
     this.employeeId = this.route.snapshot.params.id
-    this.getEmployees()
+  }
+
+  ngOnInit(): void {
     this.getSingleEmployee()
+  }
+
+  setForms(){
     this.editEmployeeDetailsForm = this.fb.group({
-      name:[this.selectedEmployee.name],
-      phoneNo:[this.selectedEmployee.phoneNo],
-      email:[this.selectedEmployee.phoneNo],
+      firstName:[this.selectedEmployee.firstName],
+      lastName:[this.selectedEmployee.lastName],
+      phone:[this.selectedEmployee.phone],
+      email:[this.selectedEmployee.email],
       address:[this.selectedEmployee.address],
       position:[this.selectedEmployee.position],
       qualification:[this.selectedEmployee.qualification]
     })
-  }
-
-  ngOnInit(): void {
-  }
-
-  getEmployees(){
-    this.employees = [
-      {
-        id:1,
-        name:'Adigun Ibrahim',
-        phoneNo:'08165230739',
-        email:'adigun@gmail.com',
-        address:'12 main str',
-        position:'Frontend Dev',
-        Qualification:'B.Sc',
-      },
-      {
-        id:2,
-        name:'Adigun Adedotun',
-        phoneNo:'08165230739',
-        email:'adigun@gmail.com',
-        address:'12 main str',
-        position:'Backend Dev',
-        Qualification:'M.Sc',
-      },
-      {
-        id:3,
-        name:'Adigun Akanni',
-        phoneNo:'08165230739',
-        email:'adigun@gmail.com',
-        address:'12 main str',
-        position:'Devops',
-        Qualification:'HND',
-      }
-    ]
+    this.qualificationForm = this.fb.group({
+      id: 0,
+      name: [],
+      status: [true],
+      startDate: [],
+      endDate: [],
+      staffID: [+this.employeeId]
+    })
   }
 
   getSingleEmployee(){
-    this.selectedEmployee = this.employees.find(x=>x.id==this.employeeId)
+    this.loadingDetails = true
+    this.skillService.getSingleStaff(this.employeeId).subscribe(data=>{
+      this.selectedEmployee = <any>data
+      this.setForms()
+      this.loadingDetails = false
+    },
+      err=>{})
+  }
+
+  updateStaff(){
+    this.updatingEmployee = true
+    this.skillService.updateStaff(this.editEmployeeDetailsForm.value).subscribe(data=>{
+      this.updatingEmployee = false
+    },
+      err=>{
+        this.updatingEmployee = false
+      })
+  }
+
+  saveQualification(){
+    this.savingQualification = true
+    this.qualificationForm.value.startDate = `${this.qualificationForm.value.startDate}T11:53:50.102Z`
+    this.qualificationForm.value.endDate = `${this.qualificationForm.value.endDate}T11:53:50.102Z`
+    // console.log(this.qualificationForm.value)
+    this.skillService.saveQualification(this.qualificationForm.value).subscribe(data=>{
+      this.savingQualification = false
+      this.getSingleEmployee()
+    },
+      err=>{
+        this.savingQualification = false
+      })
+  }   
+
+  deleteStaff(){
+    this.deletingEmployee = true
+    this.skillService.deleteEmployee(this.employeeId).subscribe(data=>{
+      console.log(data)
+      this.deletingEmployee = false
+      this.router.navigateByUrl('main/employees')
+    },
+      err=>{
+        console.log(err)
+        this.deletingEmployee = false
+      })
   }
 
 }

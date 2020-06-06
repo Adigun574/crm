@@ -20,4 +20,8 @@ export class SaleService {
   getAllSales(){
     return this.httpClient.get(`${this.generalService.api}Sale/GetAllSales`)
   }
+
+  getSalesByDate(date){
+    return this.httpClient.get(`${this.generalService.api}Sale/GetSingleDaySales/${date}`)
+  }
 }

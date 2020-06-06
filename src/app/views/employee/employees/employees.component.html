@@ -1,3 +1,6 @@
+<app-loader *ngIf="loadingEmployees"></app-loader>
+
+<div *ngIf="!loadingEmployees">
 <div class="pt-4 d-block mb-4">
     <button mat-raised-button class="add-button" (click)="open(topModal, { windowClass: 'modal-top' })">Add A New Employee</button>
 </div>
@@ -6,9 +9,9 @@
     <div class="row">
       <div class="col-md-3" *ngFor="let employee of employees" (click)="showEmployee(employee.id)">
         <div class="contact shadow cursor-pointer">
-          <h4><span class="name-initial">{{employee.name.split(' ')[0][0]}} {{employee.name.split(' ')[1][0]}}</span></h4><br>
-          <h4 class="mb-0 mt-0">{{employee.name}}</h4>
-          <p class="mb-0 mt-0">{{employee.position}}</p>
+          <h4><span class="name-initial">{{employee.firstName.split('')[0] | uppercase}}{{employee.lastName.split('')[0] | uppercase}}</span></h4><br>
+          <h4 class="mb-0 mt-0">{{employee.firstName}} {{employee.lastName}}</h4>
+          <p class="mb-0 mt-0">{{employee.phone}}</p>
         </div>
       </div>
     </div>
@@ -25,13 +28,18 @@
         <div  class="card mb-4 save-customer-card">
             <form [formGroup]="addEmployeeForm">
                 <div class="form-group">
-                    <label class="form-label"> Employee Name:</label>
-                    <input type="text" class="form-control" placeholder="Name" formControlName="name">
-                    <small class="text-danger">Name is required</small>
+                    <label class="form-label"> Firstname:</label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="firstName">
+                    <small class="text-danger">Firstname is required</small>
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Lastname:</label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="lastName">
+                    <small class="text-danger">Lastname is required</small>
                 </div> 
                 <div class="form-group">
                     <label class="form-label"> Phone Number:</label>
-                    <input type="text" class="form-control" placeholder="+234XXXXXXXX" formControlName="phoneNo">
+                    <input type="text" class="form-control" placeholder="+234XXXXXXXX" formControlName="phone">
                 </div>  
                 <div class="form-group">
                     <label class="form-label"> Email:</label>
@@ -42,22 +50,38 @@
                     <textarea  class="form-control" placeholder="123 main str, Isolo" formControlName="address"></textarea>
                 </div> 
                 <div class="form-group">
-                    <label class="form-label"> Position:</label>
-                    <input type="text"  class="form-control" placeholder="Secretary" formControlName="position">
-                </div> 
-                <div class="form-group">
-                    <label class="form-label"> Qualification:</label>
+                    <label class="form-label"> Highest Education Level:</label>
                     <ng-select
                         [items]="qualifications"
-                        bindLabel="name"                    
+                        bindLabel="name" 
+                        bindValue="name"  
+                        formControlName="hel"                 
                     >
                     </ng-select>
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Gender:</label>
+                    <ng-select
+                        [items]="genders"
+                        bindValue="name"
+                        bindLabel="name"
+                        formControlName="gender"
+                    >
+                    </ng-select>
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Date of Birth:</label>
+                    <input type="date" class="form-control" formControlName="dateofBirth">
                 </div> 
             </form>
         </div>
     
        <div class="modal-footer">
-         <button class="btn btn-primary" (click)="saveEmployee()">Save</button>
+         <button class="btn btn-primary" (click)="saveEmployee()">
+            <span class="spinner-grow spinner-grow-sm" *ngIf="savingEmployee"></span> 
+             Save
+         </button>
        </div>
       </div>    
 </ng-template>
+</div>

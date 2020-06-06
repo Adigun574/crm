@@ -25,6 +25,7 @@ export class CustomerDetailsComponent implements OnInit {
   editCustomerDetailsForm:FormGroup
   products:any[]
   updatingCustomer:boolean = false
+  deletingCustomer:boolean = false
 
 
   constructor(
@@ -34,7 +35,6 @@ export class CustomerDetailsComponent implements OnInit {
     private router:Router
   ) { 
     this.customerId = this.route.snapshot.params.id
-    // this.getCustomers()
     this.getSingleCustomer()
   }
 
@@ -55,14 +55,24 @@ export class CustomerDetailsComponent implements OnInit {
 
   updateCustomer(){
     this.updatingCustomer = true
-    console.log(this.selectedCustomer)
     this.customerService.updateCustomer(this.selectedCustomer).subscribe(data=>{
+      this.router.navigateByUrl('/main/customers')
+    },
+      err=>{
+        this.updatingCustomer = false
+      })
+  }
+
+  deleteCustomer(id){
+    this.deletingCustomer = true
+    this.customerService.deleteCustomer(id).subscribe(data=>{
       console.log(data)
+      this.deletingCustomer = false
       this.router.navigateByUrl('/main/customers')
     },
       err=>{
         console.log(err)
-        this.updatingCustomer = false
+        this.deletingCustomer = false
       })
   }
 
@@ -97,37 +107,5 @@ export class CustomerDetailsComponent implements OnInit {
       },
     ]
   }
-
-
-  // getCustomers(){
-  //   this.customers = [
-  //     {
-  //       id:1,
-  //       name:'Adigun Ibrahim',
-  //       phoneNo:'08165230739',
-  //       email:'adigun@gmail.com',
-  //       address:'12 main str'
-  //     },
-  //     {
-  //       id:2,
-  //       name:'Adigun Adedotun',
-  //       phoneNo:'08165230739',
-  //       email:'adigun@gmail.com',
-  //       address:'12 main str'
-  //     },
-  //     {
-  //       id:3,
-  //       name:'Adigun Akanni',
-  //       phoneNo:'08165230739',
-  //       email:'adigun@gmail.com',
-  //       address:'12 main str'
-  //     }
-  //   ]
-  // }
-
-  // getSingleCustomer(){
-  //   this.selectedCustomer = this.customers.find(x=>x.id==this.customerId)
-  // }
-
 
 }

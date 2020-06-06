@@ -315,4 +315,15 @@ body {
     bottom: 100%;
   }
 }
+/* .login-img{
+	width:50px;
+	margin:auto;
+} */
+.login-img-div{
+	width:64px;
+	margin:auto;
+	border:3px solid #59D6F4;
+	border-radius:3px;
+	overflow: hidden;
+}
 

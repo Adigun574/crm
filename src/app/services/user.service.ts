@@ -27,4 +27,8 @@ export class UserService {
   login(username,password){
     return this.httpClient.post(`${this.generalService.api}User/Authenticate?username=${username}&password=${password}`,null)
   }
+
+  deleteUser(id){
+    return this.httpClient.post(`${this.generalService.api}User/DeleteUser/${id}`,null)
+  }
 }

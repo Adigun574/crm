@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SkillService } from '../../../services/skill.service';
+import { User } from '../../../models/User';
+import { date } from '../../../classes/date';
 
 @Component({
   selector: 'app-employees',
@@ -22,19 +25,38 @@ export class EmployeesComponent implements OnInit {
     {name:"PhD"},
     {name:"Others"}
   ]
+  genders=[
+    {name:'male'},
+    {name:'female'},
+    {name:'not specified'}
+  ]
+  loadingEmployees:boolean = false
+  savingEmployee:boolean = false
+  currentUser:User
+
 
   constructor(
     private modalService: NgbModal,
     private fb:FormBuilder,
-    private router: Router
+    private router: Router,
+    private skillService: SkillService
   ) { 
+    this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
     this.addEmployeeForm = this.fb.group({
-      name:['',Validators.required],
-      phoneNo:[],
+      firstName:['',Validators.required],
+      lastName:['',Validators.required],
+      phone:[],
       email:[''],
       address:[''],
-      position:[''],
-      qualification:['']
+      qualifications:[[]],
+      dateofBirth:[],
+      gender:['male'],
+      hel:[''],
+      id: [0],
+      userCreated: [this.currentUser.id],
+      userModified: [0],
+      dateCreated: [date()],
+      dateModified: [date()]
     })
   }
 
@@ -49,43 +71,33 @@ export class EmployeesComponent implements OnInit {
   }
 
   getEmployees(){
-    this.employees = [
-      {
-        id:1,
-        name:'Adigun Ibrahim',
-        phoneNo:'08165230739',
-        email:'adigun@gmail.com',
-        address:'12 main str',
-        position:'Frontend Dev',
-        Qualification:'B.Sc',
-      },
-      {
-        id:2,
-        name:'Adigun Adedotun',
-        phoneNo:'08165230739',
-        email:'adigun@gmail.com',
-        address:'12 main str',
-        position:'Backend Dev',
-        Qualification:'M.Sc',
-      },
-      {
-        id:3,
-        name:'Adigun Akanni',
-        phoneNo:'08165230739',
-        email:'adigun@gmail.com',
-        address:'12 main str',
-        position:'Devops',
-        Qualification:'HND',
-      }
-    ]
+    this.loadingEmployees = true
+    this.skillService.getAllEmployees().subscribe(data=>{
+      this.employees = <any[]>data
+      this.loadingEmployees = false
+    },
+      err=>{
+        this.loadingEmployees = false
+      })
   }
 
+  
   saveEmployee(){
     if(this.addEmployeeForm.invalid){
       return
     }
     else{
-      console.log(this.addEmployeeForm.value)
+      this.savingEmployee = true
+      this.addEmployeeForm.value.dateofBirth = `${this.addEmployeeForm.value.dateofBirth}T21:44:52.321`
+      this.skillService.saveEmployee(this.addEmployeeForm.value).subscribe(data=>{
+        this.getEmployees()
+        this.savingEmployee = false
+        this.modalService.dismissAll()
+      },
+        err=>{
+          this.savingEmployee = false
+          this.modalService.dismissAll()
+        })
     }
   }
 

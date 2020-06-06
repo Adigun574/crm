@@ -21,7 +21,7 @@ export class CustomerService {
   }
 
   updateCustomer(obj){
-    return this.httpClient.put(`${this.generalService.api}Customer/UpdateCustomer`,obj)
+    return this.httpClient.post(`${this.generalService.api}Customer/UpdateCustomer`,obj)
   }
 
   getSingleCustomer(id){
@@ -30,6 +30,10 @@ export class CustomerService {
 
   getTopCustomers(){
     return this.httpClient.get(`${this.generalService.api}Customer/MostFrequentCustomers`)
+  }
+
+  deleteCustomer(id){
+    return this.httpClient.post(`${this.generalService.api}Customer/DeleteCustomer/${id}`,null)
   }
 }
 

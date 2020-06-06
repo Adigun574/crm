@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SaleService } from '../../../services/sale.service';
+import { CustomerService } from '../../../services/customer.service';
 
 @Component({
   selector: 'app-sales-report',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalesReportComponent implements OnInit {
 
-  constructor() { }
+  sales = []
+  customers = []
+
+  constructor(
+    private saleService:SaleService,
+    private customerService:CustomerService
+  ) { }
 
   ngOnInit(): void {
+    this.getAllSales()
+    this.getAllCustomers()
+  }
+
+  getAllSales(){
+    this.saleService.getAllSales().subscribe(data=>{
+      this.sales = <any[]>data
+    },
+      err=>{})
+  }
+
+  getAllCustomers(){
+    this.customerService.getAllCustomers().subscribe(data=>{
+      this.customers = <any[]>data
+    },
+      err=>{})
   }
 
 }

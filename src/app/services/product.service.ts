@@ -17,7 +17,7 @@ export class ProductService {
   }
 
   updateProduct(obj){
-    return this.httpClient.put(`${this.generalService.api}Product/UpdateProduct`,obj)
+    return this.httpClient.post(`${this.generalService.api}Product/UpdateProduct`,obj)
   }
 
   getProductById(id){
@@ -30,5 +30,9 @@ export class ProductService {
 
   getBestSellingProduct(){
     return this.httpClient.get(`${this.generalService.api}Product/BestSellingProducts`)
+  }
+
+  deleteProduct(id){
+    return this.httpClient.post(`${this.generalService.api}Product/DeleteProduct/${id}`,null)
   }
 }

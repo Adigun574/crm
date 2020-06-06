@@ -2,7 +2,7 @@
 
 <div *ngIf="!loadingReport">
   <div class="mt-2">
-    <h3 class="text-center text-muted">SALES REPORT</h3>
+    <h3 class="text-center text-muted">SALES REPORT <small>{{today}}</small></h3>
   </div>
   
   <div> 
@@ -16,11 +16,12 @@
             placeholder="Search..."> -->
             <input type="date"
             [(ngModel)]="filterVal"
-            (input)="searchTable()"
             class="form-control w-auto"
+            (change)="filterSales()"
             >
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 ">
+          <button class="btn btn-success" (click)="refresh()"><i class="fa fa-refresh">Reset</i></button>
           <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white">
               <i class="ion ion-md-print"></i>&nbsp; Print
           </a>

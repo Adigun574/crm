@@ -3,6 +3,8 @@ import { LeadService } from '../../../services/lead.service';
 import { Lead } from '../../../models/lead';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { date } from '../../../classes/date';
+import { User } from '../../../models/User';
 
 
 @Component({
@@ -25,25 +27,29 @@ export class LeadsComponent implements OnInit {
   submitted:boolean = false
   searchKey:string = ''
   filteredLeads:Lead[] = []
+  currentUser:User
 
   constructor(
     private leadService:LeadService,
     private modalService:NgbModal,
     private fb:FormBuilder
   ) { 
+    this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
     this.addLeadForm = this.fb.group({
       firstName:[,Validators.required],
       lastName:[,Validators.required],
-      email:[],
-      phone:[],
-      address:[],
-      gender:[],
-      image:[],
-      company:[],
-      userCreated:[0],
+      email:[''],
+      phone:[''],
+      address:[''],
+      gender:['male'],
+      image:[''],
+      message:[[]],
+      isCustomer:[false],
+      company:[''],
+      userCreated:[this.currentUser.id],
       userModified:[0],
-      dateCreated:["2020-04-30T04:18:48.379Z"],
-      dateModified:["2020-04-30T04:18:48.379Z"]
+      // dateCreated:[''],
+      // dateModified:['']
     })
   }
 
@@ -63,15 +69,12 @@ export class LeadsComponent implements OnInit {
         this.savingLead = false
         this.submitted = false
         this.modalService.dismissAll()
-        console.log(data)
       },
         err=>{
           this.submitted = false
           this.savingLead = false
           this.modalService.dismissAll()
-          console.log(err)
         })
-      console.log(this.addLeadForm.value)
     }
   }
 
@@ -82,11 +85,11 @@ export class LeadsComponent implements OnInit {
       this.filteredLeads = this.leads
       this.loading = false
       this.filteredLeads.forEach(lead=>{
-        if(!lead.FirstName){
-          lead.FirstName = ''
+        if(!lead.firstName){
+          lead.firstName = ''
         }
-        if(!lead.LastName){
-          lead.LastName = ''
+        if(!lead.lastName){
+          lead.lastName = ''
         }
       })
     },
@@ -105,7 +108,16 @@ export class LeadsComponent implements OnInit {
   }
 
   filterLeads(){
-    this.filteredLeads = this.leads.filter(x=>x.FirstName.includes(this.searchKey) || x.LastName.includes(this.searchKey))
+    this.filteredLeads = this.leads.filter(x=>x.firstName.toLowerCase().includes(this.searchKey.toLowerCase()) || x.lastName.toLowerCase().includes(this.searchKey.toLowerCase()))
   }
 
+  deleteLead(id){
+    this.leadService.deleteLead(id).subscribe(data=>{
+      console.log(data)
+      this.getLeads()
+    },
+      err=>{
+        console.log(err)
+      })
+  }
 }

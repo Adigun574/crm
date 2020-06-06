@@ -41,32 +41,32 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Product Name</label>
-                    <input type="text" class="form-control" formControlName="Name">
+                    <input type="text" class="form-control" formControlName="name">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Quantity</label>
-                    <input type="number" class="form-control" formControlName="Quantity">
+                    <input type="number" class="form-control" formControlName="quantity">
                 </div>
                 <div class="form-row d-flex" style="justify-content: space-between">
                     <div class="form-group">
                         <label class="form-label">Cost Price</label>
                         <!-- <input type="number" class="form-control" [(ngModel)]="CostPrice" [ngModelOptions]="{standalone:true}"> -->
-                        <input type="number" class="form-control" formControlName="CostPrice">
+                        <input type="number" class="form-control" formControlName="costPrice">
                     </div>            
                     <div class="form-group">
                         <label class="form-label">Sell Price</label>
                         <!-- <input type="number" class="form-control" [(ngModel)]="SalePrice" [ngModelOptions]="{standalone:true}"> -->
-                        <input type="number" class="form-control" formControlName="SalePrice">
+                        <input type="number" class="form-control" formControlName="salePrice">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Image</label>
-                    <input type="file" class="form-control" formControlName="Image">
+                    <input type="file" class="form-control" (change)="selectImage($event)">
                 </div>
             </form>
         </div>        
         <div class="card-footer">
-            <button class="btn btn-primary pull-right" (click)="addProduct()">
+            <button class="btn btn-primary pull-right" (click)="uploadPicture()">
                 <span class="spinner-grow spinner-grow-sm" *ngIf="saving"></span> 
                 Save
             </button>
