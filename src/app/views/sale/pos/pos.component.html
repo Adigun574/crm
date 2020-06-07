@@ -43,7 +43,7 @@
             <div>              
               <div class="p-4">
                 <div class="form-group">
-                  <label class="form-label">Select Customer</label>
+                  <label class="form-label text-danger" *ngIf="!selectedCustomer">Please select a customer!!!</label>
                   <ng-select
                     [items]="customers"
                     bindLabel="firstName"
@@ -54,7 +54,7 @@
                 <hr>
                 <div class="row">
                   <div class="col-4">
-                    <button class="btn btn-primary" (click)="completeSale()">
+                    <button class="btn btn-primary" (click)="completeSale()" [disabled]="!selectedCustomer">
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSale"></span>
                       Pay
                     </button>
@@ -73,7 +73,7 @@
                     <table>
                       <tr>
                         <td>Customer:</td>
-                        <td>{{selectedCustomer.firstName}}</td>
+                        <td>{{selectedCustomer?.firstName}}</td>
                       </tr>
                       <tr>
                         <td>Total:</td>

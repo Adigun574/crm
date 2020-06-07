@@ -52,7 +52,7 @@ export class PosComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts()
     this.getCustomers()
-    this.selectedCustomer = this.guestCustomer
+    // this.selectedCustomer = this.guestCustomer
     console.log('WTF!!! Why are you here???')
   }
 
@@ -91,8 +91,8 @@ export class PosComponent implements OnInit {
     this.sale.cart.amount = this.total
     this.sale.cart.items = this.apiorders
     this.sale.cart.userCreated = this.currentUser.id
-    console.log(this.sale)
-    console.log(JSON.stringify(this.sale))
+    // console.log(this.sale)
+    // console.log(JSON.stringify(this.sale))
     this.saleService.saveSale(this.sale).subscribe(data=>{
       console.log(data)
       this.savingSale = false

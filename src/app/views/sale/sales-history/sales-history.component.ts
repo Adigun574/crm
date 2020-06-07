@@ -22,7 +22,7 @@ export class SalesHistoryComponent implements OnInit {
     private customerService:CustomerService
   ) { 
     let d = new Date()
-    let day:any = d.getDay()
+    let day:any = d.getDate()
     let month:any = d.getMonth()+1
     let year:any = d.getFullYear()
     if(day<10){
@@ -80,8 +80,13 @@ export class SalesHistoryComponent implements OnInit {
   }
 
   getCustomerName(id){
+    try{
     let customer = this.customers.find(x=>x.id == id)
     return `${customer.firstName} ${customer.lastName}`
+    }
+    catch{
+      return `Guest Customer`
+    }
   }
 
   print(id){
