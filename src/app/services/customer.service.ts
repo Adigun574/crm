@@ -35,5 +35,9 @@ export class CustomerService {
   deleteCustomer(id){
     return this.httpClient.post(`${this.generalService.api}Customer/DeleteCustomer/${id}`,null)
   }
+
+  saveCustomerMessage(obj){
+    return this.httpClient.post(`${this.generalService.api}CustomerMessage/SaveCustomerMessage`,obj)
+  }
 }
 

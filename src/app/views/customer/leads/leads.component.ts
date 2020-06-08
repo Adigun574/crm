@@ -28,6 +28,9 @@ export class LeadsComponent implements OnInit {
   searchKey:string = ''
   filteredLeads:Lead[] = []
   currentUser:User
+  selectedLeadID
+  leadMessage = ''
+  savingLeadMessage:boolean = false
 
   constructor(
     private leadService:LeadService,
@@ -118,6 +121,31 @@ export class LeadsComponent implements OnInit {
     },
       err=>{
         console.log(err)
+      })
+  }
+
+  selectLead(leadID){
+    this.selectedLeadID = leadID
+  }
+
+  addMessage(){
+    this.savingLeadMessage = true
+    let convoObj= {
+      type: "",
+      summary: this.leadMessage,
+      leadID: this.selectedLeadID,
+      attachment: "",
+      id: 0,
+      userCreated: this.currentUser.id,
+      userModified: 0,
+    }
+    this.leadService.saveMessage(convoObj).subscribe(data=>{
+      this.savingLeadMessage = false
+      this.modalService.dismissAll()
+    },
+      err=>{
+        this.savingLeadMessage = false
+        this.modalService.dismissAll()
       })
   }
 }

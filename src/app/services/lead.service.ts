@@ -31,4 +31,8 @@ export class LeadService {
   deleteLead(id){
     return this.httpClient.post(`${this.generalService.api}Lead/DeleteLead/ID?ID=${id}`,null)
   }
+
+  saveMessage(obj){
+    return this.httpClient.post(`${this.generalService.api}Message/SaveMessage`,obj)
+  }
 }

@@ -9,9 +9,9 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">
-                      High Sales Period
+                      Products
                     </h5>
-                    <span class="h2 font-weight-bold mb-0">12:00 - 13:30</span>
+                    <span class="h2 font-weight-bold mb-0">{{products.length}}</span>
                   </div>
                   <div class="col-auto">
                     <div
@@ -37,9 +37,9 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">
-                      Low Sales Period
+                      Leads
                     </h5>
-                    <span class="h2 font-weight-bold mb-0">08:00 - 09:30</span>
+                    <span class="h2 font-weight-bold mb-0">{{leads.length}}</span>
                   </div>
                   <div class="col-auto">
                     <div
@@ -54,7 +54,7 @@
                   <span class="text-danger mr-2"
                     ><i class="fas fa-arrow-down"></i></span
                   >
-                  <span class="text-nowrap cursor-pointer underline-hover" [routerLink]="['/main/sales-history']">Click to view sales report</span>
+                  <span class="text-nowrap cursor-pointer underline-hover" [routerLink]="['/main/leads']">Click to view leads</span>
                 </p>
               </div>
             </div>

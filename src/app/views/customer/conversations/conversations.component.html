@@ -16,9 +16,12 @@
             <hr>
             <div class="form-group">
                 <label>Add a new message</label>
-                <textarea class="form-control"></textarea>
+                <textarea class="form-control" [(ngModel)]="leadMessage"></textarea>
             </div>
-            <button class="btn btn-primary float-right">Add</button>
+            <button class="btn btn-primary float-right" (click)="addMessage()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="savingLeadMessage"></span>                 
+                Add
+            </button>
         </div>
     </div>
 </div>

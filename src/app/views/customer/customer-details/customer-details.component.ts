@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../models/customer';
+import { User } from '../../../models/user';
 
 
 @Component({
@@ -26,6 +27,10 @@ export class CustomerDetailsComponent implements OnInit {
   products:any[]
   updatingCustomer:boolean = false
   deletingCustomer:boolean = false
+  savingCustomerMessage:boolean = false
+  customerMessage = ''
+  currentUser:User
+
 
 
   constructor(
@@ -34,6 +39,7 @@ export class CustomerDetailsComponent implements OnInit {
     private customerService:CustomerService,
     private router:Router
   ) { 
+    this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
     this.customerId = this.route.snapshot.params.id
     this.getSingleCustomer()
   }
@@ -73,6 +79,28 @@ export class CustomerDetailsComponent implements OnInit {
       err=>{
         console.log(err)
         this.deletingCustomer = false
+      })
+  }
+
+  addMessage(){
+    this.savingCustomerMessage = true
+    let convoObj= {
+      type: "",
+      summary: this.customerMessage,
+      customerID: +this.customerId,
+      attachment: "",
+      id: 0,
+      userCreated: this.currentUser.id,
+      userModified: 0,
+    }
+    this.customerService.saveCustomerMessage(convoObj).subscribe(data=>{
+      this.getSingleCustomer()
+      this.savingCustomerMessage = false
+      this.customerMessage = ''
+    },
+      err=>{
+        this.savingCustomerMessage = false
+        this.customerMessage = ''
       })
   }
 
