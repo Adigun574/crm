@@ -101,7 +101,8 @@ export class TrainingProgramsComponent implements OnInit {
   }
 
   addStaffSkill(){
-    if(!this.selectedSkill || !this.selectedEmployee || this.sas>5 || !this.sas || this.sas<0){
+    // if(!this.selectedSkill || !this.selectedEmployee || this.sas>5 || !this.sas || this.sas<0){
+    if(!this.selectedSkill || !this.selectedEmployee){    
       console.log('invalid stuffs')
       this.invalidDetails = true
       return
@@ -109,28 +110,38 @@ export class TrainingProgramsComponent implements OnInit {
     else{
       this.invalidDetails = false
       this.addingStaffSkill = true
+      // let obj = {
+      //   id: 0,
+      //   staffID: this.selectedEmployee.id,
+      //   skillID: this.selectedSkill.id,
+      //   assessments: [
+      //     {
+      //       id: 0,
+      //       staffSkillID: 0,
+      //       sas: this.sas,
+      //       dateCreated: '2020-06-04T09:52:53.345Z'
+      //     }
+      //   ],
+      //   supervisorID: 0,
+      //   competencyValue: this.currentUser.id
       let obj = {
         id: 0,
         staffID: this.selectedEmployee.id,
         skillID: this.selectedSkill.id,
-        assessments: [
-          {
-            id: 0,
-            staffSkillID: 0,
-            sas: this.sas,
-            dateCreated: '2020-06-04T09:52:53.345Z'
-          }
-        ],
-        supervisorID: 0,
-        competencyValue: this.currentUser.id
+        assessments: [],
+        supervisorID: this.currentUser.id,
+        competencyValue: 0
       }
+      console.log(obj)
       this.skillService.saveStaffSkill(obj).subscribe(data=>{
         this.addingStaffSkill = false
         this.modalService.dismissAll()
+        console.log(data)
       },
         err=>{
           this.addingStaffSkill = false
           this.modalService.dismissAll()
+          console.log(err)
         })
     }    
   }

@@ -14,6 +14,7 @@ import { RoleComponent } from './role/role.component';
 import { SharedModule } from '../../shared/shared.module';
 import { UserComponent } from './user/user.component';
 import { QualificationsComponent } from './qualifications/qualifications.component';
+import { AssessmentComponent } from './assessment/assessment.component';
 
 
 
@@ -25,7 +26,8 @@ import { QualificationsComponent } from './qualifications/qualifications.compone
     SkillMonitoringComponent,
     RoleComponent,
     UserComponent,
-    QualificationsComponent
+    QualificationsComponent,
+    AssessmentComponent
   ],
   imports: [
     CommonModule,

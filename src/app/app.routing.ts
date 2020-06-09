@@ -30,6 +30,7 @@ import { PosComponent } from './views/sale/pos/pos.component';
 import { SalesHistoryComponent } from './views/sale/sales-history/sales-history.component';
 import { LeadsComponent } from './views/customer/leads/leads.component';
 import { ConversationsComponent } from './views/customer/conversations/conversations.component';
+import { AssessmentComponent } from './views/employee/assessment/assessment.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -120,6 +121,10 @@ export const routes: Routes = [
       {
         path:'conversations/:id',
         component:ConversationsComponent
+      },
+      {
+        path:'assessment',
+        component:AssessmentComponent
       },
       {
         path:'**',

@@ -52,4 +52,12 @@ export class SkillService {
   deleteEmployee(id){
     return this.httpClient.post(`${this.generalService.api}Staff/DeleteStaff/${id}`,null)
   }
+
+  getAllStaffSKil(){
+    return this.httpClient.get(`${this.generalService.api}StaffSkill/GetAllStaffSkill`)
+  }
+
+  upDateStaffSkill(obj){
+    return this.httpClient.post(`${this.generalService.api}StaffSkill/Update`,obj)
+  }
 }

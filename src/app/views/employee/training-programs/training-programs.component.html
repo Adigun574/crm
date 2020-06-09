@@ -2,6 +2,7 @@
 <div *ngIf="!loadingSkills">
 <div class="pt-4 d-block mb-4">
     <button mat-raised-button class="add-button" (click)="open(topModal, { windowClass: 'modal-top' })">Add A New Skill</button>
+    <button mat-raised-button class="add-button pull-right" [routerLink]="['/main/assessment']">Add A New Skill</button>
 </div>
 
 <ng-template #topModal let-c="close" let-d="dismiss">
@@ -45,7 +46,7 @@
             </div>            
             <div class="enroll-btn">
                 <button mat-raised-button (click)="open(topModal3, { windowClass: 'modal-top' }); selectSkill(program)">
-                    Certify Staff
+                    Enroll Staff
                 </button>
             </div>
         </div>
@@ -116,10 +117,10 @@
                 >
                 </ng-select>
             </div> 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="form-label"> Competency Level <small>(on a scale of 0 -5)</small>:</label>
                 <input type="number" min="0" max="5" [(ngModel)]="sas">
-            </div> 
+            </div>  -->
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" (click)="addStaffSkill()">

@@ -1,6 +1,6 @@
 export interface Product{
         name: string,
-        Quantity: string,
+        Quantity: number,
         Image: string,
         PriceID: number,
         Price: Price
@@ -8,7 +8,10 @@ export interface Product{
         UserCreated: number,
         UserModified: number,
         DateCreated: string,
-        DateModified: string
+        DateModified: string,
+        salePrice?:number,
+        costPrice?:number,
+        quantity?:number
 }
 
 interface Price{

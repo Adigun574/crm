@@ -42,6 +42,9 @@ export class EditProductComponent implements OnInit {
 
   updateProduct(){
     this.updating = true
+    this.product.quantity = +this.product.quantity
+    this.product.salePrice = +this.product.salePrice
+    this.product.costPrice = +this.product.costPrice
     this.productService.updateProduct(this.product).subscribe(data=>{
       this.updating = false
       this.router.navigateByUrl('main/products')

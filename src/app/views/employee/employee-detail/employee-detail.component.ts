@@ -44,8 +44,10 @@ export class EmployeeDetailComponent implements OnInit {
       phone:[this.selectedEmployee.phone],
       email:[this.selectedEmployee.email],
       address:[this.selectedEmployee.address],
-      position:[this.selectedEmployee.position],
-      qualification:[this.selectedEmployee.qualification]
+      // position:[this.selectedEmployee.position],
+      hel:[this.selectedEmployee.hel],
+      qualifications:[this.selectedEmployee.qualifications],
+      id:[this.selectedEmployee.id]
     })
     this.qualificationForm = this.fb.group({
       id: 0,
@@ -69,7 +71,18 @@ export class EmployeeDetailComponent implements OnInit {
 
   updateStaff(){
     this.updatingEmployee = true
-    this.skillService.updateStaff(this.editEmployeeDetailsForm.value).subscribe(data=>{
+    // console.log(this.editEmployeeDetailsForm.value)
+    // this.skillService.updateStaff(this.editEmployeeDetailsForm.value).subscribe(data=>{
+    //   this.updatingEmployee = false
+    // },
+    //   err=>{
+    //     this.updatingEmployee = false
+    //   })
+    delete this.selectedEmployee.userCreated
+    delete this.selectedEmployee.userModified
+    this.selectedEmployee.image = ''
+    console.log(JSON.stringify(this.selectedEmployee))
+    this.skillService.updateStaff(this.selectedEmployee).subscribe(data=>{
       this.updatingEmployee = false
     },
       err=>{

@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // import { TextLoaderComponent } from '../views/components/text-loader/text-loader.component';
 import { MatTableModule, MatPaginatorModule } from '@angular/material';
 import { LoaderComponent } from '../loader/loader.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LoaderComponent } from '../loader/loader.component';
     FormsModule,
     MatTableModule,
     MatPaginatorModule,    
+    RouterModule
   ],
   exports: [
     // LoaderComponent, 
@@ -27,7 +29,8 @@ import { LoaderComponent } from '../loader/loader.component';
     FormsModule,
     MatTableModule,
     MatPaginatorModule,
-    LoaderComponent
+    LoaderComponent,
+    RouterModule
     // ErrorMsgComponent, FilterPipe, TextLoaderComponent
   ]
 })
