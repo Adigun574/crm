@@ -31,6 +31,7 @@ import { SalesHistoryComponent } from './views/sale/sales-history/sales-history.
 import { LeadsComponent } from './views/customer/leads/leads.component';
 import { ConversationsComponent } from './views/customer/conversations/conversations.component';
 import { AssessmentComponent } from './views/employee/assessment/assessment.component';
+import { InvoiceComponent } from './views/sale/invoice/invoice.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -125,6 +126,10 @@ export const routes: Routes = [
       {
         path:'assessment',
         component:AssessmentComponent
+      },
+      {
+        path:'invoice/:customerID/:invoiceNo',
+        component:InvoiceComponent
       },
       {
         path:'**',

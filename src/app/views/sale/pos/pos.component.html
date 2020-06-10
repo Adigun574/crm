@@ -52,18 +52,23 @@
                   </ng-select>
                 </div>
                 <hr>
-                <div class="row">
-                  <div class="col-4">
-                    <button class="btn btn-primary" (click)="completeSale()" [disabled]="!selectedCustomer">
+                <div class="row btn-stuff">
+                  <div class="ol-4 mr-1">
+                    <button class="btn btn-primary" (click)="completeSale('cash')" [disabled]="!selectedCustomer">
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSale"></span>
-                      Pay
+                      <small><i class="fa fa-money"></i> Cash</small>
                     </button>
                   </div>
-                  <div class="col-4">
-                    <button class="btn btn-success">Receipt</button>
+                  <div class="ol-4 mr-1">
+                    <button class="btn btn-success" [disabled]="!selectedCustomer" (click)="completeSale('credit')">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSaleCredit"></span>
+                      <small><i class="fa fa-credit-card"></i> Credit</small>
+                    </button>
                   </div>
-                  <div class="col-4">
-                    <button class="btn btn-danger" (click)="resetSales()">Reset</button>
+                  <div class="ol-4 mr-1">
+                    <button class="btn btn-danger" (click)="resetSales()">
+                      <small><i class="fa fa-refresh"></i> Reset</small>
+                    </button>
                   </div>
                 </div>
 

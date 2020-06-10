@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SaleService } from '../../../services/sale.service';
 import { CustomerService } from '../../../services/customer.service';
 import { Formats } from '../../../classes/print';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sales-history',
@@ -19,7 +20,8 @@ export class SalesHistoryComponent implements OnInit {
 
   constructor(
     private saleService:SaleService,
-    private customerService:CustomerService
+    private customerService:CustomerService,
+    private router:Router
   ) { 
     let d = new Date()
     let day:any = d.getDate()
@@ -91,6 +93,11 @@ export class SalesHistoryComponent implements OnInit {
 
   print(id){
     this.format.printDiv(id)
+  }
+
+  openInvoice(customerID,invoiceNo){
+    console.log(customerID,invoiceNo)
+    this.router.navigateByUrl(`/main/invoice/${customerID}/${invoiceNo}`)
   }
 
 }

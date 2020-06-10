@@ -39,6 +39,7 @@ export class PosComponent implements OnInit {
   }
   allProducts:any[] = []
   savingSale:boolean = false
+  savingSaleCredit:boolean = false
   currentUser:User
 
   constructor(
@@ -56,8 +57,13 @@ export class PosComponent implements OnInit {
     console.log('WTF!!! Why are you here???')
   }
 
-  completeSale(){
-    this.savingSale = true
+  completeSale(method){
+    if(method == 'cash'){
+      this.savingSale = true
+    }
+    else{
+      this.savingSaleCredit = true
+    }
     if(this.selectedCustomer){
       this.sale.customerID = this.selectedCustomer.id
     }
@@ -66,18 +72,23 @@ export class PosComponent implements OnInit {
       this.selectedCustomer = this.guestCustomer
     }
     this.sale.cart = null
-    this.sale.payment = [
-      {
-        id: 0,
-        customerID: this.selectedCustomer.id,
-        amount: this.total,
-        method: 'cash',
-        reference: null,
-        // DatePaid: date(),
-        invoiceNo: null,
-        userCreated: this.currentUser.id
-      }
-    ]
+    if(method=='cash'){
+      this.sale.payment = [
+        {
+          id: 0,
+          customerID: this.selectedCustomer.id,
+          amount: this.total,
+          method: 'cash',
+          reference: null,
+          // DatePaid: date(),
+          invoiceNo: null,
+          userCreated: this.currentUser.id
+        }
+      ]
+    }
+    else{
+      this.sale.payment = []
+    }
     this.sale.userCreated = this.currentUser.id
     this.sale.invoice = new Invoice()
     this.sale.invoice.cashier = new Cashier()
@@ -94,12 +105,13 @@ export class PosComponent implements OnInit {
     // console.log(this.sale)
     // console.log(JSON.stringify(this.sale))
     this.saleService.saveSale(this.sale).subscribe(data=>{
-      console.log(data)
       this.savingSale = false
+      this.savingSaleCredit = false
       this.resetSales()
     },
       err=>{
         this.savingSale = false
+        this.savingSaleCredit = false
       })
   }
 

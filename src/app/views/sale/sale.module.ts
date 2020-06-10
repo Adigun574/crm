@@ -10,11 +10,12 @@ import { PosComponent } from './pos/pos.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from '../../shared/shared.module';
 import { SalesHistoryComponent } from './sales-history/sales-history.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 
 
 @NgModule({
-  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent],
+  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

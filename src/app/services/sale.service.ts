@@ -24,4 +24,12 @@ export class SaleService {
   getSalesByDate(date){
     return this.httpClient.get(`${this.generalService.api}Sale/GetSingleDaySales/${date}`)
   }
+
+  getInvoiceByCIDandInvoiceNo(invoiceNo,cID){
+    return this.httpClient.get(`${this.generalService.api}Invoice/GetInvoice/${invoiceNo}/${cID}`)
+  }
+
+  makePayment(obj){
+    return this.httpClient.post(`${this.generalService.api}Payment/MakePayment`,obj)
+  }
 }
