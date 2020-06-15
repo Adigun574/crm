@@ -42,6 +42,10 @@ export class SalesHistoryComponent implements OnInit {
     this.getSalesByDate(this.today)
   }
 
+  test(){
+    this.format.printDiv('tableRecordToPrint')
+  }
+
   // getSales(){
   //   this.loadingReport = true
   //   this.saleService.getAllSales().subscribe(data=>{

@@ -1,19 +1,14 @@
 <app-loader *ngIf="loadingReport"></app-loader>
 
 <div *ngIf="!loadingReport">
-  <div class="mt-2">
+  <div class="mt-2 mb-4">
     <h3 class="text-center text-muted">SALES REPORT <small>{{today}}</small></h3>
   </div>
   
   <div> 
    
-    <div class="row mb-1">
+    <div class="row mb-4">
         <div class="col-sm-6 col-md-6 d-inline-flex">
-            <!-- <input type="text"
-            [(ngModel)]="filterVal"
-            (input)="searchTable()"
-            class="form-control w-auto"
-            placeholder="Search..."> -->
             <input type="date"
             [(ngModel)]="filterVal"
             class="form-control w-auto"
@@ -21,13 +16,13 @@
             >
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 ">
-          <button class="btn btn-success" (click)="refresh()"><i class="fa fa-refresh">Reset</i></button>
-          <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white">
-              <i class="ion ion-md-print"></i>&nbsp; Print
+          <button class="btn btn-success" (click)="refresh()"><i class="fa fa-refresh"> Reset</i></button>
+          <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white" (click)="test(toprint)">
+              <i class="fa fa-print"></i>; Print
           </a>
         </div>
       </div>
-  <div class="table-responsive mt-2">
+  <div class="table-responsive mt-2" id="toprint">
       <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
     <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
       <thead>
@@ -76,3 +71,27 @@
   </div>
   </div>
 </div>
+
+
+<table id="tableRecordToPrint" class="d-none table-bordered">
+    <thead>
+          <th>S/N <i class="ion text-muted ml-2"></i></th>
+          <th>Date <i class="ion text-muted ml-2"></i></th>
+          <th>Items <i class="ion text-muted ml-2"></i></th>
+          <th>Customer <i class="ion text-muted ml-2"></i></th>
+          <th>Amount <i class="ion text-muted ml-2"></i></th>
+          <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
+     </thead><br>
+    <tbody>
+      <tr *ngFor="let sale of sales; index as i" >
+        <td>{{i+1}}</td>
+        <td>{{ sale.dateCreated.split('T')[0] }}</td>
+        <td>
+          <span *ngFor="let item of sale.cart.items"> {{item.quantity}} X {{item.name}}</span><br>
+        </td>
+        <td>{{getCustomerName(sale.customerID)}}</td>
+        <td><span>&#8358;</span>{{sale.cart.amount}}.00</td>
+        <td>{{sale.invoice.invoiceNo}}</td>
+      </tr><br>
+    </tbody>
+</table>

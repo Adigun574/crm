@@ -60,4 +60,8 @@ export class SkillService {
   upDateStaffSkill(obj){
     return this.httpClient.post(`${this.generalService.api}StaffSkill/Update`,obj)
   }
+
+  getStaffSkillByStaffID(id){
+    return this.httpClient.get(`${this.generalService.api}StaffSkill/GetStaffSkillsByStaffID/${id}`)
+  }
 }

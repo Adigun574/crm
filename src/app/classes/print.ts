@@ -3,7 +3,22 @@ export class Formats{
         var vendor = navigator.vendor.toLowerCase();
         var isGoogleChrome = vendor.indexOf('google') > -1;
 
-        let printcontent = document.getElementById(divID).innerHTML;
+        let printcontent = `
+        <style>
+        .pageToPrint{
+            text-align:center;
+        }
+        </style>
+        <div class="pageToPrint">
+            <div class="text-center mt-4 header-details">
+                <h3><b>TUNNEX LAB</b></h3>
+                <p>41, Davies Street, Ajelogo Bus Stop, Alapere, Ketu, Lagos State</p>
+                <p>+2348104403054</p>
+                <p>sales@tunnexlab.com.ng</p>
+            </div>
+        ${document.getElementById(divID).innerHTML}
+        </div>
+        `;
         const win = window.open('');
         win.document.write(printcontent);
 

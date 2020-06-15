@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { SkillService } from '../../../services/skill.service';
 import { date } from '../../../classes/date';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-employee-detail',
@@ -22,19 +23,35 @@ export class EmployeeDetailComponent implements OnInit {
   savingQualification:boolean = false
   updatingEmployee:boolean = false
   deletingEmployee:boolean = false
+  staffSkills = []
+  skills = []
+  selectedStaffSkill:any
+  sas:number
+  invalidGrade:boolean = false
+  grading:boolean = false
+  loadedSkills:boolean = false
+
+
 
 
   constructor(
     private route:ActivatedRoute,
     private fb:FormBuilder,
     private skillService:SkillService,
-    private router:Router
+    private router:Router,
+    private modalService:NgbModal
   ) { 
     this.employeeId = this.route.snapshot.params.id
   }
 
   ngOnInit(): void {
     this.getSingleEmployee()
+    this.getStaffSkillbyStaffID()
+    this.getStaffSkills()
+  }
+
+  open(content){
+    this.modalService.open(content, {centered:true})
   }
 
   setForms(){
@@ -116,5 +133,67 @@ export class EmployeeDetailComponent implements OnInit {
         this.deletingEmployee = false
       })
   }
+
+  getStaffSkills(){
+    this.skillService.getAllSkills().subscribe(data=>{
+      this.skills = <any[]>data
+      this.loadedSkills = true
+    },
+      err=>{
+
+      })
+  }
+
+  getStaffSkillbyStaffID(){
+    this.skillService.getStaffSkillByStaffID(this.employeeId).subscribe(data=>{
+      console.log(data)
+      this.staffSkills = <any[]>data
+    },
+      err=>{
+
+      })
+  }
+
+  getSkillName(id){
+    if(id==0){
+      return `null`
+    }
+    else{
+      let skill = this.skills.find(x=>x.id == id)
+      return `${skill.name}`
+    }
+  }
+
+  selectStaffSkill(staffSkill){
+    this.selectedStaffSkill = staffSkill
+  }
+
+  assess(){
+    if(this.sas<0 || this.sas>5 || !this.sas){
+      this.invalidGrade = true
+      return
+    }
+    else{
+      this.invalidGrade = false
+      this.grading = true
+      this.selectedStaffSkill.assessments.push({
+        sas:this.sas,
+        staffSkillID:this.selectedStaffSkill.skillID
+      })
+      this.skillService.upDateStaffSkill(this.selectedStaffSkill).subscribe(data=>{
+        this.getStaffSkillbyStaffID()
+        this.grading = false
+        this.modalService.dismissAll()
+        this.selectedStaffSkill.assessments = []
+      },
+        err=>{
+          this.grading = false
+          this.modalService.dismissAll()
+          this.selectedStaffSkill.assessments = []
+        })
+    }
+  }
+
+
 
 }
