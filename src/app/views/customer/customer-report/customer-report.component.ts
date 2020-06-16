@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../../services/customer.service';
+import { Formats } from '../../../classes/print';
 
 @Component({
   selector: 'app-customer-report',
@@ -11,9 +12,10 @@ export class CustomerReportComponent implements OnInit {
   customers:any[]
   loading = false
   loadingReport:boolean = false
+  format = new Formats()
 
   constructor(
-    private customerService:CustomerService
+    private customerService:CustomerService,
   ) { }
 
   ngOnInit(): void {
@@ -29,5 +31,9 @@ export class CustomerReportComponent implements OnInit {
       err=>{
         this.loadingReport = false
       })
+  }
+
+  print(){
+    this.format.printDiv('toPrint')
   }
 }

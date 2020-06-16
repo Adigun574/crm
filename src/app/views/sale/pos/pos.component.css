@@ -137,3 +137,23 @@ orderScreen li:nth-child(even){
     width:100%;
     margin:auto;
 } */
+.btn-stuff{
+    display: flex;
+    justify-content: space-around;
+}
+.rcpt-btn{
+    /* width:200px; */
+    width:100%;
+    margin:auto;
+    margin-top:10px;
+}
+/* .rcpt-btn-div{
+    width:200px;
+    margin:auto;
+} */
+.total-display{
+    color:white;
+    background-color:black;
+    padding:5px;
+    display:none;
+}

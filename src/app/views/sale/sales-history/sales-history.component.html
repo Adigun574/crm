@@ -82,8 +82,8 @@
           <th>Amount <i class="ion text-muted ml-2"></i></th>
           <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
      </thead><br>
-    <tbody>
-      <tr *ngFor="let sale of sales; index as i" >
+    <tbody class="sss">
+      <tr *ngFor="let sale of sales; index as i" style="border-bottom:2px dotted black;" >
         <td>{{i+1}}</td>
         <td>{{ sale.dateCreated.split('T')[0] }}</td>
         <td>
@@ -91,7 +91,8 @@
         </td>
         <td>{{getCustomerName(sale.customerID)}}</td>
         <td><span>&#8358;</span>{{sale.cart.amount}}.00</td>
-        <td>{{sale.invoice.invoiceNo}}</td>
+        <td class="sss">{{sale.invoice.invoiceNo}}</td>
       </tr><br>
     </tbody>
+    <small class="sss">smslsl</small>
 </table>

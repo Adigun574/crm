@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
+import { Formats } from '../../../classes/print';
 
 @Component({
   selector: 'app-requested-items',
@@ -11,6 +12,7 @@ export class RequestedItemsComponent implements OnInit {
   products:any[]
   loading = false
   loadingReport = false
+  format = new Formats()
 
   constructor(
     private productService:ProductService
@@ -29,6 +31,10 @@ export class RequestedItemsComponent implements OnInit {
       err=>{
         this.loadingReport = false
       })
+  }
+
+  print(){
+    this.format.printDiv('toPrint')
   }
 
 }

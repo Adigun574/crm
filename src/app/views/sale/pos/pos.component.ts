@@ -6,6 +6,7 @@ import { Customer } from '../../../models/customer';
 import { SaleService } from '../../../services/sale.service';
 import { date } from '../../../classes/date';
 import { User } from '../../../models/user';
+import { Formats } from '../../../classes/print';
 
 @Component({
   selector: 'app-pos',
@@ -41,6 +42,7 @@ export class PosComponent implements OnInit {
   savingSale:boolean = false
   savingSaleCredit:boolean = false
   currentUser:User
+  format  = new Formats()
 
   constructor(
     private productService:ProductService,
@@ -161,6 +163,7 @@ export class PosComponent implements OnInit {
   getCustomers(){
     this.customerService.getAllCustomers().subscribe(data=>{
       this.customers = <any[]>data
+      this.customers.forEach(cust=>cust.fullName = `${cust.firstName} ${cust.lastName}`)
     })
   }
 
@@ -173,6 +176,10 @@ export class PosComponent implements OnInit {
 
   resetSales(){
     this.orders = []
+  }
+
+  print(){
+    this.format.printDiv('toPrint')
   }
 
 }

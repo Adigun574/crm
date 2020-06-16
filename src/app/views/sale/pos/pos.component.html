@@ -36,7 +36,7 @@
                     <h1><i class="fa fa-shopping-cart"></i></h1>
                     <h3>Your shopping cart is empty!!!</h3>
                 </div>
-                <div style="position:absolute; top:200px; right:40px"><b>Total:₦{{total}}.00</b></div>
+                <div style="position:absolute; top:200px; right:40px" class="total-display"><b>Total:₦{{total}}.00</b></div>
             </div>
             
           <div class="calculator" style="width:90%; margin-left:auto; margin-right:auto">    
@@ -46,7 +46,7 @@
                   <label class="form-label text-danger" *ngIf="!selectedCustomer">Please select a customer!!!</label>
                   <ng-select
                     [items]="customers"
-                    bindLabel="firstName"
+                    bindLabel="fullName"
                     [(ngModel)]="selectedCustomer"
                   >                    
                   </ng-select>
@@ -71,18 +71,21 @@
                     </button>
                   </div>
                 </div>
-
+                <div class="rcpt-btn-div">
+                    <button class="btn btn-warning rcpt-btn" (click)="print()"><i class="fa fa-print"></i> Receipt</button>
+                </div>
+          
                 <hr>
 
                 <div class="order-display-screen mt-2">
                     <table>
                       <tr>
                         <td>Customer:</td>
-                        <td>{{selectedCustomer?.firstName}}</td>
+                        <td><code>{{selectedCustomer?.firstName}} {{selectedCustomer?.lastName}}</code></td>
                       </tr>
                       <tr>
                         <td>Total:</td>
-                        <td>₦{{total}}.00</td>
+                        <td><code>₦{{total}}.00</code></td>
                       </tr>
                     </table>
                 </div>
@@ -140,4 +143,44 @@
         <div style="position:absolute; top:200px; right:30px"><b>Total:₦{{total}}</b></div>
         <!-- <code>You were served by: <b>{{cashierName}}</b></code> -->
     </div> 
+</div>
+
+
+<div id="toPrint" class="d-none">
+    <table>
+      <thead>
+        <td>
+          <b>Qty</b>
+        </td>
+        <td>
+          <b>Item</b>
+        </td>
+        <td>
+          <b>Price</b>
+        </td>
+        <td></td>
+      </thead>
+      <tr *ngFor="let order of orders; index as i">
+        <td>
+          {{order.quantity}}
+        </td>
+        <td>
+          {{order.name}}
+        </td>
+        <td>
+          ₦{{order.salePrice * order.quantity}}.00
+        </td>
+        
+      </tr>
+      <tr>
+        <td></td>
+        <td><b>Customer</b></td>
+        <td><b>{{selectedCustomer?.firstName}} {{selectedCustomer?.lastName}}</b></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><b>Total</b></td>
+        <td><b>₦{{total}}.00</b></td>
+      </tr>
+    </table>
 </div>

@@ -8,6 +8,10 @@ export class Formats{
         .pageToPrint{
             text-align:center;
         }
+        .aaaa{
+            border:2px solid black;
+            color:red;
+        }
         </style>
         <div class="pageToPrint">
             <div class="text-center mt-4 header-details">
