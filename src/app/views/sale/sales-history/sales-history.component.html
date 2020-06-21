@@ -17,7 +17,7 @@
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 ">
           <button class="btn btn-success" (click)="refresh()"><i class="fa fa-refresh"> Reset</i></button>
-          <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white" (click)="test(toprint)">
+          <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white" (click)="test()">
               <i class="fa fa-print"></i>; Print
           </a>
         </div>
@@ -72,27 +72,28 @@
   </div>
 </div>
 
-
-<table id="tableRecordToPrint" class="d-none table-bordered">
+<div id="toPrint">
+<table id="tableRecordToPrint" class="d-none">
     <thead>
           <th>S/N <i class="ion text-muted ml-2"></i></th>
           <th>Date <i class="ion text-muted ml-2"></i></th>
-          <th>Items <i class="ion text-muted ml-2"></i></th>
+          <!-- <th>Items <i class="ion text-muted ml-2"></i></th> -->
           <th>Customer <i class="ion text-muted ml-2"></i></th>
           <th>Amount <i class="ion text-muted ml-2"></i></th>
           <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
-     </thead><br>
-    <tbody class="sss">
-      <tr *ngFor="let sale of sales; index as i" style="border-bottom:2px dotted black;" >
+     </thead>
+    <tbody>
+      <tr *ngFor="let sale of sales; index as i">
         <td>{{i+1}}</td>
         <td>{{ sale.dateCreated.split('T')[0] }}</td>
-        <td>
-          <span *ngFor="let item of sale.cart.items"> {{item.quantity}} X {{item.name}}</span><br>
-        </td>
+        <!-- <td>
+          <span *ngFor="let item of sale.cart.items" class="d-block"> {{item.quantity}} X {{item.name}}</span><br>
+        </td> -->
         <td>{{getCustomerName(sale.customerID)}}</td>
         <td><span>&#8358;</span>{{sale.cart.amount}}.00</td>
-        <td class="sss">{{sale.invoice.invoiceNo}}</td>
-      </tr><br>
+        <td>{{sale.invoice.invoiceNo}}</td>
+      </tr>
     </tbody>
-    <small class="sss">smslsl</small>
+    <!-- <small class="sss">smslsl</small> -->
 </table>
+</div>

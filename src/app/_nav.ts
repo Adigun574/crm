@@ -73,11 +73,11 @@ export const navItems: INavData[] = [
         url: '/main/sales-history',
         icon: 'icon-speedometer'
       },
-      {
-        name: 'Inventory',
-        url: '/main/inventory',
-        icon: 'icon-speedometer'
-      },
+      // {
+      //   name: 'Inventory',
+      //   url: '/main/inventory',
+      //   icon: 'icon-speedometer'
+      // },
       {
         name: 'Products Report',
         url: '/main/requested-items',
@@ -86,6 +86,11 @@ export const navItems: INavData[] = [
       {
         name: 'Customers Report',
         url: '/main/customers-report',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Debtors Report',
+        url: '/main/debtors-report',
         icon: 'icon-puzzle'
       }
     ]

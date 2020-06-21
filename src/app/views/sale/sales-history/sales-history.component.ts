@@ -43,7 +43,7 @@ export class SalesHistoryComponent implements OnInit {
   }
 
   test(){
-    this.format.printDiv('tableRecordToPrint')
+    this.format.printDiv('toPrint')
   }
 
   // getSales(){

@@ -32,4 +32,8 @@ export class SaleService {
   makePayment(obj){
     return this.httpClient.post(`${this.generalService.api}Payment/MakePayment`,obj)
   }
+
+  getDebtorsReport(startDate,endDate){
+    return this.httpClient.get(`${this.generalService.api}Invoice/GetDebtorsList/${startDate}/${endDate}`)
+  }
 }

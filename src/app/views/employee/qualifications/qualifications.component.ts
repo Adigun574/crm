@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-qualifications',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QualificationsComponent implements OnInit {
 
-  constructor() { }
+  loading:boolean = false
+  filteredLeads = []
+
+  constructor(
+    private modalService:NgbModal
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  open(content){
+    this.modalService.open(content,{centered:true})
   }
 
 }

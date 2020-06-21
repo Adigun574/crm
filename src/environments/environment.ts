@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiurl: "https://mercatordcr.azurewebsites.net/api/",
+  apiurl: "https://simplifyapi.azurewebsites.net/api/",
   firebaseConfig: {
     apiKey: "AIzaSyADgsBEOvH5ki87_CK3QOFSnASmqvubl5A",
     authDomain: "simplify-4e093.firebaseapp.com",

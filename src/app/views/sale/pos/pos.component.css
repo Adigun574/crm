@@ -21,7 +21,7 @@ calculator{
     top:230px;
 }
 .orderScreen{
-    height:230px;
+    height:270px;
     overflow-y: scroll;
     
 }
@@ -155,7 +155,7 @@ orderScreen li:nth-child(even){
     color:white;
     background-color:black;
     padding:5px;
-    display:none;
+    /* display:none; */
 }
 .complete-btn{
     width:100%;
