@@ -7,6 +7,7 @@ import { SaleService } from '../../../services/sale.service';
 import { date } from '../../../classes/date';
 import { User } from '../../../models/user';
 import { Formats } from '../../../classes/print';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pos',
@@ -43,6 +44,14 @@ export class PosComponent implements OnInit {
   savingSaleCredit:boolean = false
   currentUser:User
   format  = new Formats()
+  currentAmount
+  currentPaymentMode = 'cash'
+  paymentArray = []
+  disableCompleteSale:boolean = true
+  totalAmountPaid
+  amountDue = 0
+  savingSaleInvoice:boolean = false
+  
 
   constructor(
     private productService:ProductService,
@@ -59,63 +68,188 @@ export class PosComponent implements OnInit {
     console.log('WTF!!! Why are you here???')
   }
 
-  completeSale(method){
-    if(method == 'cash'){
-      this.savingSale = true
-    }
-    else{
-      this.savingSaleCredit = true
-    }
-    if(this.selectedCustomer){
-      this.sale.customerID = this.selectedCustomer.id
-    }
-    else{
-      this.sale.customerID = 1
-      this.selectedCustomer = this.guestCustomer
-    }
-    this.sale.cart = null
-    if(method=='cash'){
-      this.sale.payment = [
-        {
+  
+
+  // completeSale(method){
+  //   if(method == 'cash'){
+  //     this.savingSale = true
+  //   }
+  //   else{
+  //     this.savingSaleCredit = true
+  //   }
+  //   if(this.selectedCustomer){
+  //     this.sale.customerID = this.selectedCustomer.id
+  //   }
+  //   else{
+  //     this.sale.customerID = 1
+  //     this.selectedCustomer = this.guestCustomer
+  //   }
+  //   this.sale.cart = null
+  //   if(method=='cash'){
+  //     this.sale.payment = [
+  //       {
+  //         id: 0,
+  //         customerID: this.selectedCustomer.id,
+  //         amount: this.total,
+  //         method: 'cash',
+  //         reference: null,
+  //         // DatePaid: date(),
+  //         invoiceNo: null,
+  //         userCreated: this.currentUser.id
+  //       }
+  //     ]
+  //   }
+  //   else{
+  //     this.sale.payment = []
+  //   }
+  //   this.sale.userCreated = this.currentUser.id
+  //   this.sale.invoice = new Invoice()
+  //   this.sale.invoice.cashier = new Cashier()
+  //   this.sale.invoice.cashier.id = this.currentUser.id
+  //   this.sale.invoice.customerID = this.selectedCustomer.id
+  //   this.sale.invoice.amount = this.total
+  //   this.sale.invoice.amountPaid = this.total
+  //   this.sale.invoice.cashier.userCreated = this.currentUser.id
+  //   this.sale.invoice.userCreated = this.currentUser.id
+  //   this.sale.cart = new Cart()
+  //   this.sale.cart.amount = this.total
+  //   this.sale.cart.items = this.apiorders
+  //   this.sale.cart.userCreated = this.currentUser.id
+  //   // console.log(this.sale)
+  //   // console.log(JSON.stringify(this.sale))
+  //   this.saleService.saveSale(this.sale).subscribe(data=>{
+  //     this.savingSale = false
+  //     this.savingSaleCredit = false
+  //     this.resetSales()
+  //   },
+  //     err=>{
+  //       this.savingSale = false
+  //       this.savingSaleCredit = false
+  //     })
+  // }
+
+  paymentMethod(method){
+    this.currentPaymentMode = method
+  }
+
+  addPayment(){
+    this.paymentArray.push({
+      id: 0,
+      customerID: this.selectedCustomer.id,
+      amount: +this.currentAmount,
+      method: this.currentPaymentMode,
+      reference: null,
+      invoiceNo: null,
+      userCreated: this.currentUser.id
+    })
+    this.amountDue = this.total - this.amountDue
+  }
+
+  // completeSale(){
+  //   let tempTotal = 0
+  //   this.paymentArray.forEach((pay)=>{
+  //     tempTotal += pay.amount
+  //   })
+  //   if(tempTotal < this.total){
+  //     this.paymentArray.push({
+  //       id: 0,
+  //       customerID: this.selectedCustomer.id,
+  //       amount: this.total - tempTotal,
+  //       method: 'credit',
+  //       reference: null,
+  //       invoiceNo: null,
+  //       userCreated: this.currentUser.id
+  //     })
+  //   }
+  //   console.log(this.paymentArray)
+  // }
+
+  completeSale(){
+    this.savingSaleInvoice = true
+      // if(method == 'cash'){
+      //   this.savingSale = true
+      // }
+      // else{
+      //   this.savingSaleCredit = true
+      // }
+      let tempTotal = 0
+      this.paymentArray.forEach((pay)=>{
+        tempTotal += pay.amount
+      })
+      if(tempTotal < this.total){
+        this.paymentArray.push({
           id: 0,
           customerID: this.selectedCustomer.id,
-          amount: this.total,
-          method: 'cash',
+          amount: this.total - tempTotal,
+          method: 'credit',
           reference: null,
-          // DatePaid: date(),
           invoiceNo: null,
           userCreated: this.currentUser.id
-        }
-      ]
-    }
-    else{
-      this.sale.payment = []
-    }
-    this.sale.userCreated = this.currentUser.id
-    this.sale.invoice = new Invoice()
-    this.sale.invoice.cashier = new Cashier()
-    this.sale.invoice.cashier.id = this.currentUser.id
-    this.sale.invoice.customerID = this.selectedCustomer.id
-    this.sale.invoice.amount = this.total
-    this.sale.invoice.amountPaid = this.total
-    this.sale.invoice.cashier.userCreated = this.currentUser.id
-    this.sale.invoice.userCreated = this.currentUser.id
-    this.sale.cart = new Cart()
-    this.sale.cart.amount = this.total
-    this.sale.cart.items = this.apiorders
-    this.sale.cart.userCreated = this.currentUser.id
-    // console.log(this.sale)
-    // console.log(JSON.stringify(this.sale))
-    this.saleService.saveSale(this.sale).subscribe(data=>{
-      this.savingSale = false
-      this.savingSaleCredit = false
-      this.resetSales()
-    },
-      err=>{
+        })
+      }
+    console.log(this.paymentArray)
+      if(this.selectedCustomer){
+        this.sale.customerID = this.selectedCustomer.id
+      }
+      else{
+        this.sale.customerID = 1
+        this.selectedCustomer = this.guestCustomer
+      }
+      this.sale.cart = null
+      // if(method=='cash'){
+      //   this.sale.payment = [
+      //     {
+      //       id: 0,
+      //       customerID: this.selectedCustomer.id,
+      //       amount: this.total,
+      //       method: 'cash',
+      //       reference: null,
+      //       // DatePaid: date(),
+      //       invoiceNo: null,
+      //       userCreated: this.currentUser.id
+      //     }
+      //   ]
+      // }
+      // else{
+      //   this.sale.payment = []
+      // }
+      this.sale.userCreated = this.currentUser.id
+      this.sale.invoice = new Invoice()
+      this.sale.invoice.cashier = new Cashier()
+      this.sale.invoice.cashier.id = this.currentUser.id
+      this.sale.invoice.customerID = this.selectedCustomer.id
+      this.sale.invoice.amount = this.total
+      this.sale.invoice.amountPaid = this.total
+      this.sale.invoice.cashier.userCreated = this.currentUser.id
+      this.sale.invoice.userCreated = this.currentUser.id
+      this.sale.cart = new Cart()
+      this.sale.cart.amount = this.total
+      this.sale.cart.items = this.apiorders
+      this.sale.cart.userCreated = this.currentUser.id
+      this.sale.payment = this.paymentArray
+      console.log(JSON.stringify(this.sale))
+      this.saleService.saveSale(this.sale).subscribe(data=>{
+        this.savingSaleInvoice = false
         this.savingSale = false
         this.savingSaleCredit = false
-      })
-  }
+        this.resetSales()
+        Swal.fire(
+          'Success',
+          'Sale completed',
+          'success'
+        )
+      },
+        err=>{
+          this.savingSaleInvoice = false
+          this.savingSale = false
+          this.savingSaleCredit = false
+          Swal.fire(
+            'Oops',
+            'Something went wrong',
+            'error'
+          )
+        })
+    }
 
   setQuantity(qnt,i){
     this.orders[i].quantity = qnt
@@ -158,6 +292,7 @@ export class PosComponent implements OnInit {
   calculateTotal(){
     this.total = 0
     this.orders.forEach(order=>this.total += order.salePrice * order.quantity)
+    this.amountDue = this.total
   }
 
   getCustomers(){
@@ -176,6 +311,8 @@ export class PosComponent implements OnInit {
 
   resetSales(){
     this.orders = []
+    this.selectedCustomer = null
+    this.currentAmount = null
   }
 
   print(){
