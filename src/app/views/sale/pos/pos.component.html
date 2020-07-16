@@ -36,7 +36,7 @@
                     <h1><i class="fa fa-shopping-cart"></i></h1>
                     <h3>Your shopping cart is empty!!!</h3>
                 </div>
-                <div style="position:absolute; top:250px; right:40px" class="total-display"><b>Total: ₦{{total}}.00</b></div>
+                <div style="position:absolute; top:220px; right:40px" class="total-display"><b>Total: ₦{{total}}.00</b></div>
             </div>
             
           <!-- <div class="calculator" style="width:90%; margin-left:auto; margin-right:auto">    
@@ -167,7 +167,7 @@
                   <button class="btn btn-warning" (click)="print()"><small><i class="fa fa-print"></i> Receipt</small></button>
                 </div>
                 <div class="row mt-3">
-                    <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer"> 
+                    <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer || total - (totalCashAmount+totalCreditAmount)>0"> 
                         <div class="spinner-border text-light" role="status" *ngIf="savingSaleInvoice">
                           <span class="sr-only">Loading...</span>
                         </div>
@@ -181,13 +181,25 @@
 
                 <div class="order-display-screen mt-2">
                     <table>
-                      <tr>
+                      <!-- <tr>
                         <td>Customer:</td>
                         <td><code>{{selectedCustomer?.firstName}} {{selectedCustomer?.lastName}}</code></td>
-                      </tr>
+                      </tr> -->
                       <tr>
                         <td>Amount Due:</td>
-                        <td><code>₦{{amountDue}}.00</code></td>
+                        <td><code>₦{{total - (totalCashAmount+totalCreditAmount)}}.00</code></td>
+                      </tr>
+                      <tr>
+                        <td>Mode:</td>
+                        <td><code>{{currentPaymentMode | titlecase}}</code></td>
+                      </tr>
+                      <tr>
+                        <td>Cash:</td>
+                        <td><code>₦{{totalCashAmount}}.00</code></td>
+                      </tr>
+                      <tr>
+                        <td>Credit:</td>
+                        <td><code>₦{{totalCreditAmount}}.00</code></td>
                       </tr>
                     </table>
                 </div>

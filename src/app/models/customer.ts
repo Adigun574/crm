@@ -11,4 +11,5 @@ export interface Customer{
     userModified?: number;
     dateCreated?: string;
     dateModified?: string;
+    fullName?: string;
 }

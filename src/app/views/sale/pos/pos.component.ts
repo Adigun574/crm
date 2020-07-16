@@ -51,6 +51,8 @@ export class PosComponent implements OnInit {
   totalAmountPaid
   amountDue = 0
   savingSaleInvoice:boolean = false
+  totalCashAmount = 0
+  totalCreditAmount = 0
   
 
   constructor(
@@ -130,6 +132,7 @@ export class PosComponent implements OnInit {
 
   paymentMethod(method){
     this.currentPaymentMode = method
+    this.currentAmount = 0
   }
 
   addPayment(){
@@ -143,6 +146,16 @@ export class PosComponent implements OnInit {
       userCreated: this.currentUser.id
     })
     this.amountDue = this.total - this.amountDue
+    let cashArray = this.paymentArray.filter(x=>x.method == 'cash')
+    let creditArray = this.paymentArray.filter(x=>x.method == 'credit')
+    this.totalCashAmount = 0
+    this.totalCreditAmount = 0
+    cashArray.forEach(cash=>{
+      this.totalCashAmount += cash.amount
+    })
+    creditArray.forEach(credit=>{
+      this.totalCreditAmount += credit.amount
+    })
   }
 
   // completeSale(){
@@ -187,7 +200,7 @@ export class PosComponent implements OnInit {
           userCreated: this.currentUser.id
         })
       }
-    console.log(this.paymentArray)
+    // console.log(this.paymentArray)
       if(this.selectedCustomer){
         this.sale.customerID = this.selectedCustomer.id
       }

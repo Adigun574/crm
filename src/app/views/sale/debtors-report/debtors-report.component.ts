@@ -17,6 +17,8 @@ export class DebtorsReportComponent implements OnInit {
   startDate = '0'
   endDate = '0'
   format = new Formats()
+  customerFilterMode:boolean = false
+  debtorsReportByCustomer = []
 
   constructor(
     private saleService:SaleService,
@@ -30,7 +32,8 @@ export class DebtorsReportComponent implements OnInit {
   getDebtorsReportMethod(startDate,endDate){
     this.saleService.getDebtorsReport(startDate,endDate).subscribe(data=>{
       this.debtorsReport = <any[]>data
-      console.log(this.debtorsReport)
+      this.debtorsReportByCustomer = this.debtorsReport
+      // console.log(this.debtorsReport)
       // this.loadingReport = false
       this.getCustomers()
     },
@@ -47,6 +50,12 @@ export class DebtorsReportComponent implements OnInit {
     this.getDebtorsReportMethod(finalStartDate,finalEndDate)
   }
 
+  filterReportByCutomer(e){
+    this.customerFilterMode = true
+    // console.log(e)
+    this.debtorsReportByCustomer = this.debtorsReport.filter(x=>x.customerID == e.id)
+  }
+
   reset(){
     this.getDebtorsReportMethod(0,0)
   }
@@ -54,6 +63,10 @@ export class DebtorsReportComponent implements OnInit {
   getCustomers(){
     this.customerService.getAllCustomers().subscribe(data=>{
       this.customers = <Customer[]>data
+      this.customers.forEach(cust=>{
+        cust.fullName = `${cust.firstName} ${cust.lastName}`
+      })
+      // console.log(this.customers)
       this.loadingReport = false
     },
       err=>{
