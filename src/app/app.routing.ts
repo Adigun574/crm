@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 
+// import { AuthGuard } from './auth.guard';
+
 // import { P404Component } from './views/error/404.component';
 // import { P500Component } from './views/error/500.component';
 // import { LoginComponent } from './views/login/login.component';
@@ -46,43 +48,74 @@ export const routes: Routes = [
     children:[
       {
         path:'',
-        component:SalesReportComponent
+        component:SalesReportComponent,
+        data: {
+          title: 'saleshistory'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'customers',
-        component:CustomersComponent
+        component:CustomersComponent,
+        data: {
+          title: 'customer'
+        }
       },
       {
         path:'products',
-        component:ProductsComponent
+        component:ProductsComponent,
+        data: {
+          title: 'sproduct'
+        }
       },
       {
         path:'product/:id',
-        component:EditProductComponent
+        component:EditProductComponent,
+        data: {
+          title: 'product'
+        }
       },
       {
         path:'customer/:id',
-        component:CustomerDetailsComponent
+        component:CustomerDetailsComponent,
+        data: {
+          title: 'customer'
+        }
       },
       {
         path:'salesreport',
-        component:SalesReportComponent
+        component:SalesReportComponent,
+        data: {
+          title: 'saleshistory'
+        }
       },
       {
         path:'employees',
-        component:EmployeesComponent
+        component:EmployeesComponent,
+        data: {
+          title: 'employees'
+        }
       },
       {
         path:'employee/:id',
-        component:EmployeeDetailComponent
+        component:EmployeeDetailComponent,
+        data: {
+          title: 'employees'
+        }
       },
       {
         path:'inventory',
-        component:InventoryComponent
+        component:InventoryComponent,
+        data: {
+          title: 'inventory'
+        }
       },
       {
         path:'customers-report',
-        component:CustomerReportComponent
+        component:CustomerReportComponent,
+        data: {
+          title: 'customersreport'
+        }
       },
       {
         path:'requested-items',
@@ -94,31 +127,53 @@ export const routes: Routes = [
       },
       {
         path:'training-programs',
-        component:TrainingProgramsComponent
+        component:TrainingProgramsComponent,
+        data: {
+          title: 'training programmes'
+        }
       },
       {
         path:'skill-monitoring',
-        component:SkillMonitoringComponent
+        component:SkillMonitoringComponent,
+        data: {
+          title: 'skillmonitoring'
+        }
       },
       {
         path:'role',
-        component:RoleComponent
+        component:RoleComponent,
+        data: {
+          title: 'role'
+        }
       },
       {
         path:'user',
-        component:UserComponent
+        component:UserComponent,
+        data: {
+          title: 'users'
+        }
       },
       {
         path:'pos',
-        component:PosComponent
+        component:PosComponent,
+        data: {
+          title: 'pos'
+        }
       },
       {
         path:'sales-history',
-        component:SalesHistoryComponent
+        component:SalesHistoryComponent,
+        data: {
+          title: 'saleshistory'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'leads',
-        component:LeadsComponent
+        component:LeadsComponent,
+        data: {
+          title: 'leads'
+        }
       },
       {
         path:'conversations/:id',

@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   login(){
     if(this.username != '' && this.password != ''){
       this.userService.login(this.username,this.password).subscribe(data=>{
+        // console.log(data)
         localStorage.setItem("tunnexcrmuser",JSON.stringify(data))
         this.router.navigateByUrl('main')
         this.invalidCredentials = false

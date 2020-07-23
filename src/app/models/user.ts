@@ -12,4 +12,29 @@ export interface User{
     userModified: number;
     dateCreated: string;
     dateModified: string;
+    role: Role;
+  }
+
+  interface Role{
+    name: string,
+    code: string,
+    privileges: Privilege[],
+    id: number,
+    userCreated: number,
+    userModified: number,
+    dateCreated: string,
+    dateModified: string
+  }
+
+  interface Privilege{
+    name: string,
+    code: string,
+    read: true,
+    write: true,
+    roleID: number,
+    id: number,
+    userCreated: number,
+    userModified: number,
+    dateCreated: string,
+    dateModified: string
   }

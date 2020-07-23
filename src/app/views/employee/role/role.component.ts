@@ -57,6 +57,7 @@ export class RoleComponent implements OnInit {
   saveRole(){
     this.savingRole = true
     this.roleObj.Name = this.roleName
+    // console.log(this.roleObj)
     this.roleService.saveRole(this.roleObj).subscribe(data=>{
       this.savingRole = false
       this.modalService.dismissAll()

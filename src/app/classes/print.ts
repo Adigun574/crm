@@ -7,6 +7,8 @@ export class Formats{
         <style>
         .pageToPrint{
             text-align:center;
+            display:flex;
+            justify-content:center;
         }
         .aaaa{
             border:2px solid black;
@@ -14,13 +16,15 @@ export class Formats{
         }
         </style>
         <div class="pageToPrint">
+            <div>
             <div class="text-center mt-4 header-details">
                 <h3><b>TUNNEX LAB</b></h3>
                 <p>41, Davies Street, Ajelogo Bus Stop, Alapere, Ketu, Lagos State</p>
                 <p>+2348104403054</p>
                 <p>sales@tunnexlab.com.ng</p>
             </div>
-        ${document.getElementById(divID).innerHTML}
+            ${document.getElementById(divID).innerHTML}
+            </div>
         </div>
         `;
         const win = window.open('');

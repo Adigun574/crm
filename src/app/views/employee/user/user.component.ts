@@ -32,6 +32,8 @@ export class UserComponent implements OnInit {
   updatingUser:boolean = false
   loadingUsers:boolean = false
   currentUser:User
+  roles:any[]
+  selectedRole:any
 
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
@@ -44,21 +46,24 @@ export class UserComponent implements OnInit {
   constructor(
     private modalService:NgbModal,
     private userService:UserService,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private roleService:RoleService
   ) { 
     this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
     this.addUserForm = this.fb.group({
-      Username:[,Validators.required],
-      Name: [,Validators.required],
-      Post: [],
-      Phone: [],
-      Password: [],
-      Gender: ["male"],
-      Image: [],
-      Email: [],
-      ID: 0,
-      UserCreated: this.currentUser.id,
-      UserModified: 0,
+      username:[,Validators.required],
+      name: [,Validators.required],
+      post: [],
+      phone: [],
+      password: [],
+      gender: ["male"],
+      image: [],
+      email: [],
+      id: 0,
+      userCreated: this.currentUser.id,
+      userModified: 0,
+      role:[],
+      roleID:[]
       // DateCreated: [date()],
       // DateModified: [date()]
     })
@@ -67,6 +72,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.getAllUsers()
+    this.getAllRoles()
   }
 
   open(content){
@@ -82,6 +88,7 @@ export class UserComponent implements OnInit {
     this.loadingUsers = true
     this.userService.getUsers().subscribe(data=>{
       this.users = <any[]>data
+      console.log(this.users)
       this.dataSource = new MatTableDataSource<Role>(this.users);
       this.loadingUsers = false
     },
@@ -96,6 +103,11 @@ export class UserComponent implements OnInit {
       return
     }
     else{
+      if(this.selectedRole){
+        this.addUserForm.value.role = this.selectedRole
+        this.addUserForm.value.roleID = this.selectedRole.id
+      }
+      console.log(this.addUserForm.value)
       this.savingUser = true
       this.userService.saveUser(this.addUserForm.value).subscribe(data=>{
         this.savingUser = false
@@ -131,6 +143,19 @@ export class UserComponent implements OnInit {
     err=>{
       console.log(err)
     })
+  }
+
+  getAllRoles(){
+    this.roleService.getAllRoles().subscribe(data=>{
+      this.roles = <Role[]>data
+      console.log(this.roles)
+    },
+      err=>{
+      })
+  }
+
+  selectRole(e){
+    this.selectedRole = e
   }
 
 }

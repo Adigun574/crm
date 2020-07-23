@@ -35,4 +35,8 @@ export class ProductService {
   deleteProduct(id){
     return this.httpClient.post(`${this.generalService.api}Product/DeleteProduct/${id}`,null)
   }
+
+  saveMultipleProducts(obj){
+    return this.httpClient.post(`${this.generalService.api}Product/SaveMultipleProducts`,obj)
+  }
 }

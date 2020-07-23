@@ -4,7 +4,7 @@
         <h3 class="text-center text-muted">USERS</h3>
     </div>
     <div>
-        <button class="btn btn-success pull-right" (click)="open(topModal)" disabled>Add User</button>
+        <button class="btn btn-success pull-right" (click)="open(topModal)" [disabled]="false">Add User</button>
     </div>
     <br>
     <br>
@@ -56,27 +56,37 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label"> Name:<small class="text-danger">*</small></label>
-                    <input type="text" class="form-control" placeholder="Name" formControlName="Name">
+                    <input type="text" class="form-control" placeholder="Name" formControlName="name">
                 </div> 
                 <div class="form-group">
                     <label class="form-label"> Username:<small class="text-danger">*</small></label>
-                    <input type="text" class="form-control" placeholder="Name" formControlName="Username">
+                    <input type="text" class="form-control" placeholder="Name" formControlName="username">
                 </div> 
                 <div class="form-group">
                     <label class="form-label"> Phone Number:</label>
-                    <input type="text" class="form-control" placeholder="+234XXXXXXXX" formControlName="Phone">
+                    <input type="text" class="form-control" placeholder="+234XXXXXXXX" formControlName="phone">
                 </div>  
                 <div class="form-group">
                     <label class="form-label"> Email:</label>
-                    <input type="text" class="form-control" placeholder="example@gmail.com" formControlName="Email">
+                    <input type="text" class="form-control" placeholder="example@gmail.com" formControlName="email">
                 </div>
                 <div class="form-group">
                     <label class="form-label"> Password:</label>
-                    <input type="password" class="form-control" formControlName="Password">
+                    <input type="password" class="form-control" formControlName="password">
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> Role:</label>
+                    <ng-select 
+                        [items]="roles"
+                        bindValue=""
+                        bindLabel="name"
+                        (change)="selectRole($event)"
+                    >
+                    </ng-select>
                 </div> 
                 <div class="form-group">
                     <label class="form-label"> Post:</label>
-                    <input type="text" class="form-control" formControlName="Post">
+                    <input type="text" class="form-control" formControlName="post">
                 </div> 
                 <div class="form-group">
                     <label class="form-label"> Gender:</label>
@@ -84,7 +94,7 @@
                         [items]="genders"
                         bindValue="name"
                         bindLabel="name"
-                        formControlName="Gender"
+                        formControlName="gender"
                     >
                     </ng-select>
                 </div> 
