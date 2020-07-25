@@ -53,3 +53,11 @@ h4 i{
 .add-button{
     /* float:right; */
 }
+.bulk-modal{
+  padding:30px;
+}
+.uploading-spinner{
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+}

@@ -83,11 +83,11 @@ export class RoleComponent implements OnInit {
 
   deleteRole(id){
     this.roleService.deleteRole(id).subscribe(data=>{
-      console.log(data)
+      // console.log(data)
       this.getAllRoles()
     },
       err=>{
-        console.log(err)
+        // console.log(err)
       })
   }
 

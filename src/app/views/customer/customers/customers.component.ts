@@ -6,6 +6,8 @@ import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../models/customer';
 import { User } from '../../../models/user';
 import { date } from '../../../classes/date';
+import * as XLSX from 'xlsx';
+
 
 
 @Component({
@@ -28,6 +30,9 @@ export class CustomersComponent implements OnInit {
   searchKey:string = ''
   filteredCustomers:Customer[] = []
   currentUser:User
+
+  data
+  uploading:boolean = false
 
   constructor(
     private modalService: NgbModal,
@@ -111,5 +116,51 @@ export class CustomersComponent implements OnInit {
   filterCustomer(){
     this.filteredCustomers = this.customers.filter(x=>x.firstName.toLowerCase().includes(this.searchKey.toLowerCase()) || x.lastName.includes(this.searchKey))
   }
+
+  onFileChange(evt: any) {
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});
+
+      /* grab first sheet */
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      /* save data */
+      this.data = (XLSX.utils.sheet_to_json(ws, {header: 1}));
+      console.log(this.data)
+      let customers = []
+      this.data.forEach(cust=>{
+        customers.push({
+          firstName:cust[0],
+          lastName:cust[1],
+          phone:`${cust[2]}`,
+          email:cust[3],
+          userCreated:this.currentUser.userCreated,
+        })
+      })
+      customers.splice(0,1)
+      this.uploading = true
+      console.log(customers)
+      this.customerService.saveMultipleCustomers(customers).subscribe(data=>{
+        console.log(data)
+        this.getAllCustomers()
+        this.uploading = false
+        this.modalService.dismissAll()
+      },
+        err=>{
+          console.log(err)
+          this.uploading = false
+          this.modalService.dismissAll()
+        })
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
+
 
 }

@@ -88,7 +88,7 @@ export class UserComponent implements OnInit {
     this.loadingUsers = true
     this.userService.getUsers().subscribe(data=>{
       this.users = <any[]>data
-      console.log(this.users)
+      // console.log(this.users)
       this.dataSource = new MatTableDataSource<Role>(this.users);
       this.loadingUsers = false
     },
@@ -104,10 +104,10 @@ export class UserComponent implements OnInit {
     }
     else{
       if(this.selectedRole){
-        this.addUserForm.value.role = this.selectedRole
+        // this.addUserForm.value.role = this.selectedRole
         this.addUserForm.value.roleID = this.selectedRole.id
       }
-      console.log(this.addUserForm.value)
+      // console.log(this.addUserForm.value)
       this.savingUser = true
       this.userService.saveUser(this.addUserForm.value).subscribe(data=>{
         this.savingUser = false
@@ -148,7 +148,7 @@ export class UserComponent implements OnInit {
   getAllRoles(){
     this.roleService.getAllRoles().subscribe(data=>{
       this.roles = <Role[]>data
-      console.log(this.roles)
+      // console.log(this.roles)
     },
       err=>{
       })

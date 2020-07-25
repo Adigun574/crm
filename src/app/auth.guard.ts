@@ -8,19 +8,33 @@ import { User } from './models/user';
 })
 export class AuthGuard implements CanActivate {
 
-  currentUser:User
-  privilege
+  privileges
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    // this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
-    // // return true;
-    // this.privilege = this.currentUser.role.privileges.find(x => {
+      this.privileges = JSON.parse(localStorage.getItem("tunnexcrmuserpriivileges"))
+      let currentPrivilege = this.privileges.find(x=>x.name.toLowerCase() == next.data.title.toLowerCase())
+      if(!currentPrivilege){
+        return true
+      }
+      else{
+        if(currentPrivilege.write){
+          return true
+        }
+        else{
+          return false
+        }
+      }
+      
+    
+
+    // this.privilege = JSON.parse(localStorage.getItem("tunnexcrmuserpriivileges"))
+    // let privileges = this.privilege.find(x => {
     //   console.log(x.name)
     //   console.log(next.data.title)
-    //   return x.name == next.data.title;
+    //   // return x.name == next.data.title;
     // });
     
     // if (this.currentUser.role.name == 'Super Admin') {
@@ -30,7 +44,6 @@ export class AuthGuard implements CanActivate {
     // } else {
     //   return false;
     // }
-    return true
 
   }
   

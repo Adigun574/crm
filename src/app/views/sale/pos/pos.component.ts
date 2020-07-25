@@ -241,12 +241,12 @@ export class PosComponent implements OnInit {
       this.sale.cart.userCreated = this.currentUser.id
       this.sale.payment = this.paymentArray
       // console.log(JSON.stringify(this.sale))
-      console.log(this.sale)
+      // console.log(this.sale)
       this.saleService.saveSale(this.sale).subscribe(data=>{
         this.savingSaleInvoice = false
         this.savingSale = false
         this.savingSaleCredit = false
-        this.resetSales()
+        // this.resetSales()
         Swal.fire(
           'Success',
           'Sale completed',

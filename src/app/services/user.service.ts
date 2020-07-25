@@ -31,4 +31,8 @@ export class UserService {
   deleteUser(id){
     return this.httpClient.post(`${this.generalService.api}User/DeleteUser/${id}`,null)
   }
+
+  getSingleUser(id){
+    return this.httpClient.get(`${this.generalService.api}User/GetUserByID/${id}`)
+  }
 }

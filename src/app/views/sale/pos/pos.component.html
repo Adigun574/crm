@@ -261,9 +261,13 @@
 </div>
 
 
-<div id="toPrint" class="d-none">
-    <table>
+<div id="toPrint" class="d-none" style="background-color: white; display:none;">
+  <div style="text-align:center; font-family: 'Times New Roman', Times, serif">
+    <table style="width:100%; text-align:center; border-collapse: collapse;">
       <thead>
+        <td></td>
+        <td></td>
+        <td></td>
         <td>
           <b>Qty</b>
         </td>
@@ -276,6 +280,9 @@
         <td></td>
       </thead>
       <tr *ngFor="let order of orders; index as i">
+        <td></td>
+        <td></td>
+        <td></td>
         <td>
           {{order.quantity}}
         </td>
@@ -289,13 +296,20 @@
       </tr>
       <tr>
         <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td><b>Customer</b></td>
         <td><b>{{selectedCustomer?.firstName}} {{selectedCustomer?.lastName}}</b></td>
       </tr>
       <tr>
         <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td><b>Total</b></td>
         <td><b>₦{{total}}.00</b></td>
       </tr>
     </table>
+  </div>
 </div>

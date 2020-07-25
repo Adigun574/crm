@@ -20,6 +20,7 @@ export class DefaultLayoutComponent {
 
   logOut() {
     localStorage.removeItem("tunnexcrmuser")
+    localStorage.removeItem("tunnexcrmuserpriivileges")
     this.router.navigateByUrl('')
   }
 }

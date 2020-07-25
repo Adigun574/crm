@@ -39,5 +39,9 @@ export class CustomerService {
   saveCustomerMessage(obj){
     return this.httpClient.post(`${this.generalService.api}CustomerMessage/SaveCustomerMessage`,obj)
   }
+
+  saveMultipleCustomers(obj){
+    return this.httpClient.post(`${this.generalService.api}Customer/SaveMultipleCustomers`,obj)
+  }
 }
 

@@ -11,7 +11,8 @@ import { DefaultLayoutComponent } from './containers';
 // import { LoginComponent } from './views/login/login.component';
 // import { RegisterComponent } from './views/register/register.component';
 
-import { AuthGuard } from './util/auth.guard';
+// import { AuthGuard } from './util/auth.guard';
+import { AuthGuard } from './auth.guard';
 import { CustomersComponent } from './views/customer/customers/customers.component';
 import { CustomerDetailsComponent } from './views/customer/customer-details/customer-details.component';
 import { SalesReportComponent } from './views/sale/sales-report/sales-report.component';
@@ -51,75 +52,83 @@ export const routes: Routes = [
         component:SalesReportComponent,
         data: {
           title: 'saleshistory'
-        },
-        canActivate:[AuthGuard]
+        }
       },
       {
         path:'customers',
         component:CustomersComponent,
         data: {
           title: 'customer'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'products',
         component:ProductsComponent,
         data: {
-          title: 'sproduct'
-        }
+          title: 'product'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'product/:id',
         component:EditProductComponent,
         data: {
           title: 'product'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'customer/:id',
         component:CustomerDetailsComponent,
         data: {
           title: 'customer'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'salesreport',
         component:SalesReportComponent,
         data: {
           title: 'saleshistory'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'employees',
         component:EmployeesComponent,
         data: {
           title: 'employees'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'employee/:id',
         component:EmployeeDetailComponent,
         data: {
           title: 'employees'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'inventory',
         component:InventoryComponent,
         data: {
           title: 'inventory'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'customers-report',
         component:CustomerReportComponent,
         data: {
           title: 'customersreport'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'requested-items',
-        component:RequestedItemsComponent
+        component:RequestedItemsComponent,
       },
       {
         path:'messaging',
@@ -130,35 +139,40 @@ export const routes: Routes = [
         component:TrainingProgramsComponent,
         data: {
           title: 'training programmes'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'skill-monitoring',
         component:SkillMonitoringComponent,
         data: {
           title: 'skillmonitoring'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'role',
         component:RoleComponent,
         data: {
           title: 'role'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'user',
         component:UserComponent,
         data: {
           title: 'users'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'pos',
         component:PosComponent,
         data: {
           title: 'pos'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'sales-history',
@@ -173,23 +187,24 @@ export const routes: Routes = [
         component:LeadsComponent,
         data: {
           title: 'leads'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'conversations/:id',
-        component:ConversationsComponent
+        component:ConversationsComponent,
       },
       {
         path:'assessment',
-        component:AssessmentComponent
+        component:AssessmentComponent,
       },
       {
         path:'invoice/:customerID/:invoiceNo',
-        component:InvoiceComponent
+        component:InvoiceComponent,
       },
       {
         path:'debtors-report',
-        component:DebtorsReportComponent
+        component:DebtorsReportComponent,
       },
       {
         path:'**',

@@ -1,6 +1,7 @@
 <app-loader *ngIf="loading"></app-loader>
 <div class="pt-4 d-block mb-4">
     <button mat-raised-button class="add-button" (click)="open(topModal, { windowClass: 'modal-top' })">Add A New Customer</button>
+    <button mat-raised-button class="add-button" (click)="open(bulkModal, { windowClass: 'modal-top' })"><i class="fa fa-upload"></i> Bulk Upload</button>
 </div>
 
 <div class="mb-2">
@@ -24,6 +25,21 @@
       </div>
     </div>
 </div>
+
+<ng-template #bulkModal>
+    <div class="bulk-modal">
+        <img src="../../../../assets/img/excel_img2.PNG" height="250px" width="350px">
+        <p><b>Please upload an excel file in the exact format as shown in the picture above</b></p>
+        <div class="form-group">
+            <label class="form-label">Select an excel file</label>
+            <input type="file" (change)="onFileChange($event)" multiple="false" class="form-control"/><br>
+        </div>
+        <div class="uploading-spinner">
+            <span class="spinner-grow spinner-grow-sm text-center" *ngIf="uploading"></span>  
+        </div>
+    </div>
+
+</ng-template>
 
 
 <ng-template #topModal let-c="close" let-d="dismiss">
