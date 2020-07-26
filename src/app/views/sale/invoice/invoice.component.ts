@@ -56,26 +56,31 @@ export class InvoiceComponent implements OnInit {
   }
 
   pay(){
-    this.paying = true
-    let obj = {
-      // id: 0,
-      customerID: this.invoice.customerID,
-      amount: +this.amount,
-      method: "cash",
-      reference: this.invoice.invoiceNo,
-      // datePaid: 2020-06-10T22:27:32.041Z,
-      invoiceNo: this.invoice.invoiceNo,
-      userCreated: this.currentUser.id
+    if(this.amount<0){
+      return
     }
-    this.saleService.makePayment(obj).subscribe(data=>{
-      this.paying = false
-      this.modalService.dismissAll()
-      this.getInvoice()
-    },
-      err=>{
+    else{
+      this.paying = true
+      let obj = {
+        // id: 0,
+        customerID: this.invoice.customerID,
+        amount: +this.amount,
+        method: "cash",
+        reference: this.invoice.invoiceNo,
+        // datePaid: 2020-06-10T22:27:32.041Z,
+        invoiceNo: this.invoice.invoiceNo,
+        userCreated: this.currentUser.id
+      }
+      this.saleService.makePayment(obj).subscribe(data=>{
         this.paying = false
         this.modalService.dismissAll()
-      })
+        this.getInvoice()
+      },
+        err=>{
+          this.paying = false
+          this.modalService.dismissAll()
+        })
+      }
   }
 
   getCustomers(){
