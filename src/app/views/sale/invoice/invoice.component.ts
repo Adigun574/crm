@@ -56,7 +56,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   pay(){
-    if(this.amount<0){
+    if(this.amount<0 || this.amount>this.invoice.balance){
       return
     }
     else{
