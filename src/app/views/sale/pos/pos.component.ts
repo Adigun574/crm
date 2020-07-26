@@ -42,6 +42,7 @@ export class PosComponent implements OnInit {
   allProducts:any[] = []
   savingSale:boolean = false
   savingSaleCredit:boolean = false
+  savingSaleCheque:boolean = false
   currentUser:User
   format  = new Formats()
   currentAmount
@@ -53,6 +54,7 @@ export class PosComponent implements OnInit {
   savingSaleInvoice:boolean = false
   totalCashAmount = 0
   totalCreditAmount = 0
+  totalChequeAmount = 0
   
 
   constructor(
@@ -69,6 +71,24 @@ export class PosComponent implements OnInit {
     // this.selectedCustomer = this.guestCustomer
     console.log('WTF!!! Why are you here???')
   }
+
+  resetSales(){
+    this.orders = []
+    this.selectedCustomer = null
+    this.currentAmount = null
+    this.amountDue = 0
+    this.totalChequeAmount = 0
+    this.totalCashAmount = 0
+    this.totalCreditAmount = 0
+    this.disableCompleteSale = false
+    this.currentPaymentMode = 'cash'
+    this.paymentArray = []
+    this.total = 0
+    this.selectedCustomer = null
+    this.savingSaleInvoice = false
+    this.sale = new Sale()
+  }
+
 
   
 
@@ -148,13 +168,18 @@ export class PosComponent implements OnInit {
     this.amountDue = this.total - this.amountDue
     let cashArray = this.paymentArray.filter(x=>x.method == 'cash')
     let creditArray = this.paymentArray.filter(x=>x.method == 'credit')
+    let chequeArray = this.paymentArray.filter(x=>x.method == 'cheque')
     this.totalCashAmount = 0
     this.totalCreditAmount = 0
+    this.totalChequeAmount = 0
     cashArray.forEach(cash=>{
       this.totalCashAmount += cash.amount
     })
     creditArray.forEach(credit=>{
       this.totalCreditAmount += credit.amount
+    })
+    chequeArray.forEach(cheque=>{
+      this.totalChequeAmount += cheque.amount
     })
   }
 
@@ -239,8 +264,18 @@ export class PosComponent implements OnInit {
       this.sale.cart.amount = this.total
       this.sale.cart.items = this.apiorders
       this.sale.cart.userCreated = this.currentUser.id
-      this.sale.payment = this.paymentArray
-      // console.log(JSON.stringify(this.sale))
+      let newPaymentArray = []
+      this.paymentArray.forEach(pay=>{
+        if(pay.method == 'credit'){
+          pay = {}
+          newPaymentArray.push(pay)
+        }
+        else{
+          newPaymentArray.push(pay)
+        }
+      })
+      this.sale.payment = newPaymentArray
+      // this.sale.payment = this.paymentArray
       // console.log(this.sale)
       this.saleService.saveSale(this.sale).subscribe(data=>{
         this.savingSaleInvoice = false
@@ -321,13 +356,6 @@ export class PosComponent implements OnInit {
     this.calculateTotal()
   }
 
-  
-
-  resetSales(){
-    this.orders = []
-    this.selectedCustomer = null
-    this.currentAmount = null
-  }
 
   print(){
     this.format.printDiv('toPrint')

@@ -1,5 +1,4 @@
 <div class="pos-body"> 
-  <!-- <div class="pos-top"></div> -->
     <div class="row">
         <div class="col-md-5">
             
@@ -38,61 +37,6 @@
                 </div>
                 <div style="position:absolute; top:220px; right:40px" class="total-display"><b>Total: ₦{{total}}.00</b></div>
             </div>
-            
-          <!-- <div class="calculator" style="width:90%; margin-left:auto; margin-right:auto">    
-            <div>              
-              <div class="p-4">
-                <div class="form-group">
-                  <label class="form-label text-danger" *ngIf="!selectedCustomer">Please select a customer!!!</label>
-                  <ng-select
-                    [items]="customers"
-                    bindLabel="fullName"
-                    [(ngModel)]="selectedCustomer"
-                  >                    
-                  </ng-select>
-                </div>
-                <hr>
-                <div class="row btn-stuff">
-                  <div class="ol-4 mr-1">
-                    <button class="btn btn-primary" (click)="completeSale('cash')" [disabled]="!selectedCustomer">
-                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSale"></span>
-                      <small><i class="fa fa-money"></i> Cash</small>
-                    </button>
-                  </div>
-                  <div class="ol-4 mr-1">
-                    <button class="btn btn-success" [disabled]="!selectedCustomer" (click)="completeSale('credit')">
-                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSaleCredit"></span>
-                      <small><i class="fa fa-credit-card"></i> Credit</small>
-                    </button>
-                  </div>
-                  <div class="ol-4 mr-1">
-                    <button class="btn btn-danger" (click)="resetSales()">
-                      <small><i class="fa fa-refresh"></i> Reset</small>
-                    </button>
-                  </div>
-                </div>
-                <div class="rcpt-btn-div">
-                    <button class="btn btn-warning rcpt-btn" (click)="print()"><i class="fa fa-print"></i> Receipt</button>
-                </div>
-          
-                <hr>
-
-                <div class="order-display-screen mt-2">
-                    <table>
-                      <tr>
-                        <td>Customer:</td>
-                        <td><code>{{selectedCustomer?.firstName}} {{selectedCustomer?.lastName}}</code></td>
-                      </tr>
-                      <tr>
-                        <td>Total:</td>
-                        <td><code>₦{{total}}.00</code></td>
-                      </tr>
-                    </table>
-                </div>
-              </div>
-            </div>            
-            
-          </div> -->
 
           <div class="calculator" style="width:90%; margin-left:auto; margin-right:auto">    
             <div>              
@@ -118,32 +62,6 @@
                 </div>
       </div>
     <div class="col-6">
-                <!-- <hr> -->
-                <!-- <div class="row btn-stuff mt-2">
-                  <div class="ol-4 mr-1">
-                    <button class="btn btn-primary" (click)="completeSale('cash')" [disabled]="!selectedCustomer">
-                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSale"></span>
-                      <small><i class="fa fa-money"></i> Cash</small>
-                    </button>
-                  </div>
-                  <div class="ol-4 mr-1">
-                    <button class="btn btn-success" [disabled]="!selectedCustomer" (click)="completeSale('credit')">
-                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSaleCredit"></span>
-                      <small><i class="fa fa-credit-card"></i> Credit</small>
-                    </button>
-                  </div>
-                </div>
-                <div class="row btn-stuff mt-3">
-                  <div class="ol-4 mr-">
-                      <button class="btn btn-danger" (click)="resetSales()">
-                        <small><i class="fa fa-refresh"></i> Reset</small>
-                      </button>
-                  </div>
-                  <button class="btn btn-warning" (click)="print()"><small><i class="fa fa-print"></i> Receipt</small></button>
-                </div>
-                <div class="row mt-3">
-                    <button class="btn btn-success complete-btn"> Complete Sale</button>
-                </div> -->
                 <div class="row btn-stuff mt-2">
                   <div class="ol-4 mr-1">
                     <button class="btn btn-primary" (click)="paymentMethod('cash')" [disabled]="!selectedCustomer">
@@ -166,13 +84,21 @@
                   </div>
                   <button class="btn btn-warning" (click)="print()"><small><i class="fa fa-print"></i> Receipt</small></button>
                 </div>
-                <div class="row mt-3">
-                    <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer || total - (totalCashAmount+totalCreditAmount)>0"> 
-                        <div class="spinner-border text-light" role="status" *ngIf="savingSaleInvoice">
-                          <span class="sr-only">Loading...</span>
-                        </div>
-                      Complete Sale
+                <div class="row btn-stuff mt-3">
+                  <div>
+                    <button class="btn btn-info" [disabled]="!selectedCustomer" (click)="paymentMethod('cheque')">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSaleCheque"></span>
+                      <small><i class="fa fa-credit-card"></i> Cheque</small>
                     </button>
+                  </div>
+                  <div>
+                    <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer || total - (totalCashAmount+totalCreditAmount+totalChequeAmount)>0"> 
+                      <div class="spinner-border text-light" role="status" *ngIf="savingSaleInvoice">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      Complete
+                    </button>
+                  </div>
                 </div>
     </div>
   </div>
@@ -187,7 +113,7 @@
                       </tr> -->
                       <tr>
                         <td>Amount Due:</td>
-                        <td><code>₦{{total - (totalCashAmount+totalCreditAmount)}}.00</code></td>
+                        <td><code>₦{{total - (totalCashAmount+totalCreditAmount+totalChequeAmount)}}.00</code></td>
                       </tr>
                       <tr>
                         <td>Mode:</td>
@@ -264,7 +190,7 @@
 <div id="toPrint" class="d-none" style="background-color: white; display:none;">
   <div style="text-align:center; font-family: 'Times New Roman', Times, serif">
     <table style="width:100%; text-align:center; border-collapse: collapse;">
-      <thead>
+      <thead style="border-bottom:1px solid black">
         <td></td>
         <td></td>
         <td></td>
@@ -279,7 +205,7 @@
         </td>
         <td></td>
       </thead>
-      <tr *ngFor="let order of orders; index as i">
+      <tr *ngFor="let order of orders; index as i" style="border-bottom:1px dotted black">
         <td></td>
         <td></td>
         <td></td>
@@ -299,10 +225,34 @@
         <td></td>
         <td></td>
         <td></td>
+        <td><b>Cash</b></td>
+        <td><b>₦{{totalCashAmount}}.00</b></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Credit</b></td>
+        <td><b>₦{{totalCreditAmount}}.00</b></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Cheque</b></td>
+        <td><b>₦{{totalChequeAmount}}.00</b></td>
+      </tr>
+      <tr  style="border-top:1px dotted black; border-bottom: 1px dotted black;">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td><b>Customer</b></td>
         <td><b>{{selectedCustomer?.firstName}} {{selectedCustomer?.lastName}}</b></td>
       </tr>
-      <tr>
+      <tr style="border-top:1px dotted black; border-bottom: 1px dotted black;">
         <td></td>
         <td></td>
         <td></td>
