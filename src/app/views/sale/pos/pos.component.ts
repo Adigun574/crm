@@ -277,6 +277,7 @@ export class PosComponent implements OnInit {
       this.sale.payment = newPaymentArray
       // this.sale.payment = this.paymentArray
       console.log(this.sale)
+      console.log(JSON.stringify(this.sale))
       this.saleService.saveSale(this.sale).subscribe(data=>{
         this.savingSaleInvoice = false
         this.savingSale = false
