@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../models/product';
+import { Formats } from '../../../classes/print';
+
 
 @Component({
   selector: 'app-quotation',
@@ -12,6 +14,9 @@ export class QuotationComponent implements OnInit {
   products:Product[]
   cart = []
   qtyArray = []
+  loading:boolean = false
+  format  = new Formats()
+
 
   constructor(
     private prodcutService:ProductService
@@ -22,11 +27,14 @@ export class QuotationComponent implements OnInit {
   }
 
   getProducts(){
+    this.loading = true
     this.prodcutService.getAllProducts().subscribe(data=>{
+      this.loading = false
       this.products = <Product[]>data
       console.log(data)
     },
       err=>{
+        this.loading = false
         console.log(err)
       })
   }
@@ -52,7 +60,11 @@ export class QuotationComponent implements OnInit {
   }
 
   calculateTotal(){
-    
+
+  }
+
+  print(){
+    this.format.printDiv('toPrint')
   }
 
 }

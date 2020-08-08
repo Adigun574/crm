@@ -7,3 +7,17 @@
     display: flex;
     justify-content: flex-end;
 }
+.product-card{
+    background-color:white;
+    color:black;
+    text-align: center;
+    font-weight:bold;
+    border-radius:5px;
+    box-shadow:2px 2px 2px #555;
+    padding:5px;
+    margin:5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
