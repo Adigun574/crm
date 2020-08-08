@@ -96,6 +96,16 @@ export const navItems: INavData[] = [
     ]
   },
   {
+    name: 'Quotation',
+    url: '/main/quotation',
+    icon: 'icon-speedometer'
+  },
+  {
+    name: 'Waybill',
+    url: '/main/waybill',
+    icon: 'icon-speedometer'
+  },
+  {
     name: 'Training Programs',
     url: '/main/training-programs',
     icon: 'icon-speedometer'

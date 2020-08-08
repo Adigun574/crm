@@ -36,6 +36,8 @@ import { ConversationsComponent } from './views/customer/conversations/conversat
 import { AssessmentComponent } from './views/employee/assessment/assessment.component';
 import { InvoiceComponent } from './views/sale/invoice/invoice.component';
 import { DebtorsReportComponent } from './views/sale/debtors-report/debtors-report.component';
+import { QuotationComponent } from './views/sale/quotation/quotation.component';
+import { WaybillComponent } from './views/sale/waybill/waybill.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -205,6 +207,14 @@ export const routes: Routes = [
       {
         path:'debtors-report',
         component:DebtorsReportComponent,
+      },
+      {
+        path:'quotation',
+        component:QuotationComponent,
+      },
+      {
+        path:'waybill',
+        component:WaybillComponent,
       },
       {
         path:'**',

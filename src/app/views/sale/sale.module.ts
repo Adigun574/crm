@@ -12,11 +12,13 @@ import { SharedModule } from '../../shared/shared.module';
 import { SalesHistoryComponent } from './sales-history/sales-history.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { DebtorsReportComponent } from './debtors-report/debtors-report.component';
+import { QuotationComponent } from './quotation/quotation.component';
+import { WaybillComponent } from './waybill/waybill.component';
 
 
 
 @NgModule({
-  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent],
+  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
